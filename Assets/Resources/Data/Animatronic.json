@@ -26,7 +26,7 @@
             "decloackedTime": 2,
             "minRepositionAngleDegrees": 60,
             "maxRepositionAngleDegrees": 90,
-        }
+        },
         {
             "id": 1002,
             "charName": "BareEndo",
@@ -53,7 +53,7 @@
             "decloackedTime": 2,
             "minRepositionAngleDegrees": 60,
             "maxRepositionAngleDegrees": 90,
-        }
+        },
         {
             "id": 1003,
             "charName": "Bonnie",
@@ -80,7 +80,7 @@
             "decloackedTime": 2,
             "minRepositionAngleDegrees": 60,
             "maxRepositionAngleDegrees": 90,
-        }
+        },
         {
             "id": 1004,
             "charName": "ToyChika",
