@@ -1,5 +1,5 @@
 {
-    "Animatronics":[
+    "animatronics":[
         {
             "id": 1001,
             "charName": "FreddyFazbear",
@@ -25,7 +25,7 @@
             "cloackedTime": 5,
             "decloackedTime": 2,
             "minRepositionAngleDegrees": 60,
-            "maxRepositionAngleDegrees": 90,
+            "maxRepositionAngleDegrees": 90
         },
         {
             "id": 1002,
@@ -52,7 +52,7 @@
             "cloackedTime": 5,
             "decloackedTime": 2,
             "minRepositionAngleDegrees": 60,
-            "maxRepositionAngleDegrees": 90,
+            "maxRepositionAngleDegrees": 90
         },
         {
             "id": 1003,
@@ -79,7 +79,7 @@
             "cloackedTime": 5,
             "decloackedTime": 2,
             "minRepositionAngleDegrees": 60,
-            "maxRepositionAngleDegrees": 90,
+            "maxRepositionAngleDegrees": 90
         },
         {
             "id": 1004,
@@ -106,7 +106,7 @@
             "cloackedTime": 5,
             "decloackedTime": 2,
             "minRepositionAngleDegrees": 60,
-            "maxRepositionAngleDegrees": 90,
+            "maxRepositionAngleDegrees": 90
         }
     ]
 }
