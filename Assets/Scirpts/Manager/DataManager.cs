@@ -30,12 +30,12 @@ public class DataManager : MonoBehaviour
         Init();
     }
 
+
     private void Init()
     {
         var json = Resources.Load<TextAsset>(Path.Combine(DATA_PATH, ANIMATRONICS_JSON));
         GameData gameData = JsonUtility.FromJson<GameData>(json.text);
 
         AnimatronicsTable = gameData.animatronics.ToDictionary(datum => datum.id);
-
     }
 }
