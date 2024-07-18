@@ -52,10 +52,8 @@ public class DataManager : MonoBehaviour
     {
         TextAsset animatronicsJson = Resources.Load<TextAsset>(Path.Combine(DATA_PATH, ANIMATRONICS_JSON));
         AnimatronicsData animatronicsList = JsonUtility.FromJson<AnimatronicsData>(animatronicsJson.text);
-        Debug.Log($"{animatronicsList.animatronics}");
         foreach(var data in animatronicsList.animatronics)
         {
-            var animatronics = data as Animatronics;
             _animatronics.Add(data.id, data);
         }
     }
@@ -78,7 +76,6 @@ public class DataManager : MonoBehaviour
 
     public Animatronics GetAnimatronicsData(int id)
     {
-        
         return _animatronics[id];
     }
 
