@@ -10,8 +10,8 @@ public class AnimatronicsModel
     public int maxInitialPauseSecond;
     public int hp;
     public int jumpScareTime;
-    public int minshockTime;
-    public int maxshockTime;
+    public int minShockTime;
+    public int maxShockTime;
     public int minCircleDegreesPerSecond;
     public int maxCircleDegreesPerSecond;
     public int circleMoveTime;
