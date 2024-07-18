@@ -47,8 +47,8 @@ public class Animatronics : MonoBehaviour
         maxInitialPauseSecond = animatronicsTable.maxInitialPauseSecond;
         hp = animatronicsTable.hp;
         jumpScareTime = animatronicsTable.jumpScareTime;
-        minshockTime = animatronicsTable.minshockTime;
-        maxshockTime = animatronicsTable.maxshockTime;
+        minshockTime = animatronicsTable.minShockTime;
+        maxshockTime = animatronicsTable.maxShockTime;
         minCircleDegreesPerSecond = animatronicsTable.minCircleDegreesPerSecond;
         maxCircleDegreesPerSecond = animatronicsTable.maxCircleDegreesPerSecond;
         circleMoveTime = animatronicsTable.circleMoveTime;
