@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using static DataManager;
 
 public class DataManager : MonoBehaviour
 {
@@ -9,22 +10,22 @@ public class DataManager : MonoBehaviour
 
     private const string DATA_PATH = "Data";
     private const string ANIMATRONICS_JSON = "Animatronic";
+    private Dictionary<int , Animatronics> _animatronics = new Dictionary<int , Animatronics>();
 
-    public Dictionary<int , Animatronics> _animatronics = new Dictionary<int , Animatronics>();
-
+    [System.Serializable]
     public class Animatronics
     {
         public int id;
         public string charName;
-        public float minNoiseForce;
-        public float maxNoiseForce;
-        public float spawnDistance;
+        public int minNoiseForce;
+        public int maxNoiseForce;
+        public int spawnDistance;
         public int minInitialPauseSecond;
         public int maxInitialPauseSecond;
         public int hp;
-        public float jumpScareTime;
-        public float minshockTime;
-        public float maxshockTime;
+        public int jumpScareTime;
+        public int minshockTime;
+        public int maxshockTime;
         public int minCircleDegreesPerSecond;
         public int maxCircleDegreesPerSecond;
         public int circleMoveTime;
@@ -41,7 +42,8 @@ public class DataManager : MonoBehaviour
         public int maxRepositionAngleDegrees;
     }
 
-    public struct AnimatronicsData
+    [System.Serializable]
+    public class AnimatronicsData
     {
         public Animatronics[] animatronics;
     }
@@ -50,12 +52,11 @@ public class DataManager : MonoBehaviour
     {
         TextAsset animatronicsJson = Resources.Load<TextAsset>(Path.Combine(DATA_PATH, ANIMATRONICS_JSON));
         AnimatronicsData animatronicsList = JsonUtility.FromJson<AnimatronicsData>(animatronicsJson.text);
-
+        Debug.Log($"{animatronicsList.animatronics}");
         foreach(var data in animatronicsList.animatronics)
         {
             var animatronics = data as Animatronics;
             _animatronics.Add(data.id, data);
-            Debug.Log($"{data.id}, {data}");
         }
     }
 
@@ -71,11 +72,13 @@ public class DataManager : MonoBehaviour
         }
 
         InitAnimatronicsData();
-        GetAnimatronicsData(1001);
+        
     }
+
 
     public Animatronics GetAnimatronicsData(int id)
     {
+        
         return _animatronics[id];
     }
 

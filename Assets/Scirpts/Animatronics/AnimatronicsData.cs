@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Animatronics : MonoBehaviour
+public class AnimatronicsData : MonoBehaviour
 {
     public string charName;
-    public float minNoiseForce;
-    public float maxNoiseForce;
-    public float spawnDistance;
+    public int minNoiseForce;
+    public int maxNoiseForce;
+    public int spawnDistance;
     public int minInitialPauseSecond;
     public int maxInitialPauseSecond;
     public int hp;
-    public float jumpScareTime;
-    public float minshockTime;
-    public float maxshockTime;
+    public int jumpScareTime;
+    public int minshockTime;
+    public int maxshockTime;
     public int minCircleDegreesPerSecond;
     public int maxCircleDegreesPerSecond;
     public int circleMoveTime;
