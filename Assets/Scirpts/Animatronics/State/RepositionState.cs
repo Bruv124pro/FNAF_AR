@@ -13,7 +13,6 @@ public class RepositionState : IState
     }
     public void Enter()
     {
-        controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
     }
 
     public void Update()
@@ -23,6 +22,6 @@ public class RepositionState : IState
 
     public void Exit()
     {
-        
+        controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
     }
 }

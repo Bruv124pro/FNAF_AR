@@ -527,6 +527,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c93c6146642113409eae205100c21f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bodyShader: {fileID: -876546973899608171, guid: b0ce001b702c6a341b79fc1be2a0b7bb,
+    type: 3}
   animatronics: {fileID: 2111881616}
 --- !u!114 &2111881616
 MonoBehaviour:
@@ -540,7 +542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16736df49a73834fb1526144fc20995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1004
+  id: 1001
   charName: 
   minNoiseForce: 0
   maxNoiseForce: 0

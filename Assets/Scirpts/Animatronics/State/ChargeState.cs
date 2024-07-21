@@ -6,7 +6,6 @@ public class ChargeState : IState
     private AnimatronicsController controller;
     private Animatronics animatronics;
 
-
     public ChargeState(AnimatronicsController controller)
     {
         this.controller = controller;
@@ -14,7 +13,10 @@ public class ChargeState : IState
     }
     public void Enter()
     {
+        Debug.Log("ChargeEnter");
+
         animatronics.PlayAnimation("FreddyCharge");
+
         if (animatronics.ShouldJumpScare())
         {
             controller.StateMachine.TransitionTo(controller.StateMachine.jumpScareState);
@@ -27,6 +29,7 @@ public class ChargeState : IState
 
     public void Update()
     {
+
     }
 
     public void Exit()

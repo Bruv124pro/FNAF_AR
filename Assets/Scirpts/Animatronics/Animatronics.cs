@@ -4,31 +4,31 @@ using UnityEngine;
 
 public class Animatronics : MonoBehaviour
 {
-    [SerializeField]private int id;
-    [SerializeField]private string charName;
-    [SerializeField]private int minNoiseForce;
-    [SerializeField]private int maxNoiseForce;
-    [SerializeField]private int spawnDistance;
-    [SerializeField]private int minInitialPauseSecond;
-    [SerializeField]private int maxInitialPauseSecond;
-    [SerializeField]private int hp;
-    [SerializeField]private int jumpScareTime;
-    [SerializeField]private int minshockTime;
-    [SerializeField]private int maxshockTime;
-    [SerializeField]private int minCircleDegreesPerSecond;
-    [SerializeField]private int maxCircleDegreesPerSecond;
-    [SerializeField]private int circleMoveTime;
-    [SerializeField]private int minPauseSecond;
-    [SerializeField]private int maxPauseSecond;
-    [SerializeField]private int chanceToCharge;
-    [SerializeField]private int chanceToJumpScare;
-    [SerializeField]private int chanceToFeint;
-    [SerializeField]private int chargeTime;
-    [SerializeField]private int invisibleTime;
-    [SerializeField]private int cloackedTime;
-    [SerializeField]private int deCloackedTime;
-    [SerializeField]private int minRepositionAngleDegrees;
-    [SerializeField]private int maxRepositionAngleDegrees;
+    [SerializeField] private int id;
+    [SerializeField] private string charName;
+    [SerializeField] private int minNoiseForce;
+    [SerializeField] private int maxNoiseForce;
+    [SerializeField] private int spawnDistance;
+    [SerializeField] private int minInitialPauseSecond;
+    [SerializeField] private int maxInitialPauseSecond;
+    [SerializeField] private int hp;
+    [SerializeField] private int jumpScareTime;
+    [SerializeField] private int minshockTime;
+    [SerializeField] private int maxshockTime;
+    [SerializeField] private int minCircleDegreesPerSecond;
+    [SerializeField] private int maxCircleDegreesPerSecond;
+    [SerializeField] private int circleMoveTime;
+    [SerializeField] private int minPauseSecond;
+    [SerializeField] private int maxPauseSecond;
+    [SerializeField] private int chanceToCharge;
+    [SerializeField] private int chanceToJumpScare;
+    [SerializeField] private int chanceToFeint;
+    [SerializeField] private int chargeTime;
+    [SerializeField] private int invisibleTime;
+    [SerializeField] private int cloackedTime;
+    [SerializeField] private int deCloackedTime;
+    [SerializeField] private int minRepositionAngleDegrees;
+    [SerializeField] private int maxRepositionAngleDegrees;
 
     private Animator animator;
 
@@ -50,6 +50,17 @@ public class Animatronics : MonoBehaviour
         return Random.Range(0, 100) < chanceToJumpScare;
     }
 
+    public bool HpCheck()
+    {
+        if(hp > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     public void AnimatronicsInit(int _id)
     {
@@ -86,5 +97,11 @@ public class Animatronics : MonoBehaviour
         {
             animator.Play(animationName);
         }
+    }
+
+    public IEnumerator FloatSetting(float alpha)
+    {
+        alpha -= 0.1f;
+        yield return new WaitForSeconds(0.1f);
     }
 }

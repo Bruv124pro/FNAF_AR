@@ -16,12 +16,16 @@ public class IdleState : IState
 
     public void Enter()
     {
+            Debug.Log("Enter");
     }
 
     public void Update()
     {
-        if(time > 2)
+        Debug.Log("Update");
+
+        if (time > 2)
         {
+            Debug.Log(animatronics.ShouldCharge());
             time = 0;
             if (animatronics.ShouldCharge())
             {
@@ -41,6 +45,4 @@ public class IdleState : IState
     public void Exit()
     {
     }
-
-
 }
