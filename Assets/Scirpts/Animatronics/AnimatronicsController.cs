@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class AnimatronicsController : MonoBehaviour
 {
-    private StateMachine sm;
+    public Animatronics animatronics;
+    private StateMachine stateMachine;
 
     void Start()
     {
-        sm = new StateMachine(this);
-
-        sm.Initialize(sm.idleState);
+        stateMachine = new StateMachine(this);
+        stateMachine.Initialize(stateMachine.idleState);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        stateMachine.Update();
     }
+
+    public StateMachine StateMachine => stateMachine;
 }

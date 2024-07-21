@@ -1,10 +1,13 @@
 ﻿public class SoundFeintState : IState
 {
-    private AnimatronicsController animatronics;
+    private AnimatronicsController controller;
+    private Animatronics animatronics;
 
-    public SoundFeintState(AnimatronicsController animatronics)
+
+    public SoundFeintState(AnimatronicsController controller)
     {
-        this.animatronics = animatronics;
+        this.controller = controller;
+        this.animatronics = controller.animatronics;
     }
     public void Enter()
     {

@@ -30,15 +30,30 @@ public class Animatronics : MonoBehaviour
     [SerializeField]private int minRepositionAngleDegrees;
     [SerializeField]private int maxRepositionAngleDegrees;
 
+    private Animator animator;
+
+    public StateMachine StateMachine {  get; private set; }
+
     void Start()
     {
+        animator = GetComponent<Animator>();
         AnimatronicsInit(id);
     }
+
+    public bool ShouldCharge()
+    {
+        return Random.Range(0, 100) < chanceToCharge;
+    }
+
+    public bool ShouldJumpScare()
+    {
+        return Random.Range(0, 100) < chanceToJumpScare;
+    }
+
 
     public void AnimatronicsInit(int _id)
     {
         var animatronicsTable = DataManager.Instance.AnimatronicsTable[_id];
-
         charName = animatronicsTable.charName;
         minNoiseForce = animatronicsTable.minNoiseForce;
         maxNoiseForce = animatronicsTable.maxNoiseForce;
@@ -63,5 +78,13 @@ public class Animatronics : MonoBehaviour
         deCloackedTime = animatronicsTable.deCloackedTime;
         minRepositionAngleDegrees = animatronicsTable.minRepositionAngleDegrees;
         maxRepositionAngleDegrees = animatronicsTable.maxRepositionAngleDegrees;
+    }
+
+    public void PlayAnimation(string animationName)
+    {
+        if(animator != null)
+        {
+            animator.Play(animationName);
+        }
     }
 }

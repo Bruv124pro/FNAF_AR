@@ -4,19 +4,38 @@ using UnityEngine;
 
 public class IdleState : IState
 {
-    private AnimatronicsController animatronics;
+    private AnimatronicsController controller;
+    private Animatronics animatronics;
+    public float time = 0;
 
-    private bool isCharge =false;
-
-    public IdleState(AnimatronicsController animatronics) { this.animatronics = animatronics; }
+    public IdleState(AnimatronicsController controller)
+    {
+        this.controller = controller;
+        this.animatronics = controller.animatronics;
+    }
 
     public void Enter()
     {
-        isCharge = true;
     }
 
     public void Update()
     {
+        if(time > 2)
+        {
+            time = 0;
+            if (animatronics.ShouldCharge())
+            {
+                controller.StateMachine.TransitionTo(controller.StateMachine.chargeState);
+            }
+            else
+            {
+                controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
+            }
+        }
+        else
+        {
+            time += Time.deltaTime;
+        }
     }
 
     public void Exit()

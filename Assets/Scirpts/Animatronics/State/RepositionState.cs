@@ -1,14 +1,19 @@
-﻿public class RepositionState : IState
-{
-    private AnimatronicsController animatronics;
+﻿using UnityEngine;
 
-    public RepositionState(AnimatronicsController animatronics)
+public class RepositionState : IState
+{
+    private AnimatronicsController controller;
+    private Animatronics animatronics;
+
+
+    public RepositionState(AnimatronicsController controller)
     {
-        this.animatronics = animatronics;
+        this.controller = controller;
+        this.animatronics = controller.animatronics;
     }
     public void Enter()
     {
-
+        controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
     }
 
     public void Update()
@@ -18,6 +23,6 @@
 
     public void Exit()
     {
-
+        
     }
 }

@@ -3,14 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 public class ChargeState : IState
 {
-    private AnimatronicsController animatronics;
+    private AnimatronicsController controller;
+    private Animatronics animatronics;
 
-    public ChargeState(AnimatronicsController animatronics)
+
+    public ChargeState(AnimatronicsController controller)
     {
-        this.animatronics = animatronics;
+        this.controller = controller;
+        this.animatronics = controller.animatronics;
     }
     public void Enter()
     {
+        animatronics.PlayAnimation("FreddyCharge");
+        if (animatronics.ShouldJumpScare())
+        {
+            controller.StateMachine.TransitionTo(controller.StateMachine.jumpScareState);
+        }
+        else
+        {
+            controller.StateMachine.TransitionTo(controller.StateMachine.repositionState);
+        }
     }
 
     public void Update()

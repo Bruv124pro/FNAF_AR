@@ -1,10 +1,13 @@
 ﻿public class FeintState : IState
 {
-    private AnimatronicsController animatronics;
+    private AnimatronicsController controller;
+    private Animatronics animatronics;
 
-    public FeintState(AnimatronicsController animatronics)
+
+    public FeintState(AnimatronicsController controller)
     {
-        this.animatronics = animatronics;
+        this.controller = controller;
+        this.animatronics = controller.animatronics;
     }
     public void Enter()
     {
