@@ -1,10 +1,13 @@
 ﻿public class CircleMoveState : IState
 {
-    private AnimatronicsController animatronics;
+    private AnimatronicsController controller;
+    private Animatronics animatronics;
 
-    public CircleMoveState(AnimatronicsController animatronics)
+
+    public CircleMoveState(AnimatronicsController controller)
     {
-        this.animatronics = animatronics;
+        this.controller = controller;
+        this.animatronics = controller.animatronics;
     }
     public void Enter()
     {

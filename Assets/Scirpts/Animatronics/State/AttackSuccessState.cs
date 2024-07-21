@@ -1,22 +1,26 @@
-﻿public class AttackSuccessState : IState
+﻿using UnityEngine;
+public class AttackSuccessState : IState
 {
-    private AnimatronicsController animatronics;
-    public AttackSuccessState(AnimatronicsController animatronicss)
+    private AnimatronicsController controller;
+    private Animatronics animatronics;
+
+
+    public AttackSuccessState(AnimatronicsController controller)
     {
-        this.animatronics = animatronicss;
+        this.controller = controller;
+        this.animatronics = controller.animatronics;
     }
     public void Enter()
     {
-
+        animatronics.PlayAnimation("FreddyJumpscare_Intro");
+        
     }
 
     public void Update()
     {
-
     }
 
     public void Exit()
     {
-
     }
 }

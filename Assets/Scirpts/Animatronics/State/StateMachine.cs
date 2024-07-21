@@ -17,19 +17,20 @@ public class StateMachine
     public InvisibleFeintState invisibleFeintState;
     public RepositionState repositionState;
 
-    public StateMachine(AnimatronicsController animatronics)
+    public StateMachine(AnimatronicsController controller)
     {
-        this.idleState = new IdleState (animatronics);  
-        this.chargeState = new ChargeState(animatronics);
-        this.jumpScareState = new JumpScareState(animatronics);
-        this.attackSuccessState = new AttackSuccessState(animatronics);
-        this.attackFailState = new AttackFailState(animatronics);
-        this.stopWorkState = new StopWorkState(animatronics);
-        this.circleMoveState = new CircleMoveState(animatronics);
-        this.feintState = new FeintState(animatronics);
-        this.soundFeintState = new SoundFeintState(animatronics);
-        this.invisibleFeintState = new InvisibleFeintState(animatronics);
-        this.repositionState = new RepositionState(animatronics);
+        Animatronics animatronics = controller.animatronics;
+        this.idleState = new IdleState (controller);
+        this.chargeState = new ChargeState(controller);
+        this.jumpScareState = new JumpScareState(controller);
+        this.attackSuccessState = new AttackSuccessState(controller);
+        this.attackFailState = new AttackFailState(controller);
+        this.stopWorkState = new StopWorkState(controller);
+        this.circleMoveState = new CircleMoveState(controller);
+        this.feintState = new FeintState(controller);
+        this.soundFeintState = new SoundFeintState(controller);
+        this.invisibleFeintState = new InvisibleFeintState(controller);
+        this.repositionState = new RepositionState(controller);
     }
 
     public void Initialize(IState startingState)
@@ -50,5 +51,10 @@ public class StateMachine
         CurrentState.Exit();
         CurrentState = nextState;
         nextState.Enter();
+    }
+
+    public void Exit()
+    {
+        CurrentState?.Exit();
     }
 }

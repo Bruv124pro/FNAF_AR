@@ -1,14 +1,19 @@
-﻿public class AttackFailState : IState
+﻿using UnityEngine;
+public class AttackFailState : IState
 {
-    private AnimatronicsController animatronics;
+    private AnimatronicsController controller;
+    private Animatronics animatronics;
 
-    public AttackFailState(AnimatronicsController animatronics)
+
+    public AttackFailState(AnimatronicsController controller)
     {
-        this.animatronics = animatronics;
+        this.controller = controller;
+        this.animatronics = controller.animatronics;
     }
     public void Enter()
     {
-
+        animatronics.PlayAnimation("FreddyShocked");
+        controller.StateMachine.TransitionTo(controller.StateMachine.stopWorkState);
     }
 
     public void Update()

@@ -1,14 +1,18 @@
-﻿public class StopWorkState : IState
+﻿using UnityEngine;
+public class StopWorkState : IState
 {
-    private AnimatronicsController animatronics;
+    private AnimatronicsController controller;
+    private Animatronics animatronics;
 
-    public StopWorkState(AnimatronicsController animatronics)
+
+    public StopWorkState(AnimatronicsController controller)
     {
-        this.animatronics = animatronics;
+        this.controller = controller;
+        this.animatronics = controller.animatronics;
     }
     public void Enter()
     {
-
+        animatronics.PlayAnimation("FreddyShutdown");
     }
 
     public void Update()
@@ -18,6 +22,5 @@
 
     public void Exit()
     {
-
     }
 }
