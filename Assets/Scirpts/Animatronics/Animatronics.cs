@@ -32,6 +32,8 @@ public class Animatronics : MonoBehaviour
     [SerializeField] private int maxRepositionAngleDegrees;
 
     private Animator animator;
+    private bool isFinishCircleMove;
+    private bool alreadyinit;
 
     public StateMachine StateMachine {  get; private set; }
 
@@ -48,6 +50,8 @@ public class Animatronics : MonoBehaviour
         bodyShader.SetFloat("_Alpha", 1);
         eyeShader.SetFloat("_Alpha", 0.5f);
 
+        isFinishCircleMove = false;
+        alreadyinit = false;
     }
 
     public bool ShouldCharge()
@@ -109,9 +113,17 @@ public class Animatronics : MonoBehaviour
         }
     }
 
-    public int WaitInitialPauseSecond()
+    public int WaitPauseSecond()
     {
-        return Random.Range(minInitialPauseSecond, maxInitialPauseSecond);
+        if (alreadyinit)
+        {
+            return Random.Range(minPauseSecond, maxPauseSecond);
+        }
+        else
+        {
+            alreadyinit = true;
+            return Random.Range(minInitialPauseSecond, maxInitialPauseSecond);
+        }
     }
 
     public string GoIdleToAnotherState()
@@ -135,6 +147,7 @@ public class Animatronics : MonoBehaviour
         return state;
     }
 
+
     public void SetValue()
     {
         //transform.position = Vector3.zero;
@@ -157,4 +170,51 @@ public class Animatronics : MonoBehaviour
             eyeShader.SetFloat("_Alpha", eyeAlpha);
         }
     }
+
+    public void MoveCircle()
+    {
+        isFinishCircleMove = false;
+        StartCoroutine(MoveCircleOneSecond());
+    }
+
+    IEnumerator MoveCircleOneSecond()
+    {
+        float elapsedTime = 0;
+        int degree = RotateDegree(minCircleDegreesPerSecond, maxCircleDegreesPerSecond);
+
+        while(elapsedTime < circleMoveTime)
+        {
+            transform.RotateAround(Vector3.zero , Vector3.up, degree);
+            yield return new WaitForSeconds(1f);
+            elapsedTime++;
+        }
+        isFinishCircleMove = true;
+
+    }
+
+    public bool IsFinishCircleMove()
+    {
+        if (isFinishCircleMove)
+        {
+            isFinishCircleMove = false;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public int RotateDegree(int minDegrees, int maxDegrees)
+    {
+        return Random.Range(minDegrees, maxDegrees);
+
+    }
+
+    public void RotateReposition()
+    {
+        int degree = RotateDegree(minRepositionAngleDegrees, maxRepositionAngleDegrees);
+        transform.RotateAround(Vector3.zero, Vector3.up, degree);
+    }
+
 }

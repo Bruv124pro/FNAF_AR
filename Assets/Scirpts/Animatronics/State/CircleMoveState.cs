@@ -10,15 +10,18 @@ public class CircleMoveState : IState
         this.controller = controller;
         this.animatronics = controller.animatronics;
     }
+    
     public void Enter()
     {
-        Debug.Log("MoveEnter");
+        controller.animatronics.MoveCircle();
     }
 
     public void Update()
     {
-        Debug.Log("MoveUpdate");
-        controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
+        if (controller.animatronics.IsFinishCircleMove())
+        {
+            controller.StateMachine.TransitionTo(controller.StateMachine.repositionState);
+        }
     }
 
     public void Exit()

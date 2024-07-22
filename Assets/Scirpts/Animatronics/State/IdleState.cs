@@ -17,8 +17,7 @@ public class IdleState : IState
 
     public void Enter()
     {
-        Debug.Log("idleEnter");
-        pauseSecond = animatronics.WaitInitialPauseSecond();
+        pauseSecond = animatronics.WaitPauseSecond();
     }
 
     public void Update()
@@ -26,6 +25,7 @@ public class IdleState : IState
         Debug.Log("idleUpdate");
         if (time > pauseSecond)
         {
+            time = 0;
             state = animatronics.GoIdleToAnotherState();
             IState nextState = controller.StateMachine.GetState(state);
             controller.StateMachine.TransitionTo(nextState);

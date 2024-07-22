@@ -11,9 +11,11 @@ public class RepositionState : IState
         this.controller = controller;
         this.animatronics = controller.animatronics;
     }
+    
     public void Enter()
     {
-
+        controller.animatronics.RotateReposition();
+        controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
     }
 
     public void Update()
