@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Glitch Material02
-  m_Shader: {fileID: -6465566751694194690, guid: c539096c232d24b43810e7a2114fc353,
+  m_Name: Glitch Material03
+  m_Shader: {fileID: -6465566751694194690, guid: 0752782be3b2df6499ffa271c1d7dea7,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -38,10 +38,24 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Boolean: 0
+    - _Bright: 0.25
+    - _Float: 0.3
     - _Force: 1
     - _GlitchSpeed: 10
     - _GlitchStrength: 1
+    - _MaxPower: 0.01
+    - _MinPower: -0.01
     - _NoiseAmount: 10
+    - _On_Off: 0
     - _ScanLineStrength: 0
-    m_Colors: []
+    - _XPower: 0.01
+    - _YPower: 0.01
+    m_Colors:
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Vector2: {r: 0, g: 0, b: 0, a: 0}
+    - _Vector3: {r: 0.2, g: 0.3, b: -1, a: 0}
+    - _Vector4: {r: 0, g: 0, b: 0, a: 0}
+    - _XPower: {r: -0.01, g: 0.01, b: 0, a: 0}
+    - _YPower: {r: -0.01, g: 0.01, b: 0, a: 0}
   m_BuildTextureStacks: []
