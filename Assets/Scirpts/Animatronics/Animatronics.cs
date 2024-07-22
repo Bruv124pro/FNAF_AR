@@ -32,6 +32,7 @@ public class Animatronics : MonoBehaviour
 
     private Animator animator;
     private bool isFinishCircleMove;
+    private bool alreadyinit;
 
     public StateMachine StateMachine {  get; private set; }
 
@@ -41,6 +42,7 @@ public class Animatronics : MonoBehaviour
         animator = GetComponent<Animator>();
         AnimatronicsInit(id);
         isFinishCircleMove = false;
+        alreadyinit = false;
     }
 
     public bool ShouldCharge()
@@ -91,9 +93,17 @@ public class Animatronics : MonoBehaviour
         }
     }
 
-    public int WaitInitialPauseSecond()
+    public int WaitPauseSecond()
     {
-        return Random.Range(minInitialPauseSecond, maxInitialPauseSecond);
+        if (alreadyinit)
+        {
+            return Random.Range(minPauseSecond, maxPauseSecond);
+        }
+        else
+        {
+            alreadyinit = true;
+            return Random.Range(minInitialPauseSecond, maxInitialPauseSecond);
+        }
     }
 
     public string GoIdleToAnotherState()
@@ -126,7 +136,7 @@ public class Animatronics : MonoBehaviour
     IEnumerator MoveCircleOneSecond()
     {
         float elapsedTime = 0;
-        int degree = RotateDegree();
+        int degree = RotateDegree(minCircleDegreesPerSecond, maxCircleDegreesPerSecond);
 
         while(elapsedTime < circleMoveTime)
         {
@@ -151,11 +161,16 @@ public class Animatronics : MonoBehaviour
         }
     }
 
-    public int RotateDegree()
+    public int RotateDegree(int minDegrees, int maxDegrees)
     {
-        return Random.Range(minCircleDegreesPerSecond, maxCircleDegreesPerSecond);
+        return Random.Range(minDegrees, maxDegrees);
 
     }
 
+    public void RotateReposition()
+    {
+        int degree = RotateDegree(minRepositionAngleDegrees, maxRepositionAngleDegrees);
+        transform.RotateAround(Vector3.zero, Vector3.up, degree);
+    }
 
 }
