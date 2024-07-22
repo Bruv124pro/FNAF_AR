@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics.HapticsUtility;
 
 public class Animatronics : MonoBehaviour
 {
@@ -39,8 +37,9 @@ public class Animatronics : MonoBehaviour
     public AudioSource audioSource;
 
     public event Action OnSoundPlayFinished;
+    public event Action OnVisibleFinished;
 
-    public StateMachine StateMachine {  get; private set; }
+    public StateMachine StateMachine { get; private set; }
 
     [SerializeField] private Material bodyShader;
     [SerializeField] private Material eyeShader;
@@ -60,6 +59,21 @@ public class Animatronics : MonoBehaviour
         alreadyinit = false;
     }
 
+    public void SetVisible()
+    {
+        bodyShader.SetFloat("_Alpha", 0);
+        eyeShader.SetFloat("_Alpha", 0f);
+        StartCoroutine(SetInvisible());
+    }
+
+    IEnumerator SetInvisible()
+    {
+        yield return new WaitForSeconds(invisibleTime);
+        bodyShader.SetFloat("_Alpha", 1);
+        eyeShader.SetFloat("_Alpha", 0.5f);
+        OnVisibleFinished?.Invoke();
+    }
+
     public bool ShouldCharge()
     {
         return UnityEngine.Random.Range(0, 100) < chanceToCharge;
@@ -72,7 +86,7 @@ public class Animatronics : MonoBehaviour
 
     public bool HpCheck()
     {
-        if(hp > 0)
+        if (hp > 0)
         {
             return true;
         }
@@ -113,7 +127,7 @@ public class Animatronics : MonoBehaviour
 
     public void PlayAnimation(string animationName)
     {
-        if(animator != null)
+        if (animator != null)
         {
             animator.Play(animationName);
         }
@@ -137,15 +151,15 @@ public class Animatronics : MonoBehaviour
         int ran = UnityEngine.Random.Range(0, 100);
         string state = "";
 
-        if(ran < chanceToCharge)
+        if (ran < chanceToCharge)
         {
             state = "chargeState";
         }
-        else if(ran < chanceToCharge + chanceToFeint)
+        else if (ran < chanceToCharge + chanceToFeint)
         {
             state = "feintState";
         }
-        else if(ran >= chanceToCharge + chanceToFeint)
+        else if (ran >= chanceToCharge + chanceToFeint)
         {
             state = "circleMoveState";
         }
@@ -156,7 +170,6 @@ public class Animatronics : MonoBehaviour
     {
         int ran = UnityEngine.Random.Range(0, 100);
         string state = "";
-        Debug.Log($"������ �� {ran}");
 
         if (ran <= 60)
         {
@@ -168,6 +181,7 @@ public class Animatronics : MonoBehaviour
         }
 
         return state;
+    }
 
     public void SetValue()
     {
@@ -182,8 +196,6 @@ public class Animatronics : MonoBehaviour
 
         if (bodyAlpha > 0 || eyeAlpha > 0)
         {
-            Debug.Log(bodyAlpha);
-            Debug.Log(eyeAlpha);
             bodyAlpha -= 0.03f;
             eyeAlpha -= 0.03f;
             yield return new WaitForSeconds(0.1f);
@@ -203,9 +215,9 @@ public class Animatronics : MonoBehaviour
         float elapsedTime = 0;
         int degree = RotateDegree(minCircleDegreesPerSecond, maxCircleDegreesPerSecond);
 
-        while(elapsedTime < circleMoveTime)
+        while (elapsedTime < circleMoveTime)
         {
-            transform.RotateAround(Vector3.zero , Vector3.up, degree);
+            transform.RotateAround(Vector3.zero, Vector3.up, degree);
             yield return new WaitForSeconds(1f);
             elapsedTime++;
         }
