@@ -12,15 +12,17 @@ public class CircleMoveState : IState
     }
     public void Enter()
     {
+        Debug.Log("MoveEnter");
     }
 
     public void Update()
     {
-
+        Debug.Log("MoveUpdate");
+        controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
     }
 
     public void Exit()
     {
-
+        Debug.Log("MoveExit");
     }
 }

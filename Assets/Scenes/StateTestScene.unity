@@ -340,6 +340,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: c349759c9118ff049a16114760a720c2, type: 2}
+    - target: {fileID: 3491101427363104750, guid: ed5622e56654c1946a208776199e5112,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3544433582944415976, guid: ed5622e56654c1946a208776199e5112,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -513,7 +518,7 @@ PrefabInstance:
     - target: {fileID: 7328710606861094001, guid: ed5622e56654c1946a208776199e5112,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 7328710606861094001, guid: ed5622e56654c1946a208776199e5112,
         type: 3}
@@ -853,13 +858,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1968534203}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.99768174, z: -0, w: -0.06805279}
-  m_LocalPosition: {x: 0.64, y: 0.52, z: 4.67}
+  m_LocalRotation: {x: 0, y: 1, z: -0, w: -0.0002617804}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 187.804, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180.03, z: 0}
 --- !u!114 &1968534207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -922,8 +927,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c93c6146642113409eae205100c21f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodyShader: {fileID: -876546973899608171, guid: b0ce001b702c6a341b79fc1be2a0b7bb,
-    type: 3}
   animatronics: {fileID: 2111881616}
 --- !u!114 &2111881616
 MonoBehaviour:
@@ -962,6 +965,8 @@ MonoBehaviour:
   deCloackedTime: 0
   minRepositionAngleDegrees: 0
   maxRepositionAngleDegrees: 0
+  bodyShader: {fileID: 2100000, guid: 6182c274086d9a1419d7812129fa7834, type: 2}
+  eyeShader: {fileID: 2100000, guid: 85dc20327361da240bf203ba67fc319b, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

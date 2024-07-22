@@ -17,11 +17,13 @@ public class IdleState : IState
 
     public void Enter()
     {
+        Debug.Log("idleEnter");
         pauseSecond = animatronics.WaitInitialPauseSecond();
     }
 
     public void Update()
     {
+        Debug.Log("idleUpdate");
         if (time > pauseSecond)
         {
             state = animatronics.GoIdleToAnotherState();
@@ -32,10 +34,12 @@ public class IdleState : IState
         {
             time += Time.deltaTime;
         }
+        Debug.Log($"state : {state}");
     }
 
     public void Exit()
     {
+        Debug.Log("idleExit");
     }
 
 

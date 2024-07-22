@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AnimatronicsController : MonoBehaviour
 {
-    public Material bodyShader;
     public Animatronics animatronics;
     private StateMachine stateMachine;
 

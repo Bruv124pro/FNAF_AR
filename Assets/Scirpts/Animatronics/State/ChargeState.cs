@@ -6,14 +6,10 @@ public class ChargeState : IState
     private AnimatronicsController controller;
     private Animatronics animatronics;
 
-    private Material bodyShader;
-    private float alpha;
-
     public ChargeState(AnimatronicsController controller)
     {
         this.controller = controller;
         this.animatronics = controller.animatronics;
-        this.bodyShader = controller.bodyShader;
     }
     public void Enter()
     {
@@ -22,11 +18,11 @@ public class ChargeState : IState
 
     public void Update()
     {
-        if (alpha > 0)
+        animatronics.SetValue();
+
+        if (animatronics.transform.position != new Vector3(0, 0, 1))
         {
-            alpha = bodyShader.GetFloat("_Alpha");
-            alpha -= 0.1f;
-            bodyShader.SetFloat("_Alpha", alpha);
+            animatronics.transform.position += new Vector3(0, 0, 0.05f);
         }
     }
 
