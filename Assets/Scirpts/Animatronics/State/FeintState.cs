@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+
 public class FeintState : IState
 {
     private AnimatronicsController controller;
@@ -12,16 +13,17 @@ public class FeintState : IState
     }
     public void Enter()
     {
-
+        Debug.Log("FeintEnter");
     }
 
     public void Update()
     {
-
+        Debug.Log("FeintUpdate");
+        controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
     }
 
     public void Exit()
     {
-
+        Debug.Log("FeintExit");
     }
 }
