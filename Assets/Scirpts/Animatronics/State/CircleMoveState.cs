@@ -12,7 +12,6 @@ public class CircleMoveState : IState
     }
     public void Enter()
     {
-        Debug.Log("circleMovestate 진입");
     }
 
     public void Update()
