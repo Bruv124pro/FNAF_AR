@@ -26,6 +26,7 @@ public class IdleState : IState
         if (time > 2)
         {
             Debug.Log(animatronics.ShouldCharge());
+
             time = 0;
             if (animatronics.ShouldCharge())
             {
@@ -33,7 +34,7 @@ public class IdleState : IState
             }
             else
             {
-                controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
+                controller.StateMachine.TransitionTo(controller.StateMachine.repositionState);
             }
         }
         else

@@ -2,9 +2,6 @@
 using UnityEngine;
 public class JumpScareState : IState
 {
-    private Material bodyShader;
-    private float alpha;
-
     private AnimatronicsController controller;
     private Animatronics animatronics;
 
@@ -12,7 +9,6 @@ public class JumpScareState : IState
     {
         this.controller = controller;
         this.animatronics = controller.animatronics;
-        this.bodyShader = controller.bodyShader;
     }
     public void Enter()
     {
@@ -23,8 +19,7 @@ public class JumpScareState : IState
 
     public void Update()
     {
-        alpha = bodyShader.GetFloat("_Alpha");
-        animatronics.FloatSetting(alpha);
+
     }
 
     public void Exit()

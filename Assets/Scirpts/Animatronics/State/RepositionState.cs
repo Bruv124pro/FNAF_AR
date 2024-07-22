@@ -13,15 +13,17 @@ public class RepositionState : IState
     }
     public void Enter()
     {
+
     }
 
     public void Update()
     {
-
+        // 위치를 바꾸는 코드
+        controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
     }
 
     public void Exit()
     {
-        controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
+        //controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
     }
 }

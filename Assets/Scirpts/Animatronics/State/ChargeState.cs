@@ -6,30 +6,28 @@ public class ChargeState : IState
     private AnimatronicsController controller;
     private Animatronics animatronics;
 
+    private Material bodyShader;
+    private float alpha;
+
     public ChargeState(AnimatronicsController controller)
     {
         this.controller = controller;
         this.animatronics = controller.animatronics;
+        this.bodyShader = controller.bodyShader;
     }
     public void Enter()
     {
-        Debug.Log("ChargeEnter");
-
         animatronics.PlayAnimation("FreddyCharge");
-
-        if (animatronics.ShouldJumpScare())
-        {
-            controller.StateMachine.TransitionTo(controller.StateMachine.jumpScareState);
-        }
-        else
-        {
-            controller.StateMachine.TransitionTo(controller.StateMachine.repositionState);
-        }
     }
 
     public void Update()
     {
-
+        if (alpha > 0)
+        {
+            alpha = bodyShader.GetFloat("_Alpha");
+            alpha -= 0.1f;
+            bodyShader.SetFloat("_Alpha", alpha);
+        }
     }
 
     public void Exit()

@@ -98,10 +98,4 @@ public class Animatronics : MonoBehaviour
             animator.Play(animationName);
         }
     }
-
-    public IEnumerator FloatSetting(float alpha)
-    {
-        alpha -= 0.1f;
-        yield return new WaitForSeconds(0.1f);
-    }
 }
