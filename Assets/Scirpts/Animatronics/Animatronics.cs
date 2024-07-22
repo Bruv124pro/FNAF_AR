@@ -36,8 +36,12 @@ public class Animatronics : MonoBehaviour
     public AudioClip[] audioClips;
     public AudioSource audioSource;
 
+    public Camera camera;
+
     public event Action OnSoundPlayFinished;
     public event Action OnVisibleFinished;
+
+    public string[] visibleAnimationNames = { "FreddyGlimpse1", "FreddyGlimpse2", "FreddyGlimpse3"};
 
     public StateMachine StateMachine { get; private set; }
 
@@ -263,4 +267,23 @@ public class Animatronics : MonoBehaviour
         yield return new WaitForSeconds(length);
         OnSoundPlayFinished?.Invoke();
     }
+
+    public bool IsFindVisibleAnimatronics()
+    {
+        Vector3 viewportPoint = camera.WorldToViewportPoint(transform.position);
+
+        bool isVisible = viewportPoint.x >= 0 && viewportPoint.x <= 1 && viewportPoint.y >= 0 && viewportPoint.y <= 1 && viewportPoint.z > 0;
+
+        return isVisible;
+    }
+
+    public string selectVisibleAnimation()
+    {
+        int ran = UnityEngine.Random.Range(0, visibleAnimationNames.Length);
+        string visibleanimName = visibleAnimationNames[ran];
+
+        return visibleanimName;
+    }
+
+
 }

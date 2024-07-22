@@ -12,14 +12,17 @@ public class InvisibleFeintState : IState
     }
     public void Enter()
     {
-        Debug.Log("InvisibleFeintState 진입");
+        animatronics.PlayAnimation(controller.animatronics.selectVisibleAnimation());
         controller.animatronics.SetVisible();
         controller.animatronics.OnVisibleFinished += OnVisibleFinished;
     }
 
     public void Update()
     {
-
+        if (controller.animatronics.IsFindVisibleAnimatronics())
+        {
+            controller.StateMachine.TransitionTo(controller.StateMachine.repositionState);
+        }
     }
 
     public void Exit()
@@ -29,7 +32,6 @@ public class InvisibleFeintState : IState
 
     private void OnVisibleFinished()
     {
-        Debug.Log($"OnVisibleFinished 실행");
         controller.StateMachine.TransitionTo(controller.StateMachine.repositionState);
     }
 }
