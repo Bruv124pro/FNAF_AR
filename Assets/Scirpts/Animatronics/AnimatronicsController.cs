@@ -13,10 +13,10 @@ public class AnimatronicsController : MonoBehaviour
         stateMachine.Initialize(stateMachine.idleState);
     }
 
-    // Update is called once per frame
     void Update()
     {
         stateMachine.Update();
+        
     }
 
     public StateMachine StateMachine => stateMachine;
