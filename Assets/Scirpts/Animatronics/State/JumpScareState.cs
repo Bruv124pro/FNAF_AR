@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 public class JumpScareState : IState
 {
     private AnimatronicsController controller;
     private Animatronics animatronics;
-
 
     public JumpScareState(AnimatronicsController controller)
     {
@@ -13,7 +13,7 @@ public class JumpScareState : IState
     public void Enter()
     {
         animatronics.PlayAnimation("FreddyCharge 1");
-        controller.StateMachine.TransitionTo(controller.StateMachine.attackFailState);
+        //controller.StateMachine.TransitionTo(controller.StateMachine.attackFailState);
         //controller.StateMachine.TransitionTo(controller.StateMachine.attackSuccessState);
     }
 
@@ -24,6 +24,6 @@ public class JumpScareState : IState
 
     public void Exit()
     {
+        controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
     }
-
 }

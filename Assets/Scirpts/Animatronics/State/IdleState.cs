@@ -22,6 +22,7 @@ public class IdleState : IState
 
     public void Update()
     {
+        Debug.Log("idleUpdate");
         if (time > pauseSecond)
         {
             time = 0;
@@ -33,10 +34,12 @@ public class IdleState : IState
         {
             time += Time.deltaTime;
         }
+        Debug.Log($"state : {state}");
     }
 
     public void Exit()
     {
+        Debug.Log("idleExit");
     }
 
 

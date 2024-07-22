@@ -10,6 +10,7 @@ public class CircleMoveState : IState
         this.controller = controller;
         this.animatronics = controller.animatronics;
     }
+    
     public void Enter()
     {
         controller.animatronics.MoveCircle();
@@ -25,6 +26,6 @@ public class CircleMoveState : IState
 
     public void Exit()
     {
-
+        Debug.Log("MoveExit");
     }
 }
