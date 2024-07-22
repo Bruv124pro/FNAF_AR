@@ -12,11 +12,15 @@ public class CircleMoveState : IState
     }
     public void Enter()
     {
+        controller.animatronics.MoveCircle();
     }
 
     public void Update()
     {
-
+        if (controller.animatronics.IsFinishCircleMove())
+        {
+            controller.StateMachine.TransitionTo(controller.StateMachine.repositionState);
+        }
     }
 
     public void Exit()

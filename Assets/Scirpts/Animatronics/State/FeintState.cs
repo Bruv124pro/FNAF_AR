@@ -1,4 +1,5 @@
-﻿public class FeintState : IState
+﻿using UnityEngine;
+public class FeintState : IState
 {
     private AnimatronicsController controller;
     private Animatronics animatronics;

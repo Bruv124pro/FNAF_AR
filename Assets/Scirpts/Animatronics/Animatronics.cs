@@ -31,6 +31,7 @@ public class Animatronics : MonoBehaviour
     [SerializeField]private int maxRepositionAngleDegrees;
 
     private Animator animator;
+    private bool isFinishCircleMove;
 
     public StateMachine StateMachine {  get; private set; }
 
@@ -39,6 +40,7 @@ public class Animatronics : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         AnimatronicsInit(id);
+        isFinishCircleMove = false;
     }
 
     public bool ShouldCharge()
@@ -114,5 +116,46 @@ public class Animatronics : MonoBehaviour
 
         return state;
     }
+
+    public void MoveCircle()
+    {
+        isFinishCircleMove = false;
+        StartCoroutine(MoveCircleOneSecond());
+    }
+
+    IEnumerator MoveCircleOneSecond()
+    {
+        float elapsedTime = 0;
+        int degree = RotateDegree();
+
+        while(elapsedTime < 15)
+        {
+            transform.RotateAround(Vector3.zero , Vector3.up, degree);
+            yield return new WaitForSeconds(1f);
+            elapsedTime++;
+        }
+        isFinishCircleMove = true;
+
+    }
+
+    public bool IsFinishCircleMove()
+    {
+        if (isFinishCircleMove)
+        {
+            isFinishCircleMove = false;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public int RotateDegree()
+    {
+        return Random.Range(minCircleDegreesPerSecond, maxCircleDegreesPerSecond);
+
+    }
+
 
 }
