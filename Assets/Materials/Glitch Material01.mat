@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Glitch Material
+  m_Name: Glitch Material01
   m_Shader: {fileID: -6465566751694194690, guid: 5fc0b9baf53c7354d957577a4d644175,
     type: 3}
   m_Parent: {fileID: 0}
