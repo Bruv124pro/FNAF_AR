@@ -128,7 +128,7 @@ public class Animatronics : MonoBehaviour
         float elapsedTime = 0;
         int degree = RotateDegree();
 
-        while(elapsedTime < 15)
+        while(elapsedTime < circleMoveTime)
         {
             transform.RotateAround(Vector3.zero , Vector3.up, degree);
             yield return new WaitForSeconds(1f);
