@@ -1,4 +1,5 @@
-﻿public class InvisibleFeintState : IState
+﻿using UnityEngine;
+public class InvisibleFeintState : IState
 {
     private AnimatronicsController controller;
     private Animatronics animatronics;
@@ -11,7 +12,7 @@
     }
     public void Enter()
     {
-
+        Debug.Log("InvisibleFeintState 진입");
     }
 
     public void Update()

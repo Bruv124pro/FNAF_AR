@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,6 +34,10 @@ public class Animatronics : MonoBehaviour
     private Animator animator;
     private bool isFinishCircleMove;
     private bool alreadyinit;
+    public AudioClip[] audioClips;
+    public AudioSource audioSource;
+
+    public event Action OnSoundPlayFinished;
 
     public StateMachine StateMachine {  get; private set; }
 
@@ -40,6 +45,7 @@ public class Animatronics : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         AnimatronicsInit(id);
         isFinishCircleMove = false;
         alreadyinit = false;
@@ -47,12 +53,12 @@ public class Animatronics : MonoBehaviour
 
     public bool ShouldCharge()
     {
-        return Random.Range(0, 100) < chanceToCharge;
+        return UnityEngine.Random.Range(0, 100) < chanceToCharge;
     }
 
     public bool ShouldJumpScare()
     {
-        return Random.Range(0, 100) < chanceToJumpScare;
+        return UnityEngine.Random.Range(0, 100) < chanceToJumpScare;
     }
 
 
@@ -97,18 +103,18 @@ public class Animatronics : MonoBehaviour
     {
         if (alreadyinit)
         {
-            return Random.Range(minPauseSecond, maxPauseSecond);
+            return UnityEngine.Random.Range(minPauseSecond, maxPauseSecond);
         }
         else
         {
             alreadyinit = true;
-            return Random.Range(minInitialPauseSecond, maxInitialPauseSecond);
+            return UnityEngine.Random.Range(minInitialPauseSecond, maxInitialPauseSecond);
         }
     }
 
     public string GoIdleToAnotherState()
     {
-        int ran = Random.Range(0, 100);
+        int ran = UnityEngine.Random.Range(0, 100);
         string state = "";
 
         if(ran < chanceToCharge)
@@ -122,6 +128,24 @@ public class Animatronics : MonoBehaviour
         else if(ran >= chanceToCharge + chanceToFeint)
         {
             state = "circleMoveState";
+        }
+
+        return state;
+    }
+
+    public string GoFeintToAnotherState()
+    {
+        int ran = UnityEngine.Random.Range(0, 100);
+        string state = "";
+        Debug.Log($"난수의 값 {ran}");
+
+        if (ran <= 60)
+        {
+            state = "soundFeintState";
+        }
+        else if (ran > 60)
+        {
+            state = "invisibleFeintState";
         }
 
         return state;
@@ -163,7 +187,7 @@ public class Animatronics : MonoBehaviour
 
     public int RotateDegree(int minDegrees, int maxDegrees)
     {
-        return Random.Range(minDegrees, maxDegrees);
+        return UnityEngine.Random.Range(minDegrees, maxDegrees);
 
     }
 
@@ -173,4 +197,17 @@ public class Animatronics : MonoBehaviour
         transform.RotateAround(Vector3.zero, Vector3.up, degree);
     }
 
+    public void PlaySoundFeint()
+    {
+        int ran = UnityEngine.Random.Range(0, audioClips.Length);
+        AudioClip clip = audioClips[ran];
+        StartCoroutine(CheckSoundPlayFinished(clip.length));
+        GetComponent<AudioSource>().PlayOneShot(clip);
+    }
+
+    IEnumerator CheckSoundPlayFinished(float length)
+    {
+        yield return new WaitForSeconds(length);
+        OnSoundPlayFinished?.Invoke();
+    }
 }
