@@ -922,8 +922,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c93c6146642113409eae205100c21f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodyShader: {fileID: -876546973899608171, guid: b0ce001b702c6a341b79fc1be2a0b7bb,
-    type: 3}
   animatronics: {fileID: 2111881616}
 --- !u!114 &2111881616
 MonoBehaviour:
@@ -962,6 +960,8 @@ MonoBehaviour:
   deCloackedTime: 0
   minRepositionAngleDegrees: 0
   maxRepositionAngleDegrees: 0
+  bodyShader: {fileID: 2100000, guid: 6182c274086d9a1419d7812129fa7834, type: 2}
+  eyeShader: {fileID: 2100000, guid: 85dc20327361da240bf203ba67fc319b, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
