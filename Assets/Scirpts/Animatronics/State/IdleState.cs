@@ -6,8 +6,9 @@ public class IdleState : IState
 {
     private AnimatronicsController controller;
     private Animatronics animatronics;
-    public float time = 0;
-
+    public float pauseSecond = 0;
+    float time = 0;
+    string state = "";
     public IdleState(AnimatronicsController controller)
     {
         this.controller = controller;
@@ -16,21 +17,16 @@ public class IdleState : IState
 
     public void Enter()
     {
+        pauseSecond = animatronics.WaitInitialPauseSecond();
     }
 
     public void Update()
     {
-        if(time > 2)
+        if (time > pauseSecond)
         {
-            time = 0;
-            if (animatronics.ShouldCharge())
-            {
-                controller.StateMachine.TransitionTo(controller.StateMachine.chargeState);
-            }
-            else
-            {
-                controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
-            }
+            state = animatronics.GoIdleToAnotherState();
+            IState nextState = controller.StateMachine.GetState(state);
+            controller.StateMachine.TransitionTo(nextState);
         }
         else
         {

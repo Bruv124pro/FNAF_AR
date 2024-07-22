@@ -1,4 +1,5 @@
-﻿public class CircleMoveState : IState
+﻿using UnityEngine;
+public class CircleMoveState : IState
 {
     private AnimatronicsController controller;
     private Animatronics animatronics;
@@ -11,7 +12,6 @@
     }
     public void Enter()
     {
-
     }
 
     public void Update()

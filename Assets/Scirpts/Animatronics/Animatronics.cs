@@ -34,6 +34,7 @@ public class Animatronics : MonoBehaviour
 
     public StateMachine StateMachine {  get; private set; }
 
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -87,4 +88,31 @@ public class Animatronics : MonoBehaviour
             animator.Play(animationName);
         }
     }
+
+    public int WaitInitialPauseSecond()
+    {
+        return Random.Range(minInitialPauseSecond, maxInitialPauseSecond);
+    }
+
+    public string GoIdleToAnotherState()
+    {
+        int ran = Random.Range(0, 100);
+        string state = "";
+
+        if(ran < chanceToCharge)
+        {
+            state = "chargeState";
+        }
+        else if(ran < chanceToCharge + chanceToFeint)
+        {
+            state = "feintState";
+        }
+        else if(ran >= chanceToCharge + chanceToFeint)
+        {
+            state = "circleMoveState";
+        }
+
+        return state;
+    }
+
 }
