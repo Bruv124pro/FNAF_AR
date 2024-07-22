@@ -11,12 +11,16 @@ public class FlashLightButton : MonoBehaviour
     [SerializeField] private Sprite onButton;
     [SerializeField] private Sprite offButton;
     [SerializeField] private Volume volume;
-    [SerializeField] private ShadowsMidtonesHighlights shadow;
 
+    private ShadowsMidtonesHighlights shadow;
     private Vignette vignette;
+    public bool isFlashPressed { get; private set; }
+
+    [SerializeField] private BatteryUse battery;
 
     private void Awake()
     {
+        isFlashPressed = false;
         if (volume.profile.TryGet<Vignette>(out vignette) && volume.profile.TryGet<ShadowsMidtonesHighlights>(out shadow))
         {
             vignette.intensity.value = 0.6f;
@@ -26,9 +30,11 @@ public class FlashLightButton : MonoBehaviour
 
     public void ButtonClick()
     {
-        if (flashButton.sprite == offButton)
+        if (battery.batteryAmount > 0 && flashButton.sprite == offButton)
         {
+            isFlashPressed = true;
             flashButton.sprite = onButton;
+
             if (volume.profile.TryGet<Vignette>(out vignette) && volume.profile.TryGet<ShadowsMidtonesHighlights>(out shadow))
             {
                 vignette.intensity.value = 0.45f;
@@ -37,6 +43,7 @@ public class FlashLightButton : MonoBehaviour
         }
         else
         {
+            isFlashPressed = false;
             flashButton.sprite = offButton;
 
             if (volume.profile.TryGet<Vignette>(out vignette) && volume.profile.TryGet<ShadowsMidtonesHighlights>(out shadow))
