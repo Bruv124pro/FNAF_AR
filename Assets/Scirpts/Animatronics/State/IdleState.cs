@@ -17,13 +17,14 @@ public class IdleState : IState
 
     public void Enter()
     {
-        pauseSecond = animatronics.WaitInitialPauseSecond();
+        pauseSecond = animatronics.WaitPauseSecond();
     }
 
     public void Update()
     {
         if (time > pauseSecond)
         {
+            time = 0;
             state = animatronics.GoIdleToAnotherState();
             IState nextState = controller.StateMachine.GetState(state);
             controller.StateMachine.TransitionTo(nextState);
