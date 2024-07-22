@@ -14,9 +14,13 @@ public class ShockButton : MonoBehaviour
 
     [SerializeField] private int elapsedTime;
 
+    [SerializeField] private BatteryUse battery;
+    public bool isShockPressed { get; private set; }
+
     void Awake()
     {
         coolTime.interactable = false;
+        isShockPressed = false;
         shock.sprite = shockImage;
         elapsedTime = 100;
     }
@@ -38,12 +42,16 @@ public class ShockButton : MonoBehaviour
 
     public void ButtonClick()
     {
-
-        if (elapsedTime == 100)
+        if (battery.batteryAmount > 0 && elapsedTime == 100)
         {
+            isShockPressed = true;
             elapsedTime = 0;
             coolTime.value = elapsedTime;
         }
 
+        else if (elapsedTime < 100 && isShockPressed)
+        {
+            isShockPressed = !isShockPressed;
+        }
     }
 }
