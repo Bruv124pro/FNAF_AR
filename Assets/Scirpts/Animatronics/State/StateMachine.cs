@@ -57,4 +57,22 @@ public class StateMachine
     {
         CurrentState?.Exit();
     }
+
+    public IState GetState(string stateName)
+    {
+        return stateName switch
+        {
+            "idleState" => idleState,
+            "chargeState" => chargeState,
+            "jumpScareState" => jumpScareState,
+            "attackSuccessState" => attackSuccessState,
+            "attackFailState" => attackFailState,
+            "stopWorkState" => stopWorkState,
+            "circleMoveState" => circleMoveState,
+            "feintState" => feintState,
+            "soundFeintState" => soundFeintState,
+            "invisibleFeintState" => invisibleFeintState,
+            "repositionState" => repositionState
+        };
+    }
 }
