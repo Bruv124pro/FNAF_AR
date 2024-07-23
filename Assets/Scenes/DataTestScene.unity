@@ -167,6 +167,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &784790307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 784790308}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &784790308
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784790307}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1649958957
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,6 +516,28 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 1968534205}
+    - target: {fileID: 7164368339707918607, guid: 1b61627eed6ce0a4c99bc082c07a7397,
+        type: 3}
+      propertyPath: urpAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d0e2fc18fe036412f8223b3b3d9ad574,
+        type: 2}
+    - target: {fileID: 7164368339707918607, guid: 1b61627eed6ce0a4c99bc082c07a7397,
+        type: 3}
+      propertyPath: glitchMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: e47b2c335e7c4b04a92dd297c77c8e8b, type: 2}
+    - target: {fileID: 7164368339707918607, guid: 1b61627eed6ce0a4c99bc082c07a7397,
+        type: 3}
+      propertyPath: glitchMaterialtest
+      value: 
+      objectReference: {fileID: 2100000, guid: e47b2c335e7c4b04a92dd297c77c8e8b, type: 2}
+    - target: {fileID: 7164368339707918607, guid: 1b61627eed6ce0a4c99bc082c07a7397,
+        type: 3}
+      propertyPath: renderPipelineAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d0e2fc18fe036412f8223b3b3d9ad574,
+        type: 2}
     - target: {fileID: 9195450298481899736, guid: 1b61627eed6ce0a4c99bc082c07a7397,
         type: 3}
       propertyPath: m_Name
@@ -503,3 +556,4 @@ SceneRoots:
   - {fileID: 1649958959}
   - {fileID: 121814020}
   - {fileID: 1544424735045980470}
+  - {fileID: 784790308}

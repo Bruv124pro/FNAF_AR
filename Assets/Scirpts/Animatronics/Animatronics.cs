@@ -1,6 +1,10 @@
 using System;
 using System.Collections;
+using System.Reflection;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class Animatronics : MonoBehaviour
 {
@@ -38,6 +42,8 @@ public class Animatronics : MonoBehaviour
 
     public Camera camera;
 
+    public Material glitchMaterial;
+
     public event Action OnSoundPlayFinished;
     public event Action OnVisibleFinished;
 
@@ -50,7 +56,7 @@ public class Animatronics : MonoBehaviour
     private float bodyAlpha;
     private float eyeAlpha;
 
-    void Start()
+    void Start()    
     {
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
@@ -62,7 +68,6 @@ public class Animatronics : MonoBehaviour
         isFinishCircleMove = false;
         alreadyinit = false;
     }
-
     public void SetVisible()
     {
         bodyShader.SetFloat("_Alpha", 0);
@@ -278,5 +283,16 @@ public class Animatronics : MonoBehaviour
         return visibleanimName;
     }
 
+    public void OnOffGlitchMaterial()
+    {
+        if (IsFindVisibleAnimatronics())
+        {
+            glitchMaterial.SetFloat("_Force", 10);    
+        }
+        else
+        {
+            glitchMaterial.SetFloat("_Force", 0);
+        }
+    }
 
 }
