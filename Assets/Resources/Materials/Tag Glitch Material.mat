@@ -38,24 +38,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Boolean: 0
-    - _Bright: -1.5
-    - _Float: 0.3
-    - _Force: 1
-    - _GlitchSpeed: 10
-    - _GlitchStrength: 1
-    - _MaxPower: 0.01
-    - _MinPower: -0.01
-    - _NoiseAmount: 10
+    - _Bright: 0.3
     - _On_Off: 0
-    - _ScanLineStrength: 0
     - _XPower: 0.01
     - _YPower: 0.01
-    m_Colors:
-    - _Color: {r: 0, g: 0, b: 0, a: 1}
-    - _Vector2: {r: 0, g: 0, b: 0, a: 0}
-    - _Vector3: {r: 0.2, g: 0.3, b: -1, a: 0}
-    - _Vector4: {r: 0, g: 0, b: 0, a: 0}
-    - _XPower: {r: -0.01, g: 0.01, b: 0, a: 0}
-    - _YPower: {r: -0.01, g: 0.01, b: 0, a: 0}
+    m_Colors: []
   m_BuildTextureStacks: []
