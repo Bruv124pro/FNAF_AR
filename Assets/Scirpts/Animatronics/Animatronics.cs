@@ -40,6 +40,7 @@ public class Animatronics : MonoBehaviour
     public AudioClip[] audioClips;
     public AudioSource audioSource;
 
+
     public Camera camera;
 
     public Material glitchMaterial;
@@ -65,6 +66,8 @@ public class Animatronics : MonoBehaviour
         AnimatronicsInit(id);
 
         ShaderAlpahValueInitalize();
+
+        camera.GetComponent<Transform>().GetChild(0).gameObject.SetActive(false);
 
         isFinishCircleMove = false;
         alreadyinit = false;
@@ -227,7 +230,7 @@ public class Animatronics : MonoBehaviour
     {
         bodyAlpha = bodyShader.GetFloat("_Alpha");
         eyeAlpha = eyeShader.GetFloat("_Alpha");
-
+        eyeShader.SetFloat("_OnOff", 1f);
         if (bodyAlpha > 0 || eyeAlpha > 0)
         {
             bodyAlpha -= 0.03f;
@@ -335,5 +338,20 @@ public class Animatronics : MonoBehaviour
     {
         bodyShader.SetFloat("_Alpha", 1);
         eyeShader.SetFloat("_Alpha", 0.5f);
+        eyeShader.SetFloat("_OnOff", 0f);
     }
+
+    public void HitElecParticle()
+    {
+        camera.GetComponent<Transform>().GetChild(0).gameObject.SetActive(true);
+        StartCoroutine(HitElecParticleFinish());
+    }
+
+    IEnumerator HitElecParticleFinish()
+    {
+        yield return new WaitForSeconds(1f);
+        camera.GetComponent<Transform>().GetChild(0).gameObject.SetActive(false);
+    }
+
+
 }
