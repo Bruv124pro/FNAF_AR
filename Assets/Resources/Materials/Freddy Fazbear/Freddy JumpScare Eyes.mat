@@ -58,16 +58,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0
+    - _Alpha: 0.5
     - _Metallic: 1
     - _Normal: 1
     - _Occlusion: 0.5
     - _On_Off: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothness: 4.55
+    - _Smoothness: 1
     m_Colors:
-    - _Emission: {r: 1, g: 1, b: 1, a: 1}
+    - _Emission: {r: 5.672134, g: 19.60415, b: 77.384155, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &4187747123439442151
 MonoBehaviour:
