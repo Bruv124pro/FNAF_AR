@@ -47,7 +47,7 @@ Material:
     - _MaxPower: 0.01
     - _MinPower: -0.01
     - _NoiseAmount: 10
-    - _On_Off: 1
+    - _On_Off: 0
     - _ScanLineStrength: 0
     - _XPower: 0.01
     - _YPower: 0.01
