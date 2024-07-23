@@ -40,6 +40,7 @@ public class Animatronics : MonoBehaviour
 
     public event Action OnSoundPlayFinished;
     public event Action OnVisibleFinished;
+    public event Action ShockButtonPressed;
 
     public string[] visibleAnimationNames = { "FreddyGlimpse1", "FreddyGlimpse2", "FreddyGlimpse3"};
 
@@ -76,6 +77,17 @@ public class Animatronics : MonoBehaviour
         bodyShader.SetFloat("_Alpha", 1);
         eyeShader.SetFloat("_Alpha", 0.5f);
         OnVisibleFinished?.Invoke();
+    }
+
+    public void ShockPress()
+    {
+        StartCoroutine(ShockPressCheck());
+    }
+
+    IEnumerator ShockPressCheck()
+    {
+        yield return new WaitForSeconds(minshockTime);
+        ShockButtonPressed?.Invoke();
     }
 
     public bool ShouldCharge()
@@ -278,5 +290,8 @@ public class Animatronics : MonoBehaviour
         return visibleanimName;
     }
 
-
+    public int ChargeTimeCheck()
+    {
+        return chargeTime;
+    }
 }

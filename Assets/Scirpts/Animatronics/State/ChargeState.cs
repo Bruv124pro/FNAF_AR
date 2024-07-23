@@ -6,6 +6,8 @@ public class ChargeState : IState
     private AnimatronicsController controller;
     private Animatronics animatronics;
 
+    private float elapsedTime;
+
     public ChargeState(AnimatronicsController controller)
     {
         this.controller = controller;
@@ -18,12 +20,13 @@ public class ChargeState : IState
 
     public void Update()
     {
+        elapsedTime += Time.deltaTime;
         animatronics.ShaderSetAlphaValue();
 
-        if (animatronics.transform.position != Camera.main.transform.position)
+        if (elapsedTime < animatronics.ChargeTimeCheck())
         {
             animatronics.transform.position -= Camera.main.transform.position;
-            
+
         }
         else
         {
@@ -33,5 +36,6 @@ public class ChargeState : IState
 
     public void Exit()
     {
+        elapsedTime = 0;
     }
 }

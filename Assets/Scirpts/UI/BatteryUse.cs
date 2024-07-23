@@ -11,7 +11,7 @@ public class BatteryUse : MonoBehaviour
     [SerializeField] private Slider batterySlider;
     [SerializeField] private Text batteryText;
 
-    public int batteryAmount { get; private set; }
+    public int batteryAmount;
 
     void Start()
     {
