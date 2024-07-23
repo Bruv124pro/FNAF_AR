@@ -1,4 +1,7 @@
-﻿public class InvisibleFeintState : IState
+﻿using System;
+using System.Collections;
+using UnityEngine;
+public class InvisibleFeintState : IState
 {
     private AnimatronicsController controller;
     private Animatronics animatronics;
@@ -11,16 +14,26 @@
     }
     public void Enter()
     {
-
+        animatronics.PlayAnimation(controller.animatronics.selectVisibleAnimation());
+        controller.animatronics.SetVisible();
+        controller.animatronics.OnVisibleFinished += OnVisibleFinished;
     }
 
     public void Update()
     {
-
+        if (controller.animatronics.IsFindVisibleAnimatronics())
+        {
+            controller.StateMachine.TransitionTo(controller.StateMachine.repositionState);
+        }
     }
 
     public void Exit()
     {
+        animatronics.OnVisibleFinished -= OnVisibleFinished;
+    }
 
+    private void OnVisibleFinished()
+    {
+        controller.StateMachine.TransitionTo(controller.StateMachine.repositionState);
     }
 }

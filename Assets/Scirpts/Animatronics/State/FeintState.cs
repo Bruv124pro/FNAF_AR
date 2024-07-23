@@ -4,7 +4,7 @@ public class FeintState : IState
 {
     private AnimatronicsController controller;
     private Animatronics animatronics;
-
+    string state = "";
 
     public FeintState(AnimatronicsController controller)
     {
@@ -13,17 +13,17 @@ public class FeintState : IState
     }
     public void Enter()
     {
-        Debug.Log("FeintEnter");
+        state = animatronics.GoFeintToAnotherState();
+        Debug.Log(state);
+        IState nextState = controller.StateMachine.GetState(state);
+        controller.StateMachine.TransitionTo(nextState);
     }
 
     public void Update()
     {
-        Debug.Log("FeintUpdate");
-        controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
     }
 
     public void Exit()
     {
-        Debug.Log("FeintExit");
     }
 }
