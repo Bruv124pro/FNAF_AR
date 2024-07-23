@@ -39,10 +39,14 @@ Material:
     m_Ints: []
     m_Floats:
     - _Float: 0
-    - _Force: 1
+    - _Force: 5
+    - _Fullscreen_DepthWrite: 0
     - _GlitchSpeed: 1
     - _GlitchStrength: 10
     - _NoiseAmount: 100
+    - _QueueControl: 0
+    - _QueueOffset: 0
     - _ScanLineStrength: 1
-    m_Colors: []
+    m_Colors:
+    - _Vector4: {r: 0.5, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []

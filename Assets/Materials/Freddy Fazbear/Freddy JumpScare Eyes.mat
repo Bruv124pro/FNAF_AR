@@ -58,10 +58,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: -0.52
+    - _Alpha: 0.5
     - _Metallic: 0.3
     - _Normal: 1
     - _Occlusion: 0.5
+    - _On_Off: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 1
