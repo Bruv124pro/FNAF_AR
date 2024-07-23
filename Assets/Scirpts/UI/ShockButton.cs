@@ -15,7 +15,9 @@ public class ShockButton : MonoBehaviour
     [SerializeField] private int elapsedTime;
 
     [SerializeField] private BatteryUse battery;
-    public bool isShockPressed { get; private set; }
+    public bool isShockPressed;
+
+    private Animatronics animatronics;
 
     void Awake()
     {
@@ -45,6 +47,7 @@ public class ShockButton : MonoBehaviour
         if (battery.batteryAmount > 0 && elapsedTime == 100)
         {
             isShockPressed = true;
+            animatronics.ShockButtonPressed += ButtonClick;
             elapsedTime = 0;
             coolTime.value = elapsedTime;
         }

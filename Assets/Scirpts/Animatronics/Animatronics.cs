@@ -46,6 +46,8 @@ public class Animatronics : MonoBehaviour
 
     public event Action OnSoundPlayFinished;
     public event Action OnVisibleFinished;
+    public event Action ShockButtonPressed;
+    public event Action ChargeToJumpScare;
 
     public string[] visibleAnimationNames = { "FreddyGlimpse1", "FreddyGlimpse2", "FreddyGlimpse3"};
 
@@ -62,8 +64,7 @@ public class Animatronics : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         AnimatronicsInit(id);
 
-        bodyShader.SetFloat("_Alpha", 1);
-        eyeShader.SetFloat("_Alpha", 0.5f);
+        ShaderAlpahValueInitalize();
 
         isFinishCircleMove = false;
         alreadyinit = false;
@@ -78,9 +79,19 @@ public class Animatronics : MonoBehaviour
     IEnumerator SetInvisible()
     {
         yield return new WaitForSeconds(invisibleTime);
-        bodyShader.SetFloat("_Alpha", 1);
-        eyeShader.SetFloat("_Alpha", 0.5f);
+        ShaderAlpahValueInitalize();
         OnVisibleFinished?.Invoke();
+    }
+
+    public void ShockPress()
+    {
+        StartCoroutine(ShockPressCheck());
+    }
+
+    IEnumerator ShockPressCheck()
+    {
+        yield return new WaitForSeconds(minshockTime);
+        ShockButtonPressed?.Invoke();
     }
 
     public bool ShouldCharge()
@@ -91,6 +102,18 @@ public class Animatronics : MonoBehaviour
     public bool ShouldJumpScare()
     {
         return UnityEngine.Random.Range(0, 100) < chanceToJumpScare;
+    }
+
+    public void ChangeChargeToJumpScare()
+    {
+        StartCoroutine(WaitForChange());
+    }
+
+    IEnumerator WaitForChange()
+    {
+        yield return new WaitForSeconds(chargeTime);
+
+        ChargeToJumpScare?.Invoke();
     }
 
     public bool HpCheck()
@@ -283,6 +306,11 @@ public class Animatronics : MonoBehaviour
         return visibleanimName;
     }
 
+    public int ChargeTimeCheck()
+    {
+        return chargeTime;
+    }
+    
     public void OnOffGlitchMaterial()
     {
         if (IsFindVisibleAnimatronics())
@@ -295,4 +323,9 @@ public class Animatronics : MonoBehaviour
         }
     }
 
+    public void ShaderAlpahValueInitalize()
+    {
+        bodyShader.SetFloat("_Alpha", 1);
+        eyeShader.SetFloat("_Alpha", 0.5f);
+    }
 }

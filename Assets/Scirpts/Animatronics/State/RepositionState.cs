@@ -14,6 +14,7 @@ public class RepositionState : IState
     
     public void Enter()
     {
+        animatronics.ShaderAlpahValueInitalize();
         controller.animatronics.RotateReposition();
         controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
     }

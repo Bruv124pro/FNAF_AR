@@ -5,7 +5,6 @@ public class JumpScareState : IState
     private AnimatronicsController controller;
     private Animatronics animatronics;
 
-    private ShockButton shockButton;
     private int MinShockTime;
     private int MaxShockTime;
     private float elapsedTime;
@@ -24,37 +23,22 @@ public class JumpScareState : IState
     public void Update()
     {
         elapsedTime += Time.deltaTime;
-        Debug.Log(elapsedTime);
 
-        if (shockButton.isShockPressed)
+        if (MinShockTime < elapsedTime)
         {
-            if (MinShockTime < elapsedTime && elapsedTime < MaxShockTime)
-            {
-                controller.StateMachine.TransitionTo(controller.StateMachine.attackFailState);
-            }
-            else
-            {
-                controller.StateMachine.TransitionTo(controller.StateMachine.attackSuccessState);
-                elapsedTime = 0;
-            }
+            animatronics.ShockPress();
         }
-        else
+
+        if (elapsedTime > MaxShockTime)
         {
             controller.StateMachine.TransitionTo(controller.StateMachine.attackSuccessState);
-            elapsedTime = 0;
         }
+
     }
 
     public void Exit()
     {
-        if (animatronics.HpCheck())
-        {
-            controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
-        }
-
-        else
-        {
-            controller.StateMachine.TransitionTo(controller.StateMachine.attackFailState);
-        }
+        elapsedTime = 0;
+        Debug.Log("jumpExit");
     }
 }
