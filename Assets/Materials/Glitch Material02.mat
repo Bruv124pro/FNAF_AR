@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Glitch Material03
+  m_Name: Glitch Material02
   m_Shader: {fileID: -6465566751694194690, guid: 0752782be3b2df6499ffa271c1d7dea7,
     type: 3}
   m_Parent: {fileID: 0}
@@ -47,7 +47,7 @@ Material:
     - _MaxPower: 0.01
     - _MinPower: -0.01
     - _NoiseAmount: 10
-    - _On_Off: 0
+    - _On_Off: 1
     - _ScanLineStrength: 0
     - _XPower: 0.01
     - _YPower: 0.01
