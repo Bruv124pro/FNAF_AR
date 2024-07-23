@@ -13,7 +13,6 @@ public class AttackSuccessState : IState
     public void Enter()
     {
         animatronics.PlayAnimation("FreddyJumpscare_Intro");
-        
     }
 
     public void Update()

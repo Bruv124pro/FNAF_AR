@@ -49,7 +49,7 @@ public class Animatronics : MonoBehaviour
     public event Action ShockButtonPressed;
     public event Action ChargeToJumpScare;
 
-    public string[] visibleAnimationNames = { "FreddyGlimpse1", "FreddyGlimpse2", "FreddyGlimpse3"};
+    public string[] visibleAnimationNames = { "FreddyGlimpse1", "FreddyGlimpse2", "FreddyGlimpse3" };
 
     public StateMachine StateMachine { get; private set; }
 
@@ -58,7 +58,7 @@ public class Animatronics : MonoBehaviour
     private float bodyAlpha;
     private float eyeAlpha;
 
-    void Start()    
+    void Start()
     {
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
@@ -125,6 +125,14 @@ public class Animatronics : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+    public void HpDecrease()
+    {
+        if (hp > 0)
+        {
+            hp--;
         }
     }
 
@@ -310,12 +318,12 @@ public class Animatronics : MonoBehaviour
     {
         return chargeTime;
     }
-    
+
     public void OnOffGlitchMaterial()
     {
         if (IsFindVisibleAnimatronics())
         {
-            glitchMaterial.SetFloat("_Force", 10);    
+            glitchMaterial.SetFloat("_Force", 10);
         }
         else
         {
