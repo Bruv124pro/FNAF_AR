@@ -39,7 +39,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Boolean: 0
-    - _Bright: 0.25
+    - _Bright: -1.5
     - _Float: 0.3
     - _Force: 1
     - _GlitchSpeed: 10
