@@ -20,7 +20,6 @@ public class RepositionState : IState
 
     public void Update()
     {
-        controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
     }
 
     public void Exit()
