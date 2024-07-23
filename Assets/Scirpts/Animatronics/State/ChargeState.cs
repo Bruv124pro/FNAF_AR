@@ -14,19 +14,33 @@ public class ChargeState : IState
     public void Enter()
     {
         animatronics.PlayAnimation("FreddyCharge");
+        animatronics.transform.position -= Camera.main.transform.position;
+
+        animatronics.ChargeToJumpScare += ChangeChargeState;
+
+        animatronics.ChangeChargeToJumpScare();
     }
 
     public void Update()
     {
-        animatronics.SetValue();
-
-        if (animatronics.transform.position != new Vector3(0, 0, 1))
-        {
-            animatronics.transform.position += new Vector3(0, 0, 0.05f);
-        }
+        animatronics.ShaderSetAlphaValue();
     }
 
     public void Exit()
     {
+        animatronics.ChargeToJumpScare -= ChangeChargeState;
+    }
+
+    public void ChangeChargeState()
+    {
+        if (animatronics.ShouldJumpScare())
+        {
+            controller.StateMachine.TransitionTo(controller.StateMachine.jumpScareState);
+        }
+
+        else
+        {
+            controller.StateMachine.TransitionTo(controller.StateMachine.repositionState);
+        }
     }
 }

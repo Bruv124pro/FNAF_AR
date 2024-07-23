@@ -13,7 +13,7 @@ public class AttackFailState : IState
     public void Enter()
     {
         animatronics.PlayAnimation("FreddyShocked");
-        //controller.StateMachine.TransitionTo(controller.StateMachine.stopWorkState);
+        animatronics.HpDecrease();
     }
 
     public void Update()

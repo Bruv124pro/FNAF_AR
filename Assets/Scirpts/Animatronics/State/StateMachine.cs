@@ -1,6 +1,22 @@
 using System;
 
 [Serializable]
+
+public enum StateType
+{
+    IdleState,
+    ChargeState,
+    JumpScareState,
+    AttackSuccessState,
+    AttackFailureState,
+    StopWorkState,
+    CircleMoveState,
+    FeintState,
+    SoundFeintState,
+    InvisibleFeintState,
+    Reposition
+}
+
 public class StateMachine
 {
     public IState CurrentState {  get; private set; }

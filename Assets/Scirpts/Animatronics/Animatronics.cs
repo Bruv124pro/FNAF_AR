@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
-using static UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics.HapticsUtility;
+using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class Animatronics : MonoBehaviour
 {
@@ -34,8 +37,21 @@ public class Animatronics : MonoBehaviour
     private Animator animator;
     private bool isFinishCircleMove;
     private bool alreadyinit;
+    public AudioClip[] audioClips;
+    public AudioSource audioSource;
 
-    public StateMachine StateMachine {  get; private set; }
+    public Camera camera;
+
+    public Material glitchMaterial;
+
+    public event Action OnSoundPlayFinished;
+    public event Action OnVisibleFinished;
+    public event Action ShockButtonPressed;
+    public event Action ChargeToJumpScare;
+
+    public string[] visibleAnimationNames = { "FreddyGlimpse1", "FreddyGlimpse2", "FreddyGlimpse3" };
+
+    public StateMachine StateMachine { get; private set; }
 
     [SerializeField] private Material bodyShader;
     [SerializeField] private Material eyeShader;
@@ -45,34 +61,78 @@ public class Animatronics : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         AnimatronicsInit(id);
 
-        bodyShader.SetFloat("_Alpha", 1);
-        eyeShader.SetFloat("_Alpha", 0.5f);
+        ShaderAlpahValueInitalize();
 
         isFinishCircleMove = false;
         alreadyinit = false;
     }
+    public void SetVisible()
+    {
+        bodyShader.SetFloat("_Alpha", 0);
+        eyeShader.SetFloat("_Alpha", 0f);
+        StartCoroutine(SetInvisible());
+    }
+
+    IEnumerator SetInvisible()
+    {
+        yield return new WaitForSeconds(invisibleTime);
+        ShaderAlpahValueInitalize();
+        OnVisibleFinished?.Invoke();
+    }
+
+    public void ShockPress()
+    {
+        StartCoroutine(ShockPressCheck());
+    }
+
+    IEnumerator ShockPressCheck()
+    {
+        yield return new WaitForSeconds(minshockTime);
+        ShockButtonPressed?.Invoke();
+    }
 
     public bool ShouldCharge()
     {
-        return Random.Range(0, 100) < chanceToCharge;
+        return UnityEngine.Random.Range(0, 100) < chanceToCharge;
     }
 
     public bool ShouldJumpScare()
     {
-        return Random.Range(0, 100) < chanceToJumpScare;
+        return UnityEngine.Random.Range(0, 100) < chanceToJumpScare;
+    }
+
+    public void ChangeChargeToJumpScare()
+    {
+        StartCoroutine(WaitForChange());
+    }
+
+    IEnumerator WaitForChange()
+    {
+        yield return new WaitForSeconds(chargeTime);
+
+        ChargeToJumpScare?.Invoke();
     }
 
     public bool HpCheck()
     {
-        if(hp > 0)
+        if (hp > 0)
         {
             return true;
         }
         else
         {
             return false;
+        }
+    }
+
+    public void HpDecrease()
+    {
+        if (hp > 0)
+        {
+            hp--;
         }
     }
 
@@ -107,7 +167,7 @@ public class Animatronics : MonoBehaviour
 
     public void PlayAnimation(string animationName)
     {
-        if(animator != null)
+        if (animator != null)
         {
             animator.Play(animationName);
         }
@@ -117,55 +177,61 @@ public class Animatronics : MonoBehaviour
     {
         if (alreadyinit)
         {
-            return Random.Range(minPauseSecond, maxPauseSecond);
+            return UnityEngine.Random.Range(minPauseSecond, maxPauseSecond);
         }
         else
         {
             alreadyinit = true;
-            return Random.Range(minInitialPauseSecond, maxInitialPauseSecond);
+            return UnityEngine.Random.Range(minInitialPauseSecond, maxInitialPauseSecond);
         }
     }
 
     public string GoIdleToAnotherState()
     {
-        int ran = Random.Range(0, 100);
+        int ran = UnityEngine.Random.Range(0, 100);
         string state = "";
 
-        if(ran < chanceToCharge)
+        if (ran < chanceToCharge)
         {
             state = "chargeState";
         }
-        else if(ran < chanceToCharge + chanceToFeint)
+        else if (ran < chanceToCharge + chanceToFeint)
         {
             state = "feintState";
         }
-        else if(ran >= chanceToCharge + chanceToFeint)
+        else if (ran >= chanceToCharge + chanceToFeint)
         {
             state = "circleMoveState";
         }
-        Debug.Log($"animatronics.state : {state}");
         return state;
     }
 
-
-    public void SetValue()
+    public string GoFeintToAnotherState()
     {
-        //transform.position = Vector3.zero;
-        StartCoroutine(ShaderSetValue());
+        int ran = UnityEngine.Random.Range(0, 100);
+        string state = "";
+
+        if (ran <= 60)
+        {
+            state = "soundFeintState";
+        }
+        else if (ran > 60)
+        {
+            state = "invisibleFeintState";
+        }
+
+        return state;
     }
 
-    private IEnumerator ShaderSetValue()
+    public void ShaderSetAlphaValue()
     {
         bodyAlpha = bodyShader.GetFloat("_Alpha");
         eyeAlpha = eyeShader.GetFloat("_Alpha");
 
         if (bodyAlpha > 0 || eyeAlpha > 0)
         {
-            Debug.Log(bodyAlpha);
-            Debug.Log(eyeAlpha);
             bodyAlpha -= 0.03f;
             eyeAlpha -= 0.03f;
-            yield return new WaitForSeconds(0.1f);
             bodyShader.SetFloat("_Alpha", bodyAlpha);
             eyeShader.SetFloat("_Alpha", eyeAlpha);
         }
@@ -182,9 +248,9 @@ public class Animatronics : MonoBehaviour
         float elapsedTime = 0;
         int degree = RotateDegree(minCircleDegreesPerSecond, maxCircleDegreesPerSecond);
 
-        while(elapsedTime < circleMoveTime)
+        while (elapsedTime < circleMoveTime)
         {
-            transform.RotateAround(Vector3.zero , Vector3.up, degree);
+            transform.RotateAround(Vector3.zero, Vector3.up, degree);
             yield return new WaitForSeconds(1f);
             elapsedTime++;
         }
@@ -207,7 +273,7 @@ public class Animatronics : MonoBehaviour
 
     public int RotateDegree(int minDegrees, int maxDegrees)
     {
-        return Random.Range(minDegrees, maxDegrees);
+        return UnityEngine.Random.Range(minDegrees, maxDegrees);
 
     }
 
@@ -217,4 +283,57 @@ public class Animatronics : MonoBehaviour
         transform.RotateAround(Vector3.zero, Vector3.up, degree);
     }
 
+    public void PlaySoundFeint()
+    {
+        int ran = UnityEngine.Random.Range(0, audioClips.Length);
+        AudioClip clip = audioClips[ran];
+        StartCoroutine(CheckSoundPlayFinished(clip.length));
+        GetComponent<AudioSource>().PlayOneShot(clip);
+    }
+
+    IEnumerator CheckSoundPlayFinished(float length)
+    {
+        yield return new WaitForSeconds(length);
+        OnSoundPlayFinished?.Invoke();
+    }
+
+    public bool IsFindVisibleAnimatronics()
+    {
+        Vector3 viewportPoint = camera.WorldToViewportPoint(transform.position);
+
+        bool isVisible = viewportPoint.x >= 0 && viewportPoint.x <= 1 && viewportPoint.y >= 0 && viewportPoint.y <= 1 && viewportPoint.z > 0;
+
+        return isVisible;
+    }
+
+    public string selectVisibleAnimation()
+    {
+        int ran = UnityEngine.Random.Range(0, visibleAnimationNames.Length);
+        string visibleanimName = visibleAnimationNames[ran];
+
+        return visibleanimName;
+    }
+
+    public int ChargeTimeCheck()
+    {
+        return chargeTime;
+    }
+
+    public void OnOffGlitchMaterial()
+    {
+        if (IsFindVisibleAnimatronics())
+        {
+            glitchMaterial.SetFloat("_Force", 10);
+        }
+        else
+        {
+            glitchMaterial.SetFloat("_Force", 0);
+        }
+    }
+
+    public void ShaderAlpahValueInitalize()
+    {
+        bodyShader.SetFloat("_Alpha", 1);
+        eyeShader.SetFloat("_Alpha", 0.5f);
+    }
 }
