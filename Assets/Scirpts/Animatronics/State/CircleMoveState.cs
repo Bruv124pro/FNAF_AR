@@ -26,6 +26,5 @@ public class CircleMoveState : IState
 
     public void Exit()
     {
-        Debug.Log("MoveExit");
     }
 }
