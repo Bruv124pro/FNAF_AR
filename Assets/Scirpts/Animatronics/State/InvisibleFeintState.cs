@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 public class InvisibleFeintState : IState
 {
     private AnimatronicsController controller;
@@ -27,7 +29,7 @@ public class InvisibleFeintState : IState
 
     public void Exit()
     {
-
+        animatronics.OnVisibleFinished -= OnVisibleFinished;
     }
 
     private void OnVisibleFinished()

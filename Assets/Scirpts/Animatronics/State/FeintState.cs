@@ -21,8 +21,6 @@ public class FeintState : IState
 
     public void Update()
     {
-        Debug.Log("FeintUpdate");
-        controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
     }
 
     public void Exit()
