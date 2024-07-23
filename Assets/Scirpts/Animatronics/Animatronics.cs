@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics.HapticsUtility;
 
 public class Animatronics : MonoBehaviour
 {
@@ -41,6 +42,7 @@ public class Animatronics : MonoBehaviour
     public event Action OnSoundPlayFinished;
     public event Action OnVisibleFinished;
     public event Action ShockButtonPressed;
+    public event Action ChargeToJumpScare;
 
     public string[] visibleAnimationNames = { "FreddyGlimpse1", "FreddyGlimpse2", "FreddyGlimpse3"};
 
@@ -96,6 +98,18 @@ public class Animatronics : MonoBehaviour
     public bool ShouldJumpScare()
     {
         return UnityEngine.Random.Range(0, 100) < chanceToJumpScare;
+    }
+
+    public void ChangeChargeToJumpScare()
+    {
+        StartCoroutine(WaitForChange());
+    }
+
+    IEnumerator WaitForChange()
+    {
+        yield return new WaitForSeconds(chargeTime);
+
+        ChargeToJumpScare?.Invoke();
     }
 
     public bool HpCheck()

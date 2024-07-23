@@ -6,8 +6,6 @@ public class ChargeState : IState
     private AnimatronicsController controller;
     private Animatronics animatronics;
 
-    private float elapsedTime;
-
     public ChargeState(AnimatronicsController controller)
     {
         this.controller = controller;
@@ -16,32 +14,33 @@ public class ChargeState : IState
     public void Enter()
     {
         animatronics.PlayAnimation("FreddyCharge");
+        animatronics.transform.position -= Camera.main.transform.position;
+
+        animatronics.ChargeToJumpScare += ChangeChargeState;
+
+        animatronics.ChangeChargeToJumpScare();
     }
 
     public void Update()
     {
-        elapsedTime += Time.deltaTime;
         animatronics.ShaderSetAlphaValue();
-
-        if (elapsedTime < animatronics.ChargeTimeCheck())
-        {
-            animatronics.transform.position -= Camera.main.transform.position;
-
-        }
-        else if (elapsedTime > animatronics.ChargeTimeCheck() && animatronics.ShouldJumpScare())
-        {
-            controller.StateMachine.TransitionTo(controller.StateMachine.jumpScareState);
-        }
-        else
-        {
-            animatronics.StateMachine.TransitionTo(animatronics.StateMachine.repositionState);
-        }
     }
 
     public void Exit()
     {
-        elapsedTime = 0;
+        animatronics.ChargeToJumpScare -= ChangeChargeState;
+    }
 
-        animatronics.ShaderAlpahValueInitalize();
+    public void ChangeChargeState()
+    {
+        if (animatronics.ShouldJumpScare())
+        {
+            controller.StateMachine.TransitionTo(controller.StateMachine.jumpScareState);
+        }
+
+        else
+        {
+            controller.StateMachine.TransitionTo(controller.StateMachine.repositionState);
+        }
     }
 }
