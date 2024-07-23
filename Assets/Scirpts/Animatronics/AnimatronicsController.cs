@@ -16,7 +16,7 @@ public class AnimatronicsController : MonoBehaviour
     void Update()
     {
         stateMachine.Update();
-        
+        animatronics.OnOffGlitchMaterial();
     }
 
     public StateMachine StateMachine => stateMachine;
