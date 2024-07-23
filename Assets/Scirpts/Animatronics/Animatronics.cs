@@ -57,8 +57,7 @@ public class Animatronics : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         AnimatronicsInit(id);
 
-        bodyShader.SetFloat("_Alpha", 1);
-        eyeShader.SetFloat("_Alpha", 0.5f);
+        ShaderAlpahValueInitalize();
 
         isFinishCircleMove = false;
         alreadyinit = false;
@@ -74,8 +73,7 @@ public class Animatronics : MonoBehaviour
     IEnumerator SetInvisible()
     {
         yield return new WaitForSeconds(invisibleTime);
-        bodyShader.SetFloat("_Alpha", 1);
-        eyeShader.SetFloat("_Alpha", 0.5f);
+        ShaderAlpahValueInitalize();
         OnVisibleFinished?.Invoke();
     }
 
@@ -293,5 +291,11 @@ public class Animatronics : MonoBehaviour
     public int ChargeTimeCheck()
     {
         return chargeTime;
+    }
+
+    public void ShaderAlpahValueInitalize()
+    {
+        bodyShader.SetFloat("_Alpha", 1);
+        eyeShader.SetFloat("_Alpha", 0.5f);
     }
 }

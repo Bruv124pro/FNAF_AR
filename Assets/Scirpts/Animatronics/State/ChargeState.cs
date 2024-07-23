@@ -28,14 +28,20 @@ public class ChargeState : IState
             animatronics.transform.position -= Camera.main.transform.position;
 
         }
-        else
+        else if (elapsedTime > animatronics.ChargeTimeCheck() && animatronics.ShouldJumpScare())
         {
             controller.StateMachine.TransitionTo(controller.StateMachine.jumpScareState);
+        }
+        else
+        {
+            animatronics.StateMachine.TransitionTo(animatronics.StateMachine.repositionState);
         }
     }
 
     public void Exit()
     {
         elapsedTime = 0;
+
+        animatronics.ShaderAlpahValueInitalize();
     }
 }
