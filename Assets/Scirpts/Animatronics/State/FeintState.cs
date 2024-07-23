@@ -25,6 +25,5 @@ public class FeintState : IState
 
     public void Exit()
     {
-        Debug.Log("FeintExit");
     }
 }
