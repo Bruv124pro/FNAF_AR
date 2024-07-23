@@ -148,24 +148,15 @@ public class Animatronics : MonoBehaviour
     }
 
 
-    public void SetValue()
-    {
-        //transform.position = Vector3.zero;
-        StartCoroutine(ShaderSetValue());
-    }
-
-    private IEnumerator ShaderSetValue()
+    public void ShaderSetAlphaValue()
     {
         bodyAlpha = bodyShader.GetFloat("_Alpha");
         eyeAlpha = eyeShader.GetFloat("_Alpha");
 
         if (bodyAlpha > 0 || eyeAlpha > 0)
         {
-            Debug.Log(bodyAlpha);
-            Debug.Log(eyeAlpha);
             bodyAlpha -= 0.03f;
             eyeAlpha -= 0.03f;
-            yield return new WaitForSeconds(0.1f);
             bodyShader.SetFloat("_Alpha", bodyAlpha);
             eyeShader.SetFloat("_Alpha", eyeAlpha);
         }
@@ -208,7 +199,6 @@ public class Animatronics : MonoBehaviour
     public int RotateDegree(int minDegrees, int maxDegrees)
     {
         return Random.Range(minDegrees, maxDegrees);
-
     }
 
     public void RotateReposition()

@@ -18,11 +18,16 @@ public class ChargeState : IState
 
     public void Update()
     {
-        animatronics.SetValue();
+        animatronics.ShaderSetAlphaValue();
 
-        if (animatronics.transform.position != new Vector3(0, 0, 1))
+        if (animatronics.transform.position != Camera.main.transform.position)
         {
-            animatronics.transform.position += new Vector3(0, 0, 0.05f);
+            animatronics.transform.position -= Camera.main.transform.position;
+            
+        }
+        else
+        {
+            controller.StateMachine.TransitionTo(controller.StateMachine.jumpScareState);
         }
     }
 
