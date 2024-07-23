@@ -39,9 +39,14 @@ Material:
     m_Ints: []
     m_Floats:
     - _Float: 0
+<<<<<<<< HEAD:Assets/Resources/Materials/Glitch Material01.mat
+    - _Force: 10
+    - _GlitchSpeed: 1
+========
     - _Force: 1
     - _Fullscreen_DepthWrite: 0
     - _GlitchSpeed: 100
+>>>>>>>> 7a71f2429ed6a08747cc41a21b0be7cf0feb78d5:Assets/Resources/Materials/Glitch Material.mat
     - _GlitchStrength: 10
     - _NoiseAmount: 100
     - _QueueControl: 0
