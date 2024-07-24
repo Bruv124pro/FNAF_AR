@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.VFX;
 
 public class Animatronics : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class Animatronics : MonoBehaviour
     public AudioClip[] audioClips;
     public AudioSource audioSource;
 
+    [SerializeField] private VisualEffect[] particle;
 
     public Camera camera;
 
@@ -76,6 +78,11 @@ public class Animatronics : MonoBehaviour
         alreadyinit = false;
         isJumpState = false;
         isHitElectronic = false;
+
+        foreach (var effect in particle)
+        {
+            effect.transform.GetComponent<VisualEffect>();
+        }
     }
     public void SetVisible()
     {
@@ -348,14 +355,16 @@ public class Animatronics : MonoBehaviour
 
     public void HitElecParticle(int num)
     {
-        camera.GetComponent<Transform>().GetChild(num).gameObject.SetActive(true);
+        ElecEffectOn();
+        //camera.GetComponent<Transform>().GetChild(num).gameObject.SetActive(true);
         StartCoroutine(HitElecParticleFinish(num));
     }
 
     IEnumerator HitElecParticleFinish(int num)
     {
         yield return new WaitForSeconds(1f);
-        camera.GetComponent<Transform>().GetChild(num).gameObject.SetActive(false);
+        //camera.GetComponent<Transform>().GetChild(num).gameObject.SetActive(false);
+        ElecEffectOff();
         isJumpState = false;
     }
 
@@ -364,4 +373,28 @@ public class Animatronics : MonoBehaviour
         return maxshockTime / 10 + maxshockTime % 10;
     }
 
+    private void ElecEffectOn()
+    {
+        if (particle != null)
+        {
+            foreach (VisualEffect p in particle)
+            {
+                //p.SetBool("ElectricArkOnOff", true);
+                p.Play();
+            }
+        }
+
+    }
+
+    private void ElecEffectOff()
+    {
+        if (particle != null)
+        {
+            foreach (VisualEffect p in particle)
+            {
+                //p.SetBool("ElectricArkOnOff", false);
+                p.Stop();
+            }
+        }
+    }
 }
