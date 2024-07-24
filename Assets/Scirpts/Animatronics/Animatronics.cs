@@ -59,6 +59,9 @@ public class Animatronics : MonoBehaviour
     private float bodyAlpha;
     private float eyeAlpha;
 
+    public bool isJumpState;
+    public bool isHitElectronic;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -71,6 +74,8 @@ public class Animatronics : MonoBehaviour
 
         isFinishCircleMove = false;
         alreadyinit = false;
+        isJumpState = false;
+        isHitElectronic = false;
     }
     public void SetVisible()
     {
@@ -341,17 +346,22 @@ public class Animatronics : MonoBehaviour
         eyeShader.SetFloat("_OnOff", 0f);
     }
 
-    public void HitElecParticle()
+    public void HitElecParticle(int num)
     {
-        camera.GetComponent<Transform>().GetChild(0).gameObject.SetActive(true);
-        StartCoroutine(HitElecParticleFinish());
+        camera.GetComponent<Transform>().GetChild(num).gameObject.SetActive(true);
+        StartCoroutine(HitElecParticleFinish(num));
     }
 
-    IEnumerator HitElecParticleFinish()
+    IEnumerator HitElecParticleFinish(int num)
     {
         yield return new WaitForSeconds(1f);
-        camera.GetComponent<Transform>().GetChild(0).gameObject.SetActive(false);
+        camera.GetComponent<Transform>().GetChild(num).gameObject.SetActive(false);
+        isJumpState = false;
     }
 
+    public float InitmaxShockTime()
+    {
+        return maxshockTime / 10 + maxshockTime % 10;
+    }
 
 }
