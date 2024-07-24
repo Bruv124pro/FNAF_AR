@@ -41,7 +41,7 @@ Material:
     - _Force: 10
     - _GlitchSpeed: 10
     - _GlitchStrength: 1
-    - _NoiseAmount: 10
+    - _NoiseAmount: 1000
     - _ScanLineStrength: 1
     m_Colors: []
   m_BuildTextureStacks: []
