@@ -13,6 +13,7 @@ public class ChargeState : IState
     }
     public void Enter()
     {
+        Debug.Log("ChargeState");
         animatronics.PlayAnimation("FreddyCharge");
         animatronics.transform.position -= Camera.main.transform.position;
 

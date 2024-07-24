@@ -41,7 +41,8 @@ public class Animatronics : MonoBehaviour
     public AudioClip[] audioClips;
     public AudioSource audioSource;
 
-    [SerializeField] private VisualEffect[] particle;
+    [SerializeField] public VisualEffect[] missParticle;
+    [SerializeField] public VisualEffect[] succParticle;
 
     public Camera camera;
 
@@ -72,17 +73,23 @@ public class Animatronics : MonoBehaviour
 
         ShaderAlpahValueInitalize();
 
-        camera.GetComponent<Transform>().GetChild(0).gameObject.SetActive(false);
 
         isFinishCircleMove = false;
         alreadyinit = false;
         isJumpState = false;
         isHitElectronic = false;
 
-        foreach (var effect in particle)
+        foreach (var effect in missParticle)
         {
             effect.transform.GetComponent<VisualEffect>();
         }
+        foreach (var effect in succParticle)
+        {
+            effect.transform.GetComponent<VisualEffect>();
+        }
+
+        ElecEffectOff(true);
+        ElecEffectOff(false);
     }
     public void SetVisible()
     {
@@ -353,18 +360,16 @@ public class Animatronics : MonoBehaviour
         eyeShader.SetFloat("_OnOff", 0f);
     }
 
-    public void HitElecParticle(int num)
+    public void HitElecParticle(bool isSuccAtack)
     {
-        ElecEffectOn();
-        //camera.GetComponent<Transform>().GetChild(num).gameObject.SetActive(true);
-        StartCoroutine(HitElecParticleFinish(num));
+        ElecEffectOn(isSuccAtack);
+        StartCoroutine(HitElecParticleFinish(isSuccAtack));
     }
 
-    IEnumerator HitElecParticleFinish(int num)
+    IEnumerator HitElecParticleFinish(bool isSuccAtack)
     {
         yield return new WaitForSeconds(1f);
-        //camera.GetComponent<Transform>().GetChild(num).gameObject.SetActive(false);
-        ElecEffectOff();
+        ElecEffectOff(isSuccAtack);
         isJumpState = false;
     }
 
@@ -373,26 +378,38 @@ public class Animatronics : MonoBehaviour
         return maxshockTime / 10 + maxshockTime % 10;
     }
 
-    private void ElecEffectOn()
+    private void ElecEffectOn(bool isSuccAtack)
     {
-        if (particle != null)
+        if (isSuccAtack)
         {
-            foreach (VisualEffect p in particle)
+            foreach (VisualEffect p in succParticle)
             {
-                //p.SetBool("ElectricArkOnOff", true);
+                p.Play();
+            }
+        }
+        else
+        {
+            foreach(VisualEffect p in missParticle)
+            {
                 p.Play();
             }
         }
 
     }
 
-    private void ElecEffectOff()
+    private void ElecEffectOff(bool isSuccAtack)
     {
-        if (particle != null)
+        if (isSuccAtack)
         {
-            foreach (VisualEffect p in particle)
+            foreach (VisualEffect p in succParticle)
             {
-                //p.SetBool("ElectricArkOnOff", false);
+                p.Stop();
+            }
+        }
+        else
+        {
+            foreach (VisualEffect p in missParticle)
+            {
                 p.Stop();
             }
         }

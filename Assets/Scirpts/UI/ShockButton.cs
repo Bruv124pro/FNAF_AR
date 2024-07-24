@@ -49,13 +49,13 @@ public class ShockButton : MonoBehaviour
             isShockPressed = true;
             if (animatronics.isJumpState)
             {
-                animatronics.HitElecParticle(1);
+                animatronics.HitElecParticle(true);
                 animatronics.isHitElectronic = true;
                 
             }
             else
             {
-                animatronics.HitElecParticle(0);
+                animatronics.HitElecParticle(false);
             }
             elapsedTime = 0;
             coolTime.value = elapsedTime;
