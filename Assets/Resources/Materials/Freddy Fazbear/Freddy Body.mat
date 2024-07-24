@@ -62,7 +62,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0
+    - _Alpha: 1
     - _Cutoff_Height: 18.65
     - _DissolveScale: 40
     - _DissolveWidth: 0.02
