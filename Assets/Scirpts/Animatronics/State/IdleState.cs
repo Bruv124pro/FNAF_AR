@@ -17,6 +17,7 @@ public class IdleState : IState
 
     public void Enter()
     {
+        Debug.Log("IdleState");
         pauseSecond = animatronics.WaitPauseSecond();
         animatronics.PlayAnimation("FreddyJumpscareFinalPose");
     }
@@ -28,7 +29,7 @@ public class IdleState : IState
             time = 0;
             state = animatronics.GoIdleToAnotherState();
             IState nextState = controller.StateMachine.GetState(state);
-            //controller.StateMachine.TransitionTo(nextState);
+            controller.StateMachine.TransitionTo(nextState);
         }
         else
         {

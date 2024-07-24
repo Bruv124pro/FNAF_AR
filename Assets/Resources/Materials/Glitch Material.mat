@@ -38,7 +38,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Force: 10
+    - _Force: 0
     - _GlitchSpeed: 10
     - _GlitchStrength: 1
     - _NoiseAmount: 1000

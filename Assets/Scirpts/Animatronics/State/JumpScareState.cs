@@ -17,6 +17,7 @@ public class JumpScareState : IState
 
     public void Enter()
     {
+        Debug.Log($"JumpScareState");
         MinShockTime = 0;
         MaxShockTime = animatronics.InitmaxShockTime();
         animatronics.PlayAnimation("FreddyCharge 1");

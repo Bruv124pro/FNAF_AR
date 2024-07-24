@@ -20,7 +20,7 @@ public class StartParticle : MonoBehaviour
         {
             foreach (VisualEffect p in particle)    
             {
-                p.SetBool("ElectricArkOnOff", true);
+                //p.SetBool("ElectricArkOnOff", true);
             }
         }
             
@@ -32,7 +32,7 @@ public class StartParticle : MonoBehaviour
         {
             foreach (VisualEffect p in particle)
             {
-                p.SetBool("ElectricArkOnOff", false);
+                //p.SetBool("ElectricArkOnOff", false);
             }
         }
     }

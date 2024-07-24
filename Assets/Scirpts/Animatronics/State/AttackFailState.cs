@@ -12,6 +12,7 @@ public class AttackFailState : IState
     }
     public void Enter()
     {
+        Debug.Log("AttackFailState");
         animatronics.PlayAnimation("FreddyShocked");
         animatronics.HpDecrease();
     }
