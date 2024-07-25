@@ -15,6 +15,9 @@ public class AttackSuccessState : IState
         Debug.Log("AttackSuccessState");
         animatronics.PlayAnimation("FreddyJumpscare_Intro");
         animatronics.JumpScareObject.SetActive(true);
+
+        animatronics.flashButton.interactable = false;
+        animatronics.shockButton.interactable = false;
     }
 
     public void Update()

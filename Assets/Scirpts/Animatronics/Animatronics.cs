@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 using UnityEngine.VFX;
 
 public class Animatronics : MonoBehaviour
@@ -69,6 +70,9 @@ public class Animatronics : MonoBehaviour
     public bool isHitElectronic;
 
     public GameObject JumpScareObject;
+
+    public Button flashButton;
+    public Button shockButton;
 
     void Start()
     {
