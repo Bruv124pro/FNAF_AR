@@ -15,6 +15,15 @@ public class AttackFailState : IState
         Debug.Log("AttackFailState");
         animatronics.PlayAnimation("FreddyShocked");
         animatronics.HpDecrease();
+        animatronics.HitAnimatronicsBodyParticle();
+        if (animatronics.HpCheck())
+        {
+            controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
+        }
+        else
+        {
+            controller.StateMachine.TransitionTo(controller.StateMachine.stopWorkState);
+        }
     }
 
     public void Update()
@@ -24,14 +33,6 @@ public class AttackFailState : IState
 
     public void Exit()
     {
-        if (animatronics.HpCheck())
-        {
-            controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
-        }
-        else
-        {
-            controller.StateMachine.TransitionTo(controller.StateMachine.stopWorkState);
-        }
     }
 
 }

@@ -19,6 +19,7 @@ public class JumpScareState : IState
     {
         Debug.Log($"JumpScareState");
         MinShockTime = 0;
+        Handheld.Vibrate();
         MaxShockTime = animatronics.InitmaxShockTime();
         animatronics.PlayAnimation("FreddyCharge 1");
         elapsedTime = 0;
@@ -34,7 +35,6 @@ public class JumpScareState : IState
             if (animatronics.isHitElectronic)
             {
                 controller.StateMachine.TransitionTo(controller.StateMachine.attackFailState);
-                animatronics.isHitElectronic = false;
             }
         }
 
@@ -48,6 +48,7 @@ public class JumpScareState : IState
     public void Exit()
     {
         animatronics.isJumpState = false;
+        animatronics.isHitElectronic = false;
         elapsedTime = 0;
     }
 }
