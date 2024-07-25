@@ -41,6 +41,9 @@ public class Animatronics : MonoBehaviour
     public AudioClip[] audioClips;
     public AudioSource audioSource;
 
+    [SerializeField] public Transform HitParticleTransform;
+    [SerializeField] private VisualEffect[] hitParticles;
+
     [SerializeField] public VisualEffect[] missParticle;
     [SerializeField] public VisualEffect[] succParticle;
 
@@ -74,12 +77,20 @@ public class Animatronics : MonoBehaviour
         AnimatronicsInit(id);
 
         ShaderAlpahValueInitalize();
-
+            
+        
 
         isFinishCircleMove = false;
         alreadyinit = false;
         isJumpState = false;
         isHitElectronic = false;
+
+        hitParticles = new VisualEffect[HitParticleTransform.childCount];
+
+        for(int i = 0; i < HitParticleTransform.childCount; i++)
+        {
+            hitParticles[i] = HitParticleTransform.GetChild(i).gameObject.GetComponent<VisualEffect>();
+        }
 
         foreach (var effect in missParticle)
         {
@@ -90,6 +101,7 @@ public class Animatronics : MonoBehaviour
             effect.transform.GetComponent<VisualEffect>();
         }
 
+        HitParticleOff();
         ElecEffectOff(true);
         ElecEffectOff(false);
     }
@@ -117,7 +129,6 @@ public class Animatronics : MonoBehaviour
         yield return new WaitForSeconds(minshockTime);
         ShockButtonPressed?.Invoke();
     }
-
     public bool ShouldCharge()
     {
         return UnityEngine.Random.Range(0, 100) < chanceToCharge;
@@ -127,6 +138,8 @@ public class Animatronics : MonoBehaviour
     {
         return UnityEngine.Random.Range(0, 100) < chanceToJumpScare;
     }
+
+
 
     public void ChangeChargeToJumpScare()
     {
@@ -251,7 +264,7 @@ public class Animatronics : MonoBehaviour
     {
         bodyAlpha = bodyShader.GetFloat("_Alpha");
         eyeAlpha = eyeShader.GetFloat("_Alpha");
-        eyeShader.SetFloat("_OnOff", 1f);
+        eyeShader.SetInt("_IsVisible", 1);
         if (bodyAlpha > 0 || eyeAlpha > 0)
         {
             bodyAlpha -= 0.03f;
@@ -347,7 +360,7 @@ public class Animatronics : MonoBehaviour
     {
         if (IsFindVisibleAnimatronics())
         {
-            glitchMaterial.SetFloat("_Force", 10);
+            glitchMaterial.SetFloat("_Force", 3);
         }
         else
         {
@@ -357,9 +370,9 @@ public class Animatronics : MonoBehaviour
 
     public void ShaderAlpahValueInitalize()
     {
-        bodyShader.SetFloat("_Alpha", 1);
+        bodyShader.SetFloat("_Alpha", 0.5f);
         eyeShader.SetFloat("_Alpha", 0.5f);
-        eyeShader.SetFloat("_OnOff", 0f);
+        eyeShader.SetInt("_IsVisible", 0);
     }
 
     public void HitElecParticle(bool isSuccAtack)
@@ -416,4 +429,21 @@ public class Animatronics : MonoBehaviour
             }
         }
     }
+    public void HitParticleOn()
+    {
+        foreach (VisualEffect p in hitParticles)
+        {
+            p.Play();
+        }
+    }
+
+    public void HitParticleOff()
+    {
+        foreach(VisualEffect p in hitParticles)
+        {
+            p.Stop();
+        }
+    }
+
+    
 }

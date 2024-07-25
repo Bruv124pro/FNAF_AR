@@ -13,6 +13,7 @@ public class StopWorkState : IState
     public void Enter()
     {
         Debug.Log("StopWorkState");
+        animatronics.HitParticleOff();
         animatronics.PlayAnimation("FreddyShutdown");
     }
 

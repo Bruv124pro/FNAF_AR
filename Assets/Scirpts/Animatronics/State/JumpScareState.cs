@@ -34,7 +34,6 @@ public class JumpScareState : IState
             if (animatronics.isHitElectronic)
             {
                 controller.StateMachine.TransitionTo(controller.StateMachine.attackFailState);
-                animatronics.isHitElectronic = false;
             }
         }
 
@@ -48,6 +47,7 @@ public class JumpScareState : IState
     public void Exit()
     {
         animatronics.isJumpState = false;
+        animatronics.isHitElectronic = false;
         elapsedTime = 0;
     }
 }

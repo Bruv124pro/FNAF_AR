@@ -8,9 +8,10 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Freddy Body
-  m_Shader: {fileID: -6465566751694194690, guid: 4f91fec5eeb6f8649a51147ae64336fa,
+  m_Shader: {fileID: -6465566751694194690, guid: b0ce001b702c6a341b79fc1be2a0b7bb,
     type: 3}
-  m_Parent: {fileID: 2100000, guid: 85dc20327361da240bf203ba67fc319b, type: 2}
+  m_Parent: {fileID: -876546973899608171, guid: b0ce001b702c6a341b79fc1be2a0b7bb,
+    type: 3}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -46,11 +47,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: -0.01999956
+    - _Alpha: 1
     - _Metallic: 0
     - _Normal: 2.5
     - _Occlusion: 1
     - _On_Off: 0
+    - _QueueControl: 0
     - _Smoothness: 3.5
     m_Colors:
     - _Emission: {r: 0, g: 0, b: 0, a: 1}
