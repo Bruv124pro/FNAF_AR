@@ -22,8 +22,19 @@ public class BatteryUse : MonoBehaviour
 
     void Update()
     {
-        batterySlider.value = batteryAmount;
-        batteryText.text = $"{batteryAmount}";
+        if (batteryAmount > 0)
+        {
+            batterySlider.value = batteryAmount;
+            batteryText.text = $"{batteryAmount}";
+        }
+
+        else
+        {
+            batteryAmount = 0;
+            batterySlider.value = batteryAmount;
+            batteryText.text = $"{batteryAmount}";
+        }
+
         elapsedTime += Time.deltaTime;
 
         if (!flash.isFlashPressed)
@@ -35,7 +46,7 @@ public class BatteryUse : MonoBehaviour
 
     public void ShockPressedCheck()
     {
-        if (shock.isShockPressed && batteryAmount > 0)
+        if (shock.isShockPressed && batteryAmount > 10)
         {
             batteryAmount -= 10;
         }
@@ -43,7 +54,7 @@ public class BatteryUse : MonoBehaviour
 
     public void FlashPressedCheck()
     {
-        if (flash.isFlashPressed && batteryAmount > 0 && !isBatteryCoroutineRunning)
+        if (flash.isFlashPressed && batteryAmount >= 3 && !isBatteryCoroutineRunning)
         {
             batteryAmount -= 3;
             if (elapsedTime > 1)
