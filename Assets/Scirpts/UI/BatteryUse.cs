@@ -13,6 +13,8 @@ public class BatteryUse : MonoBehaviour
 
     public int batteryAmount;
 
+    private float elapesdTime;
+
     void Start()
     {
         batteryAmount = 100;
@@ -22,6 +24,7 @@ public class BatteryUse : MonoBehaviour
     {
         batterySlider.value = batteryAmount;
         batteryText.text = $"{batteryAmount}";
+        elapesdTime += Time.deltaTime;
     }
 
     public void ShockPressedCheck()
@@ -31,7 +34,7 @@ public class BatteryUse : MonoBehaviour
             batteryAmount -= 10;
         }
     }
-    
+
     public void FlashPressedCheck()
     {
         if (flash.isFlashPressed && batteryAmount > 0)
@@ -43,10 +46,13 @@ public class BatteryUse : MonoBehaviour
 
     IEnumerator BatteryAmountDown()
     {
-        while (batteryAmount > 0 && flash.isFlashPressed)
+        if (elapesdTime > 1)
         {
-            yield return new WaitForSeconds(1);
-            batteryAmount -= 1;
+            while (batteryAmount > 0 && flash.isFlashPressed)
+            {
+                batteryAmount -= 1;
+                yield return new WaitForSeconds(1);
+            }
         }
     }
 }
