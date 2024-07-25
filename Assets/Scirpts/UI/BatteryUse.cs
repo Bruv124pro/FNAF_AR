@@ -46,7 +46,7 @@ public class BatteryUse : MonoBehaviour
 
     public void ShockPressedCheck()
     {
-        if (shock.isShockPressed && batteryAmount > 10)
+        if (shock.isShockPressed && batteryAmount >= 10)
         {
             batteryAmount -= 10;
         }

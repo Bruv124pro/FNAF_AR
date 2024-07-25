@@ -2046,17 +2046,17 @@ PrefabInstance:
     - target: {fileID: 6777627525464139607, guid: caae717d7fa63d540ac96afae4c15983,
         type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[1].m_Value
-      value: 1
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 6777627525464139607, guid: caae717d7fa63d540ac96afae4c15983,
         type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[2].m_Value
-      value: 1
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6777627525464139607, guid: caae717d7fa63d540ac96afae4c15983,
         type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[3].m_Value
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6777627525464139607, guid: caae717d7fa63d540ac96afae4c15983,
         type: 3}

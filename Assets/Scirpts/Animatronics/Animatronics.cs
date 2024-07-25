@@ -37,6 +37,7 @@ public class Animatronics : MonoBehaviour
 
     private Animator animator;
     private bool isFinishCircleMove;
+    private bool useGlitch;
     private bool alreadyinit;
     public AudioClip[] audioClips;
     public AudioSource audioSource;
@@ -81,8 +82,9 @@ public class Animatronics : MonoBehaviour
         alreadyinit = false;
         isJumpState = false;
         isHitElectronic = false;
+        useGlitch = true;
 
-        foreach(var effect in hitParticles)
+        foreach (var effect in hitParticles)
         {
             effect.transform.GetComponent<VisualEffect>();
         }
@@ -168,6 +170,7 @@ public class Animatronics : MonoBehaviour
             hp--;
         }
     }
+
 
     public void AnimatronicsInit(int _id)
     {
@@ -332,11 +335,15 @@ public class Animatronics : MonoBehaviour
 
     public bool IsFindVisibleAnimatronics()
     {
-        Vector3 viewportPoint = camera.WorldToViewportPoint(transform.position);
-
-        bool isVisible = viewportPoint.x >= 0 && viewportPoint.x <= 1 && viewportPoint.y >= 0 && viewportPoint.y <= 1 && viewportPoint.z > 0;
+        bool isVisible = IsVisibleInMonitor();
 
         return isVisible;
+    }
+
+    public bool IsVisibleInMonitor()
+    {
+        Vector3 viewportPoint = camera.WorldToViewportPoint(transform.position);
+        return viewportPoint.x >= 0 && viewportPoint.x <= 1 && viewportPoint.y >= 0 && viewportPoint.y <= 1 && viewportPoint.z > 0;
     }
 
     public string selectVisibleAnimation()
@@ -356,12 +363,32 @@ public class Animatronics : MonoBehaviour
     {
         if (IsFindVisibleAnimatronics())
         {
-            glitchMaterial.SetFloat("_Force", 3);
+            Debug.Log($"±Û¸®Ä¡ {useGlitch}");
+            if (useGlitch)
+            {
+                glitchMaterial.SetFloat("_Force", 3);
+            }
         }
         else
         {
             glitchMaterial.SetFloat("_Force", 0);
         }
+    }
+    public void OffGlitchMaterial()
+    {
+        glitchMaterial.SetFloat("_Force", 0);
+    }
+
+    public bool IsGlitchUse()
+    {
+        return useGlitch;
+    }
+
+    
+
+    public void ChangeGlitchBoolValue(bool _useGlitch)
+    {
+        useGlitch = _useGlitch;
     }
 
     public void ShaderAlpahValueInitalize()

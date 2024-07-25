@@ -18,11 +18,13 @@ public class JumpScareState : IState
     public void Enter()
     {
         Debug.Log($"JumpScareState");
+        Debug.Log($"화면에 비치는지{animatronics.IsVisibleInMonitor()}");
         MinShockTime = 0;
         Handheld.Vibrate();
         MaxShockTime = animatronics.InitmaxShockTime();
         animatronics.PlayAnimation("FreddyCharge 1");
         elapsedTime = 0;
+        animatronics.ChangeGlitchBoolValue(false);
     }
 
     public void Update()
@@ -34,6 +36,7 @@ public class JumpScareState : IState
             animatronics.isJumpState = true;
             if (animatronics.isHitElectronic)
             {
+                Debug.Log($"전기충격 받음 {animatronics.IsVisibleInMonitor()}");
                 controller.StateMachine.TransitionTo(controller.StateMachine.attackFailState);
             }
         }
@@ -47,6 +50,7 @@ public class JumpScareState : IState
 
     public void Exit()
     {
+        animatronics.OffGlitchMaterial();
         animatronics.isJumpState = false;
         animatronics.isHitElectronic = false;
         elapsedTime = 0;
