@@ -13,7 +13,7 @@ public class SoundFeintState : IState
     }
     public void Enter()
     {
-        Debug.Log("SoundFeintState 진입");
+        Debug.Log("SoundFeintState");
         controller.animatronics.PlaySoundFeint();
         controller.animatronics.OnSoundPlayFinished += OnSoundPlayFinished;
     }

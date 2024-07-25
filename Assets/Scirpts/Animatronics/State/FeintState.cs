@@ -13,8 +13,9 @@ public class FeintState : IState
     }
     public void Enter()
     {
+
         state = animatronics.GoFeintToAnotherState();
-        Debug.Log(state);
+        Debug.Log("FeintState");
         IState nextState = controller.StateMachine.GetState(state);
         controller.StateMachine.TransitionTo(nextState);
     }

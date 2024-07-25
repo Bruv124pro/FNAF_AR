@@ -13,6 +13,8 @@ public class CircleMoveState : IState
     
     public void Enter()
     {
+        Debug.Log("CircleMoveState");
+
         controller.animatronics.MoveCircle();
     }
 

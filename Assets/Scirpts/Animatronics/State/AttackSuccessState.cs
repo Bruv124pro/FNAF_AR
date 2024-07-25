@@ -12,7 +12,9 @@ public class AttackSuccessState : IState
     }
     public void Enter()
     {
+        Debug.Log("AttackSuccessState");
         animatronics.PlayAnimation("FreddyJumpscare_Intro");
+        Handheld.Vibrate();
     }
 
     public void Update()

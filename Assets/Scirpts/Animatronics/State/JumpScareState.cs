@@ -5,8 +5,8 @@ public class JumpScareState : IState
     private AnimatronicsController controller;
     private Animatronics animatronics;
 
-    private int MinShockTime;
-    private int MaxShockTime;
+    private float MinShockTime;
+    private float MaxShockTime;
     private float elapsedTime;
 
     public JumpScareState(AnimatronicsController controller)
@@ -17,7 +17,11 @@ public class JumpScareState : IState
 
     public void Enter()
     {
+        Debug.Log($"JumpScareState");
+        MinShockTime = 0;
+        MaxShockTime = animatronics.InitmaxShockTime();
         animatronics.PlayAnimation("FreddyCharge 1");
+        elapsedTime = 0;
     }
 
     public void Update()
@@ -26,7 +30,12 @@ public class JumpScareState : IState
 
         if (MinShockTime < elapsedTime)
         {
-            animatronics.ShockPress();
+            animatronics.isJumpState = true;
+            if (animatronics.isHitElectronic)
+            {
+                controller.StateMachine.TransitionTo(controller.StateMachine.attackFailState);
+                animatronics.isHitElectronic = false;
+            }
         }
 
         if (elapsedTime > MaxShockTime)
@@ -38,7 +47,7 @@ public class JumpScareState : IState
 
     public void Exit()
     {
+        animatronics.isJumpState = false;
         elapsedTime = 0;
-        Debug.Log("jumpExit");
     }
 }

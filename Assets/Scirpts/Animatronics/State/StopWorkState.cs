@@ -12,6 +12,7 @@ public class StopWorkState : IState
     }
     public void Enter()
     {
+        Debug.Log("StopWorkState");
         animatronics.PlayAnimation("FreddyShutdown");
     }
 

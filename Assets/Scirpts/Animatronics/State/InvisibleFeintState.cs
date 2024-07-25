@@ -14,6 +14,7 @@ public class InvisibleFeintState : IState
     }
     public void Enter()
     {
+        Debug.Log("InvisibleFeintState");
         animatronics.PlayAnimation(controller.animatronics.selectVisibleAnimation());
         controller.animatronics.SetVisible();
         controller.animatronics.OnVisibleFinished += OnVisibleFinished;

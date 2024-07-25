@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.VFX;
 
 public class Animatronics : MonoBehaviour
 {
@@ -40,6 +41,9 @@ public class Animatronics : MonoBehaviour
     public AudioClip[] audioClips;
     public AudioSource audioSource;
 
+    [SerializeField] public VisualEffect[] missParticle;
+    [SerializeField] public VisualEffect[] succParticle;
+
     public Camera camera;
 
     public Material glitchMaterial;
@@ -58,6 +62,9 @@ public class Animatronics : MonoBehaviour
     private float bodyAlpha;
     private float eyeAlpha;
 
+    public bool isJumpState;
+    public bool isHitElectronic;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -66,8 +73,23 @@ public class Animatronics : MonoBehaviour
 
         ShaderAlpahValueInitalize();
 
+
         isFinishCircleMove = false;
         alreadyinit = false;
+        isJumpState = false;
+        isHitElectronic = false;
+
+        foreach (var effect in missParticle)
+        {
+            effect.transform.GetComponent<VisualEffect>();
+        }
+        foreach (var effect in succParticle)
+        {
+            effect.transform.GetComponent<VisualEffect>();
+        }
+
+        ElecEffectOff(true);
+        ElecEffectOff(false);
     }
     public void SetVisible()
     {
@@ -227,7 +249,7 @@ public class Animatronics : MonoBehaviour
     {
         bodyAlpha = bodyShader.GetFloat("_Alpha");
         eyeAlpha = eyeShader.GetFloat("_Alpha");
-
+        eyeShader.SetFloat("_OnOff", 1f);
         if (bodyAlpha > 0 || eyeAlpha > 0)
         {
             bodyAlpha -= 0.03f;
@@ -335,5 +357,61 @@ public class Animatronics : MonoBehaviour
     {
         bodyShader.SetFloat("_Alpha", 1);
         eyeShader.SetFloat("_Alpha", 0.5f);
+        eyeShader.SetFloat("_OnOff", 0f);
+    }
+
+    public void HitElecParticle(bool isSuccAtack)
+    {
+        ElecEffectOn(isSuccAtack);
+        StartCoroutine(HitElecParticleFinish(isSuccAtack));
+    }
+
+    IEnumerator HitElecParticleFinish(bool isSuccAtack)
+    {
+        yield return new WaitForSeconds(1f);
+        ElecEffectOff(isSuccAtack);
+        isJumpState = false;
+    }
+
+    public float InitmaxShockTime()
+    {
+        return maxshockTime / 10 + maxshockTime % 10;
+    }
+
+    private void ElecEffectOn(bool isSuccAtack)
+    {
+        if (isSuccAtack)
+        {
+            foreach (VisualEffect p in succParticle)
+            {
+                p.Play();
+            }
+        }
+        else
+        {
+            foreach(VisualEffect p in missParticle)
+            {
+                p.Play();
+            }
+        }
+
+    }
+
+    private void ElecEffectOff(bool isSuccAtack)
+    {
+        if (isSuccAtack)
+        {
+            foreach (VisualEffect p in succParticle)
+            {
+                p.Stop();
+            }
+        }
+        else
+        {
+            foreach (VisualEffect p in missParticle)
+            {
+                p.Stop();
+            }
+        }
     }
 }
