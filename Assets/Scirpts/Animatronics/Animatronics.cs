@@ -65,6 +65,8 @@ public class Animatronics : MonoBehaviour
     public bool isJumpState;
     public bool isHitElectronic;
 
+    public GameObject JumpScareObject;
+
     void Start()
     {
         animator = GetComponent<Animator>();
