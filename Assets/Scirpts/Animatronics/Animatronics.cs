@@ -41,8 +41,7 @@ public class Animatronics : MonoBehaviour
     public AudioClip[] audioClips;
     public AudioSource audioSource;
 
-    [SerializeField] public Transform HitParticleTransform;
-    [SerializeField] private VisualEffect[] hitParticles;
+    [SerializeField] public VisualEffect[] hitParticles;
 
     [SerializeField] public VisualEffect[] missParticle;
     [SerializeField] public VisualEffect[] succParticle;
@@ -77,19 +76,15 @@ public class Animatronics : MonoBehaviour
         AnimatronicsInit(id);
 
         ShaderAlpahValueInitalize();
-            
-        
 
         isFinishCircleMove = false;
         alreadyinit = false;
         isJumpState = false;
         isHitElectronic = false;
 
-        hitParticles = new VisualEffect[HitParticleTransform.childCount];
-
-        for(int i = 0; i < HitParticleTransform.childCount; i++)
+        foreach(var effect in hitParticles)
         {
-            hitParticles[i] = HitParticleTransform.GetChild(i).gameObject.GetComponent<VisualEffect>();
+            effect.transform.GetComponent<VisualEffect>();
         }
 
         foreach (var effect in missParticle)
@@ -109,6 +104,7 @@ public class Animatronics : MonoBehaviour
     {
         bodyShader.SetFloat("_Alpha", 0);
         eyeShader.SetFloat("_Alpha", 0f);
+        eyeShader.SetInt("_IsVisible", 1);
         StartCoroutine(SetInvisible());
     }
 
@@ -370,8 +366,8 @@ public class Animatronics : MonoBehaviour
 
     public void ShaderAlpahValueInitalize()
     {
-        bodyShader.SetFloat("_Alpha", 0.5f);
-        eyeShader.SetFloat("_Alpha", 0.5f);
+        bodyShader.SetFloat("_Alpha", 1f);
+        eyeShader.SetFloat("_Alpha", 1f);
         eyeShader.SetInt("_IsVisible", 0);
     }
 
@@ -388,9 +384,10 @@ public class Animatronics : MonoBehaviour
         isJumpState = false;
     }
 
+
     public float InitmaxShockTime()
     {
-        return maxshockTime / 10 + maxshockTime % 10;
+        return (float)maxshockTime / 10;
     }
 
     private void ElecEffectOn(bool isSuccAtack)
@@ -429,7 +426,7 @@ public class Animatronics : MonoBehaviour
             }
         }
     }
-    public void HitParticleOn()
+    private void HitParticleOn()
     {
         foreach (VisualEffect p in hitParticles)
         {
@@ -437,13 +434,26 @@ public class Animatronics : MonoBehaviour
         }
     }
 
-    public void HitParticleOff()
+    IEnumerator HitParticleOnToOff()
     {
-        foreach(VisualEffect p in hitParticles)
+        yield return new WaitForSeconds(1f);
+        foreach (VisualEffect p in hitParticles)
         {
             p.Stop();
         }
     }
 
-    
+    private void HitParticleOff()
+    {
+        foreach (VisualEffect p in hitParticles)
+        {
+            p.Stop();
+        }
+    }
+    public void HitAnimatronicsBodyParticle()
+    {
+        HitParticleOn();
+        StartCoroutine(HitParticleOnToOff());
+    }
+
 }
