@@ -44,7 +44,7 @@ public class ShockButton : MonoBehaviour
 
     public void ButtonClick()
     {
-        if (battery.batteryAmount > 0 && elapsedTime == 100)
+        if (battery.batteryAmount > 10 && elapsedTime == 100)
         {
             isShockPressed = true;
             if (animatronics.isJumpState)
