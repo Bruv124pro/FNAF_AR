@@ -12,8 +12,8 @@ public class BatteryUse : MonoBehaviour
     [SerializeField] private Text batteryText;
 
     public int batteryAmount;
-
-    private float elapesdTime;
+    private bool isBatteryCoroutineRunning = false;
+    private float elapsedTime = 0;
 
     void Start()
     {
@@ -22,14 +22,31 @@ public class BatteryUse : MonoBehaviour
 
     void Update()
     {
-        batterySlider.value = batteryAmount;
-        batteryText.text = $"{batteryAmount}";
-        elapesdTime += Time.deltaTime;
+        if (batteryAmount > 0)
+        {
+            batterySlider.value = batteryAmount;
+            batteryText.text = $"{batteryAmount}";
+        }
+
+        else
+        {
+            batteryAmount = 0;
+            batterySlider.value = batteryAmount;
+            batteryText.text = $"{batteryAmount}";
+        }
+
+        elapsedTime += Time.deltaTime;
+
+        if (!flash.isFlashPressed)
+        {
+            StopCoroutine(BatteryAmountDown());
+            isBatteryCoroutineRunning = false;
+        }
     }
 
     public void ShockPressedCheck()
     {
-        if (shock.isShockPressed && batteryAmount > 0)
+        if (shock.isShockPressed && batteryAmount > 10)
         {
             batteryAmount -= 10;
         }
@@ -37,22 +54,25 @@ public class BatteryUse : MonoBehaviour
 
     public void FlashPressedCheck()
     {
-        if (flash.isFlashPressed && batteryAmount > 0)
+        if (flash.isFlashPressed && batteryAmount >= 3 && !isBatteryCoroutineRunning)
         {
             batteryAmount -= 3;
-            StartCoroutine(BatteryAmountDown());
+            if (elapsedTime > 1)
+            {
+                StartCoroutine(BatteryAmountDown());
+            }
         }
     }
 
     IEnumerator BatteryAmountDown()
     {
-        if (elapesdTime > 1)
+        isBatteryCoroutineRunning = true;
+        while (flash.isFlashPressed && batteryAmount > 0)
         {
-            while (batteryAmount > 0 && flash.isFlashPressed)
-            {
-                batteryAmount -= 1;
-                yield return new WaitForSeconds(1);
-            }
+            yield return new WaitForSeconds(1);
+            batteryAmount -= 1;
         }
+        isBatteryCoroutineRunning = false;
+        elapsedTime = 0;
     }
 }
