@@ -18,6 +18,7 @@ public class AttackFailState : IState
         animatronics.HitAnimatronicsBodyParticle();
         if (animatronics.HpCheck())
         {
+            animatronics.ChangeGlitchBoolValue(true);
             controller.StateMachine.TransitionTo(controller.StateMachine.idleState);
         }
         else

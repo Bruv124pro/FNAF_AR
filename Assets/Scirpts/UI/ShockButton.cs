@@ -47,7 +47,7 @@ public class ShockButton : MonoBehaviour
         if (battery.batteryAmount > 10 && elapsedTime == 100)
         {
             isShockPressed = true;
-            if (animatronics.isJumpState)
+            if (animatronics.isJumpState && animatronics.IsVisibleInMonitor())
             {
                 animatronics.HitElecParticle(true);
                 animatronics.isHitElectronic = true;

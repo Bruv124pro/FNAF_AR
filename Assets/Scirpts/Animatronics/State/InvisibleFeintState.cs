@@ -16,13 +16,13 @@ public class InvisibleFeintState : IState
     {
         Debug.Log("InvisibleFeintState");
         animatronics.PlayAnimation(controller.animatronics.selectVisibleAnimation());
-        controller.animatronics.SetVisible();
-        controller.animatronics.OnVisibleFinished += OnVisibleFinished;
+        animatronics.SetVisible();
+        animatronics.OnVisibleFinished += OnVisibleFinished;
     }
 
     public void Update()
     {
-        if (controller.animatronics.IsFindVisibleAnimatronics())
+        if (animatronics.IsVisibleInMonitor())
         {
             controller.StateMachine.TransitionTo(controller.StateMachine.repositionState);
         }
