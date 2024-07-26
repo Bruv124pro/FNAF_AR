@@ -2831,6 +2831,8 @@ MonoBehaviour:
   isJumpState: 0
   isHitElectronic: 0
   JumpScareObject: {fileID: 1378991237}
+  flashButton: {fileID: 1379687986}
+  shockButton: {fileID: 1123366992}
 --- !u!1001 &1362734343
 PrefabInstance:
   m_ObjectHideFlags: 0
