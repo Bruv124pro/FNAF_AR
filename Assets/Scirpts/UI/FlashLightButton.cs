@@ -30,7 +30,17 @@ public class FlashLightButton : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(battery.batteryAmount);
+        if (battery.batteryAmount <= 0)
+        {
+            isFlashPressed = false;
+            flashButton.sprite = offButton;
+
+            if (volume.profile.TryGet<Vignette>(out vignette) && volume.profile.TryGet<ShadowsMidtonesHighlights>(out shadow))
+            {
+                vignette.intensity.value = 0.65f;
+                shadow.shadows.SetValue(new Vector4Parameter(new Vector4(0, 0, 0, -0.3f)));
+            }
+        }
     }
 
     public void ButtonClick()
@@ -47,18 +57,6 @@ public class FlashLightButton : MonoBehaviour
             }
         }
         else
-        {
-            isFlashPressed = false;
-            flashButton.sprite = offButton;
-
-            if (volume.profile.TryGet<Vignette>(out vignette) && volume.profile.TryGet<ShadowsMidtonesHighlights>(out shadow))
-            {
-                vignette.intensity.value = 0.65f;
-                shadow.shadows.SetValue(new Vector4Parameter(new Vector4(0, 0, 0, -0.3f)));
-            }
-        }
-
-        if(battery.batteryAmount <= 0)
         {
             isFlashPressed = false;
             flashButton.sprite = offButton;
