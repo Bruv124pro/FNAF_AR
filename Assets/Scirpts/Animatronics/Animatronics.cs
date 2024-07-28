@@ -76,6 +76,10 @@ public class Animatronics : MonoBehaviour
 
     void Start()
     {
+        if(id == null)
+        {
+            id = 1004;
+        }
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         AnimatronicsInit(id);
@@ -485,6 +489,11 @@ public class Animatronics : MonoBehaviour
     {
         HitParticleOn();
         StartCoroutine(HitParticleOnToOff());
+    }
+
+    public void GetId(int _id)
+    {
+        id = _id;
     }
 
 }
