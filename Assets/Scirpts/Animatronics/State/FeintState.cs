@@ -26,5 +26,6 @@ public class FeintState : IState
 
     public void Exit()
     {
+
     }
 }

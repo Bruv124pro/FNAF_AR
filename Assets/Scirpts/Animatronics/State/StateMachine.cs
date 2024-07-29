@@ -14,7 +14,8 @@ public enum StateType
     FeintState,
     SoundFeintState,
     InvisibleFeintState,
-    Reposition
+    Reposition,
+    UniqueFeintState
 }
 
 public class StateMachine
@@ -32,6 +33,7 @@ public class StateMachine
     public SoundFeintState soundFeintState;
     public InvisibleFeintState invisibleFeintState;
     public RepositionState repositionState;
+    public UniqueFeintState uniqueFeintState;
 
     public StateMachine(AnimatronicsController controller)
     {
