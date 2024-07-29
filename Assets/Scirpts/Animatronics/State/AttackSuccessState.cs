@@ -18,6 +18,8 @@ public class AttackSuccessState : IState
 
         animatronics.flashButton.interactable = false;
         animatronics.shockButton.interactable = false;
+
+        animatronics.GameOverOverlay();
     }
 
     public void Update()

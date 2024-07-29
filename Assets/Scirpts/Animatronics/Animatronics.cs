@@ -75,9 +75,12 @@ public class Animatronics : MonoBehaviour
     public Button flashButton;
     public Button shockButton;
 
+    public Canvas gameResultCanvas;
+    public Text gameResultText;
+
     void Start()
     {
-        if(id == null)
+        if (id == null)
         {
             id = 1004;
         }
@@ -145,8 +148,6 @@ public class Animatronics : MonoBehaviour
     {
         return UnityEngine.Random.Range(0, 100) < chanceToJumpScare;
     }
-
-
 
     public void ChangeChargeToJumpScare()
     {
@@ -399,8 +400,6 @@ public class Animatronics : MonoBehaviour
         return useGlitch;
     }
 
-    
-
     public void ChangeGlitchBoolValue(bool _useGlitch)
     {
         useGlitch = _useGlitch;
@@ -426,7 +425,6 @@ public class Animatronics : MonoBehaviour
         isJumpState = false;
     }
 
-
     public float InitmaxShockTime()
     {
         return (float)maxshockTime / 10;
@@ -443,7 +441,7 @@ public class Animatronics : MonoBehaviour
         }
         else
         {
-            foreach(VisualEffect p in missParticle)
+            foreach (VisualEffect p in missParticle)
             {
                 p.Play();
             }
@@ -503,4 +501,30 @@ public class Animatronics : MonoBehaviour
         id = _id;
     }
 
+    public void GameOverOverlay()
+    {
+        StartCoroutine(GameOverPanelSetActive());
+    }
+    
+    public void GameClearOverlay()
+    {
+        StartCoroutine(GameClearPanelSetActive());
+    }
+
+    IEnumerator GameOverPanelSetActive()
+    {
+        yield return new WaitForSeconds(3f);
+
+        gameResultCanvas.gameObject.SetActive(true);
+        gameResultText.text = "YOU LOST";
+        gameResultText.color = Color.red;
+    }
+    IEnumerator GameClearPanelSetActive()
+    {
+        yield return new WaitForSeconds(3f);
+
+        gameResultCanvas.gameObject.SetActive(true);
+        gameResultText.text = "YOU WIN";
+        gameResultText.color = Color.white;
+    }
 }
