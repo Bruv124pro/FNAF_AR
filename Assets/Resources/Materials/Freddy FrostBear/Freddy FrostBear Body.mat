@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Freddy FrostBear Body
-  m_Shader: {fileID: -6465566751694194690, guid: b0ce001b702c6a341b79fc1be2a0b7bb,
+  m_Shader: {fileID: -6465566751694194690, guid: ba2736036257e714287f1b2e0ada4c6f,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -65,8 +65,20 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Emission_Map:
+        m_Texture: {fileID: 2800000, guid: 3b3fb81b077f8d342af2c2ecd6d6243c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Grunge:
+        m_Texture: {fileID: 2800000, guid: b48cc8ca18923e3429f3b21dfb79b4d1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GrungeMap:
+        m_Texture: {fileID: 2800000, guid: b48cc8ca18923e3429f3b21dfb79b4d1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MRAC:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 76757f9eb006d344996b1ebe359830a4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -78,7 +90,31 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal_Map:
+        m_Texture: {fileID: 2800000, guid: c7e4f7c8af63aaa4f9166b9bcc32d827, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal_Map01:
+        m_Texture: {fileID: 2800000, guid: c7e4f7c8af63aaa4f9166b9bcc32d827, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal_Map02:
+        m_Texture: {fileID: 2800000, guid: 33e2af537c663ca43a595ccf1604f739, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal_Map03:
+        m_Texture: {fileID: 2800000, guid: 4bf4afed8182c3741983a0a63835fb2e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal_Map_2:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal_Map_G:
+        m_Texture: {fileID: 2800000, guid: 33e2af537c663ca43a595ccf1604f739, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal_Map_R:
+        m_Texture: {fileID: 2800000, guid: 4bf4afed8182c3741983a0a63835fb2e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -90,6 +126,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_a64c4e4db97a489c8dcaf1d5b8115be0_Out_0_Texture2D:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -123,19 +163,20 @@ Material:
     - _DissolveWidth: 0.02
     - _DstBlend: 0
     - _DstBlendAlpha: 0
+    - _Emission: 1
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Metallic: 0
-    - _Normal: 1
-    - _Occlusion: 0.5
+    - _Metallic: 1
+    - _Normal: 2
+    - _Occlusion: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -146,7 +187,8 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DissolveColor: {r: 1, g: 1, b: 1, a: 1}
+    - _DissolveColor: {r: 0.09344962, g: 0.12813158, b: 0.9433962, a: 1}
+    - _Emission: {r: 0, g: 2.9512005, b: 4, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
