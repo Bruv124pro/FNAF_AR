@@ -29,6 +29,7 @@ public class Animatronics : MonoBehaviour
     [SerializeField] private int chanceToCharge;
     [SerializeField] private int chanceToJumpScare;
     [SerializeField] private int chanceToFeint;
+    [SerializeField] private int chanceToUniqueFeint;
     [SerializeField] private int chargeTime;
     [SerializeField] private int invisibleTime;
     [SerializeField] private int cloackedTime;
@@ -201,6 +202,7 @@ public class Animatronics : MonoBehaviour
         chanceToCharge = animatronicsTable.chanceToCharge;
         chanceToJumpScare = animatronicsTable.chanceToJumpScare;
         chanceToFeint = animatronicsTable.chanceToFeint;
+        chanceToUniqueFeint = animatronicsTable.chanceToUniqueFeint;
         chargeTime = animatronicsTable.chargeTime;
         invisibleTime = animatronicsTable.invisibleTime;
         cloackedTime = animatronicsTable.cloackedTime;
@@ -255,7 +257,12 @@ public class Animatronics : MonoBehaviour
         int ran = UnityEngine.Random.Range(0, 100);
         string state = "";
 
-        if (ran <= 60)
+
+        if (ran <= chanceToUniqueFeint)
+        {
+            state = "uniqueFeintState";
+        }
+        else if (ran > chanceToUniqueFeint && ran <= 60)
         {
             state = "soundFeintState";
         }
