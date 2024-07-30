@@ -19,6 +19,11 @@ public class SelectUIManager : MonoBehaviour
     public float currentDepth;
     private UniversalAdditionalCameraData cameraData;
 
+    private string prefabPath = "Prefabs/ARAnimatronics/AR_";
+    private string ARAnimatronicsPrefabPath = "Prefabs/PreViewAnimatronics/pre_";
+    public Transform parentTransform;
+    private GameObject preViewAnimatronics;
+
     private void Start()
     {
         panel.SetActive(false);
@@ -33,21 +38,36 @@ public class SelectUIManager : MonoBehaviour
     public void SelectAnimatronics(Button button)
     {
         panel.SetActive(true);
-        animatronics.SetActive(true);
+        //animatronics.SetActive(true);
         ButtonID buttonID = button.GetComponent<ButtonID>();
         
         if (buttonID != null)
         {
             var animatronicsTable = DataManager.Instance.AnimatronicsTable[buttonID.id];
             idText.text = animatronicsTable.charName;
+            GameObject prefab = Resources.Load<GameObject>(prefabPath + buttonID.id);
+
+            Debug.Log($"{prefabPath + buttonID.id}");
+
+            if (prefab != null)
+            {
+                preViewAnimatronics = Instantiate(prefab);
+
+                if (parentTransform != null)
+                {
+                    preViewAnimatronics.transform.SetParent(parentTransform, false);
+                }
+            }
         }
+
+        
     }
 
     public void EnCounterARView()
     {
         panel.SetActive(false);
         panel.transform.parent.gameObject.SetActive(false);
-        animatronics.SetActive(false);
+        preViewAnimatronics.SetActive(false);
         uiChild.SetActive(true);
         mapCamera.gameObject.SetActive(false);
         InGameAnimatronics.SetActive(true);
