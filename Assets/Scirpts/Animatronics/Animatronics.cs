@@ -58,7 +58,7 @@ public class Animatronics : MonoBehaviour
     public event Action ShockButtonPressed;
     public event Action ChargeToJumpScare;
 
-    public string[] visibleAnimationNames = { "FreddyGlimpse1", "FreddyGlimpse2", "FreddyGlimpse3" };
+    public string[] visibleAnimationNames = { "Glimpse1", "Glimpse2", "Glimpse3" };
 
     public StateMachine StateMachine { get; private set; }
 

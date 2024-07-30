@@ -23,6 +23,8 @@ public class SelectUIManager : MonoBehaviour
     private string prefabPath = "Prefabs/PreViewAnimatronics/pre_";
     public Transform parentTransform;
     private GameObject preViewAnimatronics;
+    private GameObject ARAnimatronics;
+
 
     private void Start()
     {
@@ -46,8 +48,9 @@ public class SelectUIManager : MonoBehaviour
             var animatronicsTable = DataManager.Instance.AnimatronicsTable[buttonID.id];
             idText.text = animatronicsTable.charName;
             GameObject prefab = Resources.Load<GameObject>(prefabPath + buttonID.id);
+            id = buttonID.id;
 
-            Debug.Log($"{prefabPath + buttonID.id}");
+            Debug.Log($"{prefabPath + id}");
 
             if (prefab != null)
             {
@@ -65,12 +68,28 @@ public class SelectUIManager : MonoBehaviour
 
     public void EnCounterARView()
     {
+        var animatronicsTable = DataManager.Instance.AnimatronicsTable[id];
+
         panel.SetActive(false);
         panel.transform.parent.gameObject.SetActive(false);
         preViewAnimatronics.SetActive(false);
         uiChild.SetActive(true);
         mapCamera.gameObject.SetActive(false);
         InGameAnimatronics.SetActive(true);
+
+        GameObject prefab = Resources.Load<GameObject>(ARAnimatronicsPrefabPath + id);
+        Debug.Log($"{prefab}");
+        if (prefab != null)
+        {
+            ARAnimatronics = Instantiate(prefab);
+
+            if (InGameAnimatronics.transform != null)
+            {
+                ARAnimatronics.transform.SetParent(InGameAnimatronics.transform, false);
+            }
+        }
+
+
         InGameAnimatronics.GetComponent<Animatronics>().GetId(id);
     }
 }
