@@ -19,8 +19,8 @@ public class SelectUIManager : MonoBehaviour
     public float currentDepth;
     private UniversalAdditionalCameraData cameraData;
 
-    private string prefabPath = "Prefabs/ARAnimatronics/AR_";
-    private string ARAnimatronicsPrefabPath = "Prefabs/PreViewAnimatronics/pre_";
+    private string ARAnimatronicsPrefabPath = "Prefabs/ARAnimatronics/AR_";
+    private string prefabPath = "Prefabs/PreViewAnimatronics/pre_";
     public Transform parentTransform;
     private GameObject preViewAnimatronics;
 
