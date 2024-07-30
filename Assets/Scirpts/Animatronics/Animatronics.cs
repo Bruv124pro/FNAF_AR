@@ -77,8 +77,8 @@ public class Animatronics : MonoBehaviour
 
     public Canvas gameResultCanvas;
     public Text gameResultText;
-
-    void Start()
+    
+    private void Awake()
     {
         if (id == null)
         {
@@ -87,7 +87,10 @@ public class Animatronics : MonoBehaviour
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         AnimatronicsInit(id);
+    }
 
+    void Start()
+    {
         ShaderAlpahValueInitalize();
 
         isFinishCircleMove = false;
@@ -379,7 +382,7 @@ public class Animatronics : MonoBehaviour
     {
         if (IsFindVisibleAnimatronics())
         {
-            Debug.Log($"�۸�ġ {useGlitch}");
+            Debug.Log($"±Û¸®Ä¡ {useGlitch}");
             if (useGlitch)
             {
                 glitchMaterial.SetFloat("_Force", 3);
@@ -390,6 +393,7 @@ public class Animatronics : MonoBehaviour
             glitchMaterial.SetFloat("_Force", 0);
         }
     }
+    
     public void OffGlitchMaterial()
     {
         glitchMaterial.SetFloat("_Force", 0);
@@ -466,6 +470,7 @@ public class Animatronics : MonoBehaviour
             }
         }
     }
+    
     private void HitParticleOn()
     {
         foreach (VisualEffect p in hitParticles)
@@ -490,6 +495,7 @@ public class Animatronics : MonoBehaviour
             p.Stop();
         }
     }
+    
     public void HitAnimatronicsBodyParticle()
     {
         HitParticleOn();
@@ -499,6 +505,11 @@ public class Animatronics : MonoBehaviour
     public void GetId(int _id)
     {
         id = _id;
+    }
+
+    public string SetName()
+    {
+        return charName;
     }
 
     public void GameOverOverlay()
@@ -519,6 +530,7 @@ public class Animatronics : MonoBehaviour
         gameResultText.text = "YOU LOST";
         gameResultText.color = Color.red;
     }
+    
     IEnumerator GameClearPanelSetActive()
     {
         yield return new WaitForSeconds(3f);

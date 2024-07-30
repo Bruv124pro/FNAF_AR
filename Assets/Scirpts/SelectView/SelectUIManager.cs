@@ -2,43 +2,75 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class SelectUIManager : MonoBehaviour
 {
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject animatronics;
-
+    [SerializeField] private GameObject InGameAnimatronics;
+    private Camera camera;
+    private Camera mapCamera;
+    private GameObject ui;
+    private GameObject uiChild;
     private TextMeshProUGUI idText;
     private int id;
+    public float currentDepth;
+    private UniversalAdditionalCameraData cameraData;
+
+    private string ARAnimatronicsPrefabPath = "Prefabs/ARAnimatronics/AR_";
+    private string prefabPath = "Prefabs/PreViewAnimatronics/pre_";
+    public Transform parentTransform;
+    private GameObject preViewAnimatronics;
 
     private void Start()
     {
         panel.SetActive(false);
-        
-        idText = panel.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        ui = GameObject.Find("UI");
+        uiChild = ui.transform.GetChild(0).gameObject;
+        idText = panel.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        camera = Camera.main;
+        mapCamera = Camera.allCameras[1];
+        cameraData = camera.GetComponent<UniversalAdditionalCameraData>();
+        mapCamera.GetComponent<UniversalAdditionalCameraData>();
     }
     public void SelectAnimatronics(Button button)
     {
         panel.SetActive(true);
-        
+        //animatronics.SetActive(true);
         ButtonID buttonID = button.GetComponent<ButtonID>();
-        Debug.Log(idText.text);
-        Debug.Log($"버튼 데이터 들어가는지 확인 {buttonID} {buttonID.id}");
-        id = buttonID.id;
-        if(buttonID != null)
+        
+        if (buttonID != null)
         {
-            idText.text = "Id test" + buttonID.id;
+            var animatronicsTable = DataManager.Instance.AnimatronicsTable[buttonID.id];
+            idText.text = animatronicsTable.charName;
+            GameObject prefab = Resources.Load<GameObject>(prefabPath + buttonID.id);
+
+            Debug.Log($"{prefabPath + buttonID.id}");
+
+            if (prefab != null)
+            {
+                preViewAnimatronics = Instantiate(prefab);
+
+                if (parentTransform != null)
+                {
+                    preViewAnimatronics.transform.SetParent(parentTransform, false);
+                }
+            }
         }
+
+        
     }
 
     public void EnCounterARView()
     {
         panel.SetActive(false);
         panel.transform.parent.gameObject.SetActive(false);
-        animatronics.SetActive(true);
-
-        animatronics.GetComponent<Animatronics>().GetId(id);
-
+        preViewAnimatronics.SetActive(false);
+        uiChild.SetActive(true);
+        mapCamera.gameObject.SetActive(false);
+        InGameAnimatronics.SetActive(true);
+        InGameAnimatronics.GetComponent<Animatronics>().GetId(id);
     }
 }
