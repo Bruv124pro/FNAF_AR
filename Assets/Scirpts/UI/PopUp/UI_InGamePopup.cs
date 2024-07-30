@@ -10,44 +10,49 @@ using static Define;
 
 public class UI_InGamePopup : UI_Popup
 {
-    [SerializeField] private Image flashButton;
-    [SerializeField] private Sprite onButton;
-    [SerializeField] private Sprite offButton;
-    [SerializeField] private Volume volume;
-    [SerializeField] private Button shockButton;
-    [SerializeField] private Image shock;
-    [SerializeField] private Sprite shockImage;
-    [SerializeField] private Sprite shockBackgroundImage;
-    [SerializeField] private Slider coolTime;
-    [SerializeField] private int elapsedTime;
-    [SerializeField] private BatteryUse battery;
-    [SerializeField] private Animatronics animatronics;
+    [SerializeField] public Image flashButton;
+    [SerializeField] public Sprite onButton;
+    [SerializeField] public Sprite offButton;
+    [SerializeField] public Volume volume;
+    [SerializeField] public Button shockButton;
+    [SerializeField] public Image shock;
+    [SerializeField] public Sprite shockImage;
+    [SerializeField] public Sprite shockBackgroundImage;
+    [SerializeField] public Slider coolTime;
+    [SerializeField] public int elapsedTime;
+                     
+    [SerializeField] public Slider batterySlider;
+    [SerializeField] public Text batteryText;
+
+    public int batteryAmount;
 
     public ShadowsMidtonesHighlights shadow;
     public Vignette vignette;
     public bool isFlashPressed { get; private set; }
     public bool isShockPressed { get; private set; }
 
-    private Slider batterySlider;
+    public bool isBatteryCoroutineRunning = false;
+    public float elapsedTimeBattery = 0;
+    public IEnumerator batteryEnumerator;
 
     enum Texts
     {
         BatteryAmountText
     }
 
-    enum Images
-    {
-        ShockImage,
-        ShockCoolDownImage,
-        FlashOnImage,
-        FlashOffImage
-    }
+    //enum Images
+    //{
+    //    ShockImage,
+    //    ShockCoolDownImage,
+    //    FlashOnImage,
+    //    FlashOffImage
+    //}
 
     enum Buttons
     {
         ShockAttackButton,
         FlashLightButton,
-        CancleButton
+        CancelButton
     }
 
     enum Sliders
@@ -64,6 +69,9 @@ public class UI_InGamePopup : UI_Popup
         {
             return false;
         }
+
+        volume.profile.TryGet<Vignette>(out vignette);
+        volume.profile.TryGet<ShadowsMidtonesHighlights>(out shadow);
 
         VignetteValueChange("off");
 
@@ -83,17 +91,23 @@ public class UI_InGamePopup : UI_Popup
             Debug.LogError("BatterySlider not found");
         }
 
+        return true;
+    }
+
+    private void Start()
+    {
         coolTime.interactable = false;
         isShockPressed = false;
         shock.sprite = shockImage;
-        elapsedTime = 100;
 
-        return true;
+        elapsedTime = 100;
+        batteryAmount = 100;
+        batteryEnumerator = BatteryAmountDown();
     }
 
     void Update()
     {
-        if (battery.batteryAmount <= 0)
+        if (batteryAmount <= 0)
         {
             VignetteValueChange("off");
         }
@@ -109,24 +123,36 @@ public class UI_InGamePopup : UI_Popup
         {
             shock.sprite = shockImage;
         }
+
+        if (batteryAmount > 0)
+        {
+            batterySlider.value = batteryAmount;
+            batteryText.text = $"{batteryAmount}";
+        }
+        else
+        {
+            batteryAmount = 0;
+            batterySlider.value = batteryAmount;
+            batteryText.text = $"{batteryAmount}";
+        }
+
+        elapsedTimeBattery += Time.deltaTime;
+
+        if (!isFlashPressed)
+        {
+            StopCoroutine(batteryEnumerator);
+            isBatteryCoroutineRunning = false;
+        }
     }
 
     void OnClickShockButton()
     {
-        if (battery.batteryAmount > 10 && elapsedTime == 100)
+        if (batteryAmount > 10 && elapsedTime == 100)
         {
             isShockPressed = true;
-            if (animatronics.isJumpState && animatronics.IsVisibleInMonitor())
-            {
-                animatronics.HitElecParticle(true);
-                animatronics.isHitElectronic = true;
-            }
-            else
-            {
-                animatronics.HitElecParticle(false);
-            }
             elapsedTime = 0;
             coolTime.value = elapsedTime;
+            ShockPressedCheck();
         }
         else if (elapsedTime < 100 && isShockPressed)
         {
@@ -142,7 +168,7 @@ public class UI_InGamePopup : UI_Popup
 
     void OnClickFlashButton()
     {
-        if (battery.batteryAmount > 0 && flashButton.sprite == offButton)
+        if (batteryAmount > 0 && flashButton.sprite == offButton)
         {
             VignetteValueChange("on");
         }
@@ -150,6 +176,8 @@ public class UI_InGamePopup : UI_Popup
         {
             VignetteValueChange("off");
         }
+
+        FlashPressedCheck();
 
         if (_onClickFlashButton != null)
         {
@@ -160,7 +188,7 @@ public class UI_InGamePopup : UI_Popup
 
     public void VignetteValueChange(string vignetteValue)
     {
-        if (volume.profile.TryGet<Vignette>(out vignette) && volume.profile.TryGet<ShadowsMidtonesHighlights>(out shadow))
+        if (vignette && shadow)
         {
             if (vignetteValue == "on")
             {
@@ -169,6 +197,11 @@ public class UI_InGamePopup : UI_Popup
 
                 vignette.intensity.value = 0.5f;
                 shadow.shadows.SetValue(new Vector4Parameter(new Vector4(0, 0, 0, 0.25f)));
+
+                if (!isBatteryCoroutineRunning && batteryAmount > 0)
+                {
+                    StartCoroutine(batteryEnumerator);
+                }
             }
             else if (vignetteValue == "off")
             {
@@ -177,7 +210,42 @@ public class UI_InGamePopup : UI_Popup
 
                 vignette.intensity.value = 0.65f;
                 shadow.shadows.SetValue(new Vector4Parameter(new Vector4(0, 0, 0, -0.3f)));
+
+                StopCoroutine(batteryEnumerator);
+                isBatteryCoroutineRunning = false;
             }
         }
+    }
+
+    public void ShockPressedCheck()
+    {
+        if (isShockPressed && batteryAmount >= 10)
+        {
+            batteryAmount -= 10;
+        }
+    }
+
+    public void FlashPressedCheck()
+    {
+        if (isFlashPressed && batteryAmount >= 3 && !isBatteryCoroutineRunning)
+        {
+            batteryAmount -= 3;
+            if (elapsedTimeBattery > 1f)
+            {
+                StartCoroutine(batteryEnumerator);
+            }
+        }
+    }
+
+    IEnumerator BatteryAmountDown()
+    {
+        isBatteryCoroutineRunning = true;
+        while (isFlashPressed && batteryAmount > 0)
+        {
+            yield return new WaitForSeconds(1);
+            batteryAmount -= 1;
+        }
+        isBatteryCoroutineRunning = false;
+        elapsedTimeBattery = 0;
     }
 }
