@@ -52,7 +52,6 @@ public class UI_TitlePopup : UI_Popup
         yield return new WaitForSeconds(0.5f);
         material.SetFloat("_Force", 0);
         yield return new WaitForSeconds(2f);
-        //gameObject.SetActive(false);
         Managers.UI.ClosePopupUI(this);
         Managers.UI.ShowPopupUI<UI_InGamePopup>();
     }

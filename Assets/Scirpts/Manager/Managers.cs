@@ -12,9 +12,11 @@ public class Managers : MonoBehaviour
     public static Managers s_instance = null;
     public static Managers Instance { get { return s_instance; } }
 
+    private static DataManager s_dataManager = new DataManager();
     private static UIManager s_uiManager = new UIManager();
     private static ResourceManager s_resourceManager = new ResourceManager();
 
+    public static DataManager Data { get { Init(); return s_dataManager; } }
     public static UIManager UI { get { Init(); return s_uiManager; } }
     public static ResourceManager Resource { get { Init(); return s_resourceManager; } }
 
@@ -43,6 +45,7 @@ public class Managers : MonoBehaviour
             DontDestroyOnLoad(go);
 
             s_resourceManager.Init();
+            s_dataManager.Init();
 
             Application.targetFrameRate = 60;
         }
