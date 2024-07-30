@@ -25,6 +25,8 @@ public class AttackFailState : IState
         {
             controller.StateMachine.TransitionTo(controller.StateMachine.stopWorkState);
         }
+
+        animatronics.GameClearOverlay();
     }
 
     public void Update()

@@ -75,6 +75,9 @@ public class Animatronics : MonoBehaviour
     public Button flashButton;
     public Button shockButton;
 
+    public Canvas gameResultCanvas;
+    public Text gameResultText;
+    
     private void Awake()
     {
         if (id == null)
@@ -148,8 +151,6 @@ public class Animatronics : MonoBehaviour
     {
         return UnityEngine.Random.Range(0, 100) < chanceToJumpScare;
     }
-
-
 
     public void ChangeChargeToJumpScare()
     {
@@ -381,7 +382,7 @@ public class Animatronics : MonoBehaviour
     {
         if (IsFindVisibleAnimatronics())
         {
-            Debug.Log($"�۸�ġ {useGlitch}");
+            Debug.Log($"±Û¸®Ä¡ {useGlitch}");
             if (useGlitch)
             {
                 glitchMaterial.SetFloat("_Force", 3);
@@ -392,6 +393,7 @@ public class Animatronics : MonoBehaviour
             glitchMaterial.SetFloat("_Force", 0);
         }
     }
+    
     public void OffGlitchMaterial()
     {
         glitchMaterial.SetFloat("_Force", 0);
@@ -401,8 +403,6 @@ public class Animatronics : MonoBehaviour
     {
         return useGlitch;
     }
-
-    
 
     public void ChangeGlitchBoolValue(bool _useGlitch)
     {
@@ -429,7 +429,6 @@ public class Animatronics : MonoBehaviour
         isJumpState = false;
     }
 
-
     public float InitmaxShockTime()
     {
         return (float)maxshockTime / 10;
@@ -446,7 +445,7 @@ public class Animatronics : MonoBehaviour
         }
         else
         {
-            foreach(VisualEffect p in missParticle)
+            foreach (VisualEffect p in missParticle)
             {
                 p.Play();
             }
@@ -471,6 +470,7 @@ public class Animatronics : MonoBehaviour
             }
         }
     }
+    
     private void HitParticleOn()
     {
         foreach (VisualEffect p in hitParticles)
@@ -495,6 +495,7 @@ public class Animatronics : MonoBehaviour
             p.Stop();
         }
     }
+    
     public void HitAnimatronicsBodyParticle()
     {
         HitParticleOn();
@@ -511,4 +512,31 @@ public class Animatronics : MonoBehaviour
         return charName;
     }
 
+    public void GameOverOverlay()
+    {
+        StartCoroutine(GameOverPanelSetActive());
+    }
+    
+    public void GameClearOverlay()
+    {
+        StartCoroutine(GameClearPanelSetActive());
+    }
+
+    IEnumerator GameOverPanelSetActive()
+    {
+        yield return new WaitForSeconds(3f);
+
+        gameResultCanvas.gameObject.SetActive(true);
+        gameResultText.text = "YOU LOST";
+        gameResultText.color = Color.red;
+    }
+    
+    IEnumerator GameClearPanelSetActive()
+    {
+        yield return new WaitForSeconds(3f);
+
+        gameResultCanvas.gameObject.SetActive(true);
+        gameResultText.text = "YOU WIN";
+        gameResultText.color = Color.white;
+    }
 }
