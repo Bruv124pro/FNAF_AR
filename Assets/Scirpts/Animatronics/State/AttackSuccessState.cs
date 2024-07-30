@@ -13,7 +13,7 @@ public class AttackSuccessState : IState
     public void Enter()
     {
         Debug.Log("AttackSuccessState");
-        animatronics.PlayAnimation("FreddyJumpscare_Intro");
+        animatronics.PlayAnimation("FreddyJumpscare");
         animatronics.JumpScareObject.SetActive(true);
 
         animatronics.flashButton.interactable = false;

@@ -18,7 +18,7 @@ public class IdleState : IState
     public void Enter()
     {
         animatronics.ChangeGlitchBoolValue(true);
-        Debug.Log("IdleState");
+        animatronics.PlayAnimation("Idle");
         pauseSecond = animatronics.WaitPauseSecond();
         animatronics.PlayAnimation("FreddyJumpscareFinalPose");
     }

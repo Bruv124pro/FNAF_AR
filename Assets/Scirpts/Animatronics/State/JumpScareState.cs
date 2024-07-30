@@ -22,7 +22,7 @@ public class JumpScareState : IState
         MinShockTime = 0;
         Handheld.Vibrate();
         MaxShockTime = animatronics.InitmaxShockTime();
-        animatronics.PlayAnimation("FreddyCharge 1");
+        animatronics.PlayAnimation("Charge");
         elapsedTime = 0;
         animatronics.ChangeGlitchBoolValue(false);
     }
