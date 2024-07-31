@@ -21,6 +21,7 @@ public class AnimatronicsModel
     public int chanceToJumpScare;
     public int chanceToFeint;
     public int chanceToUniqueFeint;
+    public int chanceToErrorAttack;
     public int chargeTime;
     public int invisibleTime;
     public int cloackedTime;
