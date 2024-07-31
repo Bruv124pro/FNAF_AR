@@ -194,16 +194,16 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: -0.16059014, y: -0.25118423, z: 3.1428266}
+      - m_Value: {x: 0.16059014, y: -0.25118423, z: 3.8571734}
         m_Name: Pos1
         m_Overridden: 1
-      - m_Value: {x: -1.2626632, y: -0.8371197, z: 4.5716286}
+      - m_Value: {x: 1.2626632, y: -0.8371197, z: 2.4283714}
         m_Name: Pos2
         m_Overridden: 1
-      - m_Value: {x: 0.83658314, y: 0.025579691, z: 3.0275135}
+      - m_Value: {x: -0.83658314, y: 0.025579691, z: 3.9724865}
         m_Name: Pos3
         m_Overridden: 1
-      - m_Value: {x: 0.3080935, y: -0.1220057, z: 3.3770134}
+      - m_Value: {x: -0.3080935, y: -0.1220057, z: 3.6229866}
         m_Name: Pos4
         m_Overridden: 1
     m_Vector4f:
@@ -487,16 +487,16 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: -0.025188696, y: 0.4065516, z: 3.4998364}
+      - m_Value: {x: 0.025188696, y: 0.4065516, z: 3.5001636}
         m_Name: Pos1
         m_Overridden: 1
-      - m_Value: {x: -0.06913379, y: 0.5860698, z: 3.2310877}
+      - m_Value: {x: 0.06913379, y: 0.5860698, z: 3.7689123}
         m_Name: Pos2
         m_Overridden: 1
-      - m_Value: {x: -0.020553347, y: 0.7228248, z: 2.9855509}
+      - m_Value: {x: 0.020553347, y: 0.7228248, z: 4.014449}
         m_Name: Pos3
         m_Overridden: 1
-      - m_Value: {x: -0.22636488, y: 0.65574145, z: 3.0046973}
+      - m_Value: {x: 0.22636488, y: 0.65574145, z: 3.9953027}
         m_Name: Pos4
         m_Overridden: 1
     m_Vector4f:
@@ -927,16 +927,16 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: 0.019165881, y: -0.35906076, z: 3.7217}
+      - m_Value: {x: -0.019165881, y: -0.35906076, z: 3.2783}
         m_Name: Pos1
         m_Overridden: 1
-      - m_Value: {x: -0.44937003, y: -0.36441422, z: 2.9172003}
+      - m_Value: {x: 0.44937003, y: -0.36441422, z: 4.0827994}
         m_Name: Pos2
         m_Overridden: 1
-      - m_Value: {x: 0.83658314, y: 0.025579691, z: 3.0275135}
+      - m_Value: {x: -0.83658314, y: 0.025579691, z: 3.9724865}
         m_Name: Pos3
         m_Overridden: 1
-      - m_Value: {x: -0.025188696, y: 0.4065516, z: 3.4998364}
+      - m_Value: {x: 0.025188696, y: 0.4065516, z: 3.5001636}
         m_Name: Pos4
         m_Overridden: 1
     m_Vector4f:
@@ -1322,16 +1322,16 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: 0.75367516, y: -0.4592229, z: 3.4215968}
+      - m_Value: {x: -0.75367516, y: -0.4592229, z: 3.5784032}
         m_Name: Pos1
         m_Overridden: 1
-      - m_Value: {x: 0.3141423, y: 0.14474607, z: 3.1495826}
+      - m_Value: {x: -0.3141423, y: 0.14474607, z: 3.8504174}
         m_Name: Pos2
         m_Overridden: 1
-      - m_Value: {x: 0.22350186, y: -0.32459676, z: 3.377878}
+      - m_Value: {x: -0.22350186, y: -0.32459676, z: 3.622122}
         m_Name: Pos3
         m_Overridden: 1
-      - m_Value: {x: 0.4137791, y: 0.3308971, z: 3.517561}
+      - m_Value: {x: -0.4137791, y: 0.3308971, z: 3.482439}
         m_Name: Pos4
         m_Overridden: 1
     m_Vector4f:
@@ -1553,16 +1553,16 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: 0.3043539, y: -1.5419863, z: 3.6051285}
+      - m_Value: {x: -0.3043539, y: -1.5419863, z: 3.3948715}
         m_Name: Pos1
         m_Overridden: 1
-      - m_Value: {x: 0.35013768, y: -1.0449648, z: 3.4225376}
+      - m_Value: {x: -0.35013768, y: -1.0449648, z: 3.5774624}
         m_Name: Pos2
         m_Overridden: 1
-      - m_Value: {x: 0.35013804, y: -1.0449703, z: 3.4225368}
+      - m_Value: {x: -0.35013804, y: -1.0449703, z: 3.5774632}
         m_Name: Pos3
         m_Overridden: 1
-      - m_Value: {x: 0.2243539, y: -0.4342693, z: 3.7581058}
+      - m_Value: {x: -0.2243539, y: -0.4342693, z: 3.2418942}
         m_Name: Pos4
         m_Overridden: 1
     m_Vector4f:
@@ -1969,37 +1969,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5871569622567284961}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5977534413667867864
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9146004754655910179}
-  m_Layer: 0
-  m_Name: Pos03
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9146004754655910179
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5977534413667867864}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.4, y: 1.387, z: -0.375}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6881717653239849517}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6080158242438506480
 GameObject:
   m_ObjectHideFlags: 0
@@ -2106,16 +2075,16 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: -0.025188696, y: 0.4065516, z: 3.4998364}
+      - m_Value: {x: 0.025188696, y: 0.4065516, z: 3.5001636}
         m_Name: Pos1
         m_Overridden: 1
-      - m_Value: {x: 0.3141423, y: 0.14474607, z: 3.1495826}
+      - m_Value: {x: -0.3141423, y: 0.14474607, z: 3.8504174}
         m_Name: Pos2
         m_Overridden: 1
-      - m_Value: {x: 0.22350186, y: -0.32459676, z: 3.377878}
+      - m_Value: {x: -0.22350186, y: -0.32459676, z: 3.622122}
         m_Name: Pos3
         m_Overridden: 1
-      - m_Value: {x: 0.2243539, y: -0.4342693, z: 3.7581058}
+      - m_Value: {x: -0.2243539, y: -0.4342693, z: 3.2418942}
         m_Name: Pos4
         m_Overridden: 1
     m_Vector4f:
@@ -2434,16 +2403,16 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: 0.019165881, y: -0.35906076, z: 3.7217}
+      - m_Value: {x: -0.019165881, y: -0.35906076, z: 3.2783}
         m_Name: Pos1
         m_Overridden: 1
-      - m_Value: {x: -0.16059014, y: -0.25118423, z: 3.1428266}
+      - m_Value: {x: 0.16059014, y: -0.25118423, z: 3.8571734}
         m_Name: Pos2
         m_Overridden: 1
-      - m_Value: {x: -0.44937003, y: -0.36441422, z: 2.9172003}
+      - m_Value: {x: 0.44937003, y: -0.36441422, z: 4.0827994}
         m_Name: Pos3
         m_Overridden: 1
-      - m_Value: {x: -0.025188696, y: 0.4065516, z: 3.4998364}
+      - m_Value: {x: 0.025188696, y: 0.4065516, z: 3.5001636}
         m_Name: Pos4
         m_Overridden: 1
     m_Vector4f:
@@ -2696,16 +2665,16 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: -0.77002716, y: -0.51784956, z: 3.4288063}
+      - m_Value: {x: 0.77002716, y: -0.51784956, z: 3.5711937}
         m_Name: Pos1
         m_Overridden: 1
-      - m_Value: {x: -0.74082506, y: -0.13581038, z: 3.5417044}
+      - m_Value: {x: 0.74082506, y: -0.13581038, z: 3.4582956}
         m_Name: Pos2
         m_Overridden: 1
-      - m_Value: {x: -0.45277053, y: 0.2809918, z: 3.5282254}
+      - m_Value: {x: 0.45277053, y: 0.2809918, z: 3.4717746}
         m_Name: Pos3
         m_Overridden: 1
-      - m_Value: {x: -0.13071503, y: 0.39008236, z: 3.5177875}
+      - m_Value: {x: 0.13071503, y: 0.39008236, z: 3.4822125}
         m_Name: Pos4
         m_Overridden: 1
     m_Vector4f:
@@ -3177,7 +3146,6 @@ Transform:
   - {fileID: 2275917865681900264}
   - {fileID: 935093967818155111}
   - {fileID: 6907340935512571963}
-  - {fileID: 9146004754655910179}
   m_Father: {fileID: 572646021793166160}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8300460258652406339
