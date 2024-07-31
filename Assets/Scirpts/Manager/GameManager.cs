@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,25 +10,34 @@ public class GameManager : MonoBehaviour
     public ShadowsMidtonesHighlights shadow;
     public Vignette vignette;
 
-    public int BatteryAmount;
-    public int ElapsedTime;
-    public bool IsFlashPressed;
-    public bool IsShockPressed;
-    public bool IsBatteryCoroutineRunning;
+    public int BatteryAmount { get; set; }
+    public int ElapsedTime { get; set; }
+    public bool IsFlashPressed { get; set; }
+    public bool IsShockPressed { get; set; }
+    public bool IsBatteryCoroutineRunning { get; private set; }
 
-    private float elapsedTimeBattery;
-    private IEnumerator batteryEnumerator;
+    public float batteryTimer = 0;
+    public float batteryDrainInterval = 1.0f;
 
-    public void Initialize()
+    public void Init()
     {
+        volume = FindObjectOfType<Volume>();
+
         volume.profile.TryGet<Vignette>(out vignette);
         volume.profile.TryGet<ShadowsMidtonesHighlights>(out shadow);
 
-        VignetteValueChange("off");
+        IsFlashPressed = false;
+        IsShockPressed = false;
 
         BatteryAmount = 100;
         ElapsedTime = 100;
-        batteryEnumerator = BatteryAmountDown();
+
+        VignetteValueChange("off");
+    }
+
+    private void Update()
+    {
+
     }
 
     public void VignetteValueChange(string vignetteValue)
@@ -39,23 +49,12 @@ public class GameManager : MonoBehaviour
                 IsFlashPressed = true;
                 vignette.intensity.value = 0.5f;
                 shadow.shadows.SetValue(new Vector4Parameter(new Vector4(0, 0, 0, 0.25f)));
-
-                if (!IsBatteryCoroutineRunning && BatteryAmount > 0)
-                {
-                    StartCoroutine(batteryEnumerator);
-                }
             }
             else if (vignetteValue == "off")
             {
                 IsFlashPressed = false;
                 vignette.intensity.value = 0.65f;
                 shadow.shadows.SetValue(new Vector4Parameter(new Vector4(0, 0, 0, -0.3f)));
-
-                if (IsBatteryCoroutineRunning)
-                {
-                    StopCoroutine(batteryEnumerator);
-                    IsBatteryCoroutineRunning = false;
-                }
             }
         }
     }
@@ -73,22 +72,6 @@ public class GameManager : MonoBehaviour
         if (IsFlashPressed && BatteryAmount >= 3 && !IsBatteryCoroutineRunning)
         {
             BatteryAmount -= 3;
-            if (elapsedTimeBattery > 1f)
-            {
-                StartCoroutine(batteryEnumerator);
-            }
         }
-    }
-
-    private IEnumerator BatteryAmountDown()
-    {
-        IsBatteryCoroutineRunning = true;
-        elapsedTimeBattery = 0;
-        while (IsFlashPressed && BatteryAmount > 0)
-        {
-            yield return new WaitForSeconds(1);
-            BatteryAmount -= 1;
-        }
-        IsBatteryCoroutineRunning = false;
     }
 }

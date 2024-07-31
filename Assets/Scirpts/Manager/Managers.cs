@@ -38,6 +38,7 @@ public class Managers : MonoBehaviour
             DontDestroyOnLoad(go);
 
             s_dataManager.Init();
+            gameManager.Init();
 
             Application.targetFrameRate = 60;
         }
