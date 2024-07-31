@@ -537,11 +537,11 @@ MonoBehaviour:
   - FreddyGlimpse1
   - FreddyGlimpse2
   - FreddyGlimpse3
+  jumpscareObject: {fileID: 0}
   bodyShader: {fileID: 2100000, guid: 6182c274086d9a1419d7812129fa7834, type: 2}
   eyeShader: {fileID: 2100000, guid: 85dc20327361da240bf203ba67fc319b, type: 2}
   isJumpState: 0
   isHitElectronic: 0
-  JumpScareObject: {fileID: 1378991237}
   flashButton: {fileID: 1379687986}
   shockButton: {fileID: 1123366992}
   gameResultCanvas: {fileID: 1802555701}
@@ -1248,10 +1248,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1990114599}
-    - targetCorrespondingSourceObject: {fileID: 2512387469002778308, guid: 48cb3fb68c91eb94999fd99957eb0cae,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1378991239}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48cb3fb68c91eb94999fd99957eb0cae, type: 3}
 --- !u!4 &331264286 stripped
@@ -3818,7 +3814,7 @@ PrefabInstance:
     - target: {fileID: 7328710606861094001, guid: 1b9584e4e049b8541807410f5153deaa,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7328710606861094001, guid: 1b9584e4e049b8541807410f5153deaa,
         type: 3}
@@ -6925,126 +6921,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef3886a9667424aedaa5b3b3e1285dbb, type: 3}
---- !u!1001 &1378991236
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 331264286}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 2215655c4439f4f40aa61ccdffaf1e20,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2215655c4439f4f40aa61ccdffaf1e20,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2215655c4439f4f40aa61ccdffaf1e20,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2215655c4439f4f40aa61ccdffaf1e20,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2215655c4439f4f40aa61ccdffaf1e20,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2215655c4439f4f40aa61ccdffaf1e20,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2215655c4439f4f40aa61ccdffaf1e20,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2215655c4439f4f40aa61ccdffaf1e20,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2215655c4439f4f40aa61ccdffaf1e20,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2215655c4439f4f40aa61ccdffaf1e20,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4750469698511600036, guid: 2215655c4439f4f40aa61ccdffaf1e20,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 6182c274086d9a1419d7812129fa7834, type: 2}
-    - target: {fileID: -4750469698511600036, guid: 2215655c4439f4f40aa61ccdffaf1e20,
-        type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: 85dc20327361da240bf203ba67fc319b, type: 2}
-    - target: {fileID: 919132149155446097, guid: 2215655c4439f4f40aa61ccdffaf1e20,
-        type: 3}
-      propertyPath: m_Name
-      value: Freddy JumpScareObject
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 2215655c4439f4f40aa61ccdffaf1e20,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2215655c4439f4f40aa61ccdffaf1e20,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1378991238}
-  m_SourcePrefab: {fileID: 100100000, guid: 2215655c4439f4f40aa61ccdffaf1e20, type: 3}
---- !u!1 &1378991237 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2215655c4439f4f40aa61ccdffaf1e20,
-    type: 3}
-  m_PrefabInstance: {fileID: 1378991236}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1378991238
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1378991237}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c4118a3b89405b34795f873537b95167, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!4 &1378991239 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2215655c4439f4f40aa61ccdffaf1e20,
-    type: 3}
-  m_PrefabInstance: {fileID: 1378991236}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1379687981
 GameObject:
   m_ObjectHideFlags: 0
@@ -7199,7 +7075,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1409455106}
   - component: {fileID: 1409455105}
-  - component: {fileID: 1409455104}
   - component: {fileID: 1409455103}
   m_Layer: 0
   m_Name: MapCamera
@@ -7252,14 +7127,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!81 &1409455104
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1409455102}
-  m_Enabled: 1
 --- !u!20 &1409455105
 Camera:
   m_ObjectHideFlags: 0
@@ -9877,7 +9744,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2078585098}
   - component: {fileID: 2078585101}
-  - component: {fileID: 2078585100}
   - component: {fileID: 2078585099}
   m_Layer: 0
   m_Name: SelectViewCamera
@@ -9945,14 +9811,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!81 &2078585100
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2078585097}
-  m_Enabled: 1
 --- !u!20 &2078585101
 Camera:
   m_ObjectHideFlags: 0
