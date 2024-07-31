@@ -61,7 +61,7 @@ Material:
     - _Alpha: 0
     - _DissolveScale: 30
     - _DissolveWidth: 0.04
-    - _IsVisible: 0
+    - _IsVisible: 1
     - _Metallic: 1
     - _Normal: 1
     - _Occlusion: 0.5
