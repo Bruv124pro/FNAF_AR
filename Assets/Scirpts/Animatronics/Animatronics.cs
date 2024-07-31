@@ -62,6 +62,9 @@ public class Animatronics : MonoBehaviour
 
     public string[] visibleAnimationNames = { "Glimpse1", "Glimpse2", "Glimpse3" };
 
+    private string jumpScarePrefabPath = "Prefabs/JumpScareAnimatronics/JumpScare_";
+    public GameObject jumpscareObject;
+
     public StateMachine StateMachine { get; private set; }
 
     [SerializeField] private Material bodyShader;
@@ -72,7 +75,6 @@ public class Animatronics : MonoBehaviour
     public bool isJumpState;
     public bool isHitElectronic;
 
-    public GameObject JumpScareObject;
 
     public Button flashButton;
     public Button shockButton;
@@ -132,7 +134,10 @@ public class Animatronics : MonoBehaviour
             _gyro = Input.gyro;
             _gyro.enabled = true;
         }
-        
+
+        SetJumpScareObject();
+
+
     }
     public void SetVisible()
     {
@@ -618,4 +623,22 @@ public class Animatronics : MonoBehaviour
         }
         return false;
     }
+
+    private void SetJumpScareObject()
+    {
+        GameObject prefab = Resources.Load<GameObject>(jumpScarePrefabPath + id);
+        Debug.Log($"점프스케어 프리팹 세팅 {prefab.name}");
+
+        if( prefab != null)
+        {
+            jumpscareObject = Instantiate(prefab);
+
+            if(camera.transform != null )
+            {
+                jumpscareObject.transform.SetParent(camera.transform, false);
+                jumpscareObject.SetActive(false);
+            }
+        }
+    }
+
 }
