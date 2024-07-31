@@ -1,68 +1,43 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
-using static Define;
 
 public class UI_InGamePopup : UI_Popup
 {
     [SerializeField] public Image flashButton;
     [SerializeField] public Sprite onButton;
     [SerializeField] public Sprite offButton;
-    [SerializeField] public Volume volume;
     [SerializeField] public Button shockButton;
     [SerializeField] public Image shock;
     [SerializeField] public Sprite shockImage;
     [SerializeField] public Sprite shockBackgroundImage;
     [SerializeField] public Slider coolTime;
-    [SerializeField] public int elapsedTime;
-                     
     [SerializeField] public Slider batterySlider;
     [SerializeField] public Text batteryText;
-
-    public int batteryAmount;
-
-    public ShadowsMidtonesHighlights shadow;
-    public Vignette vignette;
-    public bool isFlashPressed { get; private set; }
-    public bool isShockPressed { get; private set; }
-
-    public bool isBatteryCoroutineRunning = false;
-    public float elapsedTimeBattery = 0;
-    public IEnumerator batteryEnumerator;
-
-    enum Texts
+    private enum Texts
     {
-        BatteryAmountText
+        BatteryAmount
+    }
+    private enum Buttons
+    {
+        ShockButton,
+        FlashLightButton
     }
 
-    //enum Images
-    //{
-    //    ShockImage,
-    //    ShockCoolDownImage,
-    //    FlashOnImage,
-    //    FlashOffImage
-    //}
-
-    enum Buttons
+    private enum Sliders
     {
-        ShockAttackButton,
-        FlashLightButton,
-        CancelButton
-    }
-
-    enum Sliders
-    {
+        ShockCooltime,
         BatterySlider
     }
 
-    Action _onClickFlashButton;
-    Action _onClickShockButton;
+    private enum Images
+    {
+        onButton,
+        offButton,
+        shockImage,
+        shockBackgroundImage,
 
+    }
     public override bool Init()
     {
         if (base.Init() == false)
@@ -70,18 +45,19 @@ public class UI_InGamePopup : UI_Popup
             return false;
         }
 
-        volume.profile.TryGet<Vignette>(out vignette);
-        volume.profile.TryGet<ShadowsMidtonesHighlights>(out shadow);
-
-        VignetteValueChange("off");
-
         BindButton(typeof(Buttons));
         BindSlider(typeof(Sliders));
 
-        GetButton((int)Buttons.ShockAttackButton).gameObject.BindEvent(OnClickShockButton);
+        GetButton((int)Buttons.ShockButton).gameObject.BindEvent(OnClickShockButton);
         GetButton((int)Buttons.FlashLightButton).gameObject.BindEvent(OnClickFlashButton);
 
         batterySlider = GetSlider((int)Sliders.BatterySlider);
+        coolTime = GetSlider((int)Sliders.ShockCooltime);
+
+        coolTime.interactable = false;
+        
+        shock = GetImage((int)Images.shockImage);
+
         if (batterySlider != null)
         {
             batterySlider.interactable = false;
@@ -94,158 +70,56 @@ public class UI_InGamePopup : UI_Popup
         return true;
     }
 
-    private void Start()
-    {
-        coolTime.interactable = false;
-        isShockPressed = false;
-        shock.sprite = shockImage;
-
-        elapsedTime = 100;
-        batteryAmount = 100;
-        batteryEnumerator = BatteryAmountDown();
-    }
-
     void Update()
     {
-        if (batteryAmount <= 0)
+        if (Managers.GameManager.BatteryAmount <= 0)
         {
-            VignetteValueChange("off");
+            Managers.GameManager.VignetteValueChange("off");
         }
 
-        if (elapsedTime < 100)
+        if (Managers.GameManager.ElapsedTime < 100)
         {
-            shock.sprite = shockBackgroundImage;
-            elapsedTime += 1;
-            coolTime.value = elapsedTime;
+            shock = GetImage((int)Images.shockBackgroundImage);
+            Managers.GameManager.ElapsedTime += 1;
+            coolTime.value = Managers.GameManager.ElapsedTime;
         }
 
-        if (elapsedTime == 100)
+        if (Managers.GameManager.ElapsedTime == 100)
         {
-            shock.sprite = shockImage;
+            shock = GetImage((int)Images.shockImage);
         }
 
-        if (batteryAmount > 0)
-        {
-            batterySlider.value = batteryAmount;
-            batteryText.text = $"{batteryAmount}";
-        }
-        else
-        {
-            batteryAmount = 0;
-            batterySlider.value = batteryAmount;
-            batteryText.text = $"{batteryAmount}";
-        }
-
-        elapsedTimeBattery += Time.deltaTime;
-
-        if (!isFlashPressed)
-        {
-            StopCoroutine(batteryEnumerator);
-            isBatteryCoroutineRunning = false;
-        }
+        batterySlider.value = Managers.GameManager.BatteryAmount;
+        GetText((int)Texts.BatteryAmount).text = $"{Managers.GameManager.BatteryAmount}";
     }
 
     void OnClickShockButton()
     {
-        if (batteryAmount > 10 && elapsedTime == 100)
+        if (Managers.GameManager.BatteryAmount > 10 && Managers.GameManager.ElapsedTime == 100)
         {
-            isShockPressed = true;
-            elapsedTime = 0;
-            coolTime.value = elapsedTime;
-            ShockPressedCheck();
+            Managers.GameManager.IsShockPressed = true;
+            Managers.GameManager.ElapsedTime = 0;
+            coolTime.value = Managers.GameManager.ElapsedTime;
+            Managers.GameManager.ShockPressedCheck();
         }
-        else if (elapsedTime < 100 && isShockPressed)
+        else if (Managers.GameManager.ElapsedTime < 100 && Managers.GameManager.IsShockPressed)
         {
-            isShockPressed = !isShockPressed;
+            Managers.GameManager.IsShockPressed = !Managers.GameManager.IsShockPressed;
         }
-
-        if (_onClickShockButton != null)
-        {
-            _onClickShockButton.Invoke();
-        }
-        Debug.Log("Shock button 클릭");
     }
 
     void OnClickFlashButton()
     {
-        if (batteryAmount > 0 && flashButton.sprite == offButton)
+        if (Managers.GameManager.BatteryAmount > 0 && flashButton.sprite == offButton)
         {
-            VignetteValueChange("on");
+            Managers.GameManager.VignetteValueChange("on");
         }
         else
         {
-            VignetteValueChange("off");
+            Managers.GameManager.VignetteValueChange("off");
         }
 
-        FlashPressedCheck();
-
-        if (_onClickFlashButton != null)
-        {
-            _onClickFlashButton.Invoke();
-        }
-        Debug.Log("Flash button 클릭");
+        Managers.GameManager.FlashPressedCheck();
     }
 
-    public void VignetteValueChange(string vignetteValue)
-    {
-        if (vignette && shadow)
-        {
-            if (vignetteValue == "on")
-            {
-                isFlashPressed = true;
-                flashButton.sprite = onButton;
-
-                vignette.intensity.value = 0.5f;
-                shadow.shadows.SetValue(new Vector4Parameter(new Vector4(0, 0, 0, 0.25f)));
-
-                if (!isBatteryCoroutineRunning && batteryAmount > 0)
-                {
-                    StartCoroutine(batteryEnumerator);
-                }
-            }
-            else if (vignetteValue == "off")
-            {
-                isFlashPressed = false;
-                flashButton.sprite = offButton;
-
-                vignette.intensity.value = 0.65f;
-                shadow.shadows.SetValue(new Vector4Parameter(new Vector4(0, 0, 0, -0.3f)));
-
-                StopCoroutine(batteryEnumerator);
-                isBatteryCoroutineRunning = false;
-            }
-        }
-    }
-
-    public void ShockPressedCheck()
-    {
-        if (isShockPressed && batteryAmount >= 10)
-        {
-            batteryAmount -= 10;
-        }
-    }
-
-    public void FlashPressedCheck()
-    {
-        if (isFlashPressed && batteryAmount >= 3 && !isBatteryCoroutineRunning)
-        {
-            batteryAmount -= 3;
-            if (elapsedTimeBattery > 1f)
-            {
-                StartCoroutine(batteryEnumerator);
-            }
-        }
-    }
-
-    IEnumerator BatteryAmountDown()
-    {
-        isBatteryCoroutineRunning = true;
-        while (isFlashPressed && batteryAmount > 0)
-        {
-            yield return new WaitForSeconds(1);
-            batteryAmount -= 1;
-        }
-        isBatteryCoroutineRunning = false;
-        elapsedTimeBattery = 0;
-    }
 }

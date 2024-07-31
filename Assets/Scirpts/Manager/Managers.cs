@@ -15,18 +15,11 @@ public class Managers : MonoBehaviour
     private static DataManager s_dataManager = new DataManager();
     private static UIManager s_uiManager = new UIManager();
     private static ResourceManager s_resourceManager = new ResourceManager();
-
+    private static GameManager gameManager = new GameManager();
     public static DataManager Data { get { Init(); return s_dataManager; } }
     public static UIManager UI { get { Init(); return s_uiManager; } }
     public static ResourceManager Resource { get { Init(); return s_resourceManager; } }
-
-    //public static string GetText(int id)
-    //{
-    //    if (Managers.Data.Texts.TryGetValue(id, out TextData value) == false)
-    //        return "";
-
-    //    return value.kor.Replace("{userName}", Managers.Game.Name);
-    //}
+    public static GameManager GameManager { get { Init(); return gameManager; } }
 
     private void Start()
     {
@@ -44,7 +37,6 @@ public class Managers : MonoBehaviour
             s_instance = Utils.GetOrAddComponent<Managers>(go);
             DontDestroyOnLoad(go);
 
-            s_resourceManager.Init();
             s_dataManager.Init();
 
             Application.targetFrameRate = 60;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5035639002124736837}
   - component: {fileID: 2081328134023033247}
   m_Layer: 5
-  m_Name: Battery
+  m_Name: BatterySlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 5278179772730426956}
   - component: {fileID: 4244130771936480570}
   m_Layer: 5
-  m_Name: Shock Cooltime
+  m_Name: ShockCooltime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 3833840054578053293}
   - component: {fileID: 6200710602326025334}
   m_Layer: 5
-  m_Name: Shock Cooltime Background
+  m_Name: ShockCooltime Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 1659725768238929405}
   - component: {fileID: 4664411770934382107}
   m_Layer: 5
-  m_Name: Shock Button
+  m_Name: ShockButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -683,6 +683,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfd4f81a63d0e074284c0a61c4c8382f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flashButton: {fileID: 0}
+  onButton: {fileID: 0}
+  offButton: {fileID: 0}
+  shockButton: {fileID: 0}
+  shock: {fileID: 0}
+  shockImage: {fileID: 0}
+  shockBackgroundImage: {fileID: 0}
+  coolTime: {fileID: 0}
+  batterySlider: {fileID: 0}
+  batteryText: {fileID: 0}
 --- !u!1 &4808148488488735972
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,7 +837,7 @@ GameObject:
   - component: {fileID: 4821216535116538020}
   - component: {fileID: 6073437399485889029}
   m_Layer: 5
-  m_Name: Battery Amount
+  m_Name: BatteryAmount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1017,7 +1027,7 @@ GameObject:
   - component: {fileID: 585198627517905499}
   - component: {fileID: 8691635200522331557}
   m_Layer: 5
-  m_Name: Shock Image
+  m_Name: ShockImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1093,7 +1103,7 @@ GameObject:
   - component: {fileID: 14047247581763016}
   - component: {fileID: 7113460571426661797}
   m_Layer: 5
-  m_Name: FlashlightButton
+  m_Name: FlashLightButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
