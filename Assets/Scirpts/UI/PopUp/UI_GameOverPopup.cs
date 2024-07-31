@@ -6,7 +6,6 @@ using static Define;
 
 public class UI_GameOverPopup : UI_Popup
 {
-
     enum Texts
     {
         GameOverText
