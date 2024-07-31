@@ -30,6 +30,7 @@ public class Animatronics : MonoBehaviour
     [SerializeField] private int chanceToJumpScare;
     [SerializeField] private int chanceToFeint;
     [SerializeField] private int chanceToUniqueFeint;
+    [SerializeField] private int chanceToErrorAttack;
     [SerializeField] private int chargeTime;
     [SerializeField] private int invisibleTime;
     [SerializeField] private int cloackedTime;
@@ -223,6 +224,7 @@ public class Animatronics : MonoBehaviour
         chanceToJumpScare = animatronicsTable.chanceToJumpScare;
         chanceToFeint = animatronicsTable.chanceToFeint;
         chanceToUniqueFeint = animatronicsTable.chanceToUniqueFeint;
+        chanceToErrorAttack = animatronicsTable.chanceToErrorAttack;
         chargeTime = animatronicsTable.chargeTime;
         invisibleTime = animatronicsTable.invisibleTime;
         cloackedTime = animatronicsTable.cloackedTime;
@@ -265,7 +267,11 @@ public class Animatronics : MonoBehaviour
         {
             state = "feintState";
         }
-        else if (ran >= chanceToCharge + chanceToFeint)
+        else if (ran < chanceToCharge + chanceToFeint + chanceToErrorAttack)
+        {
+            state = "errorAttackFeintState";
+        }
+        else if (ran >= chanceToCharge + chanceToFeint + chanceToErrorAttack)
         {
             state = "circleMoveState";
         }

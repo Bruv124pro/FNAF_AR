@@ -15,7 +15,8 @@ public enum StateType
     SoundFeintState,
     InvisibleFeintState,
     Reposition,
-    UniqueFeintState
+    UniqueFeintState,
+    ErrorAttackFeintState
 }
 
 public class StateMachine
@@ -34,6 +35,7 @@ public class StateMachine
     public InvisibleFeintState invisibleFeintState;
     public RepositionState repositionState;
     public UniqueFeintState uniqueFeintState;
+    public ErrorAttackFeintState errorAttackFeintState;
 
     public StateMachine(AnimatronicsController controller)
     {
@@ -50,6 +52,7 @@ public class StateMachine
         this.invisibleFeintState = new InvisibleFeintState(controller);
         this.repositionState = new RepositionState(controller);
         this.uniqueFeintState = new UniqueFeintState(controller);
+        this.errorAttackFeintState = new ErrorAttackFeintState(controller);
     }
 
     public void Initialize(IState startingState)
@@ -92,7 +95,8 @@ public class StateMachine
             "soundFeintState" => soundFeintState,
             "invisibleFeintState" => invisibleFeintState,
             "repositionState" => repositionState,
-            "uniqueFeintState" => uniqueFeintState
+            "uniqueFeintState" => uniqueFeintState,
+            "errorAttackFeintState" => errorAttackFeintState
         };
     }
 }
