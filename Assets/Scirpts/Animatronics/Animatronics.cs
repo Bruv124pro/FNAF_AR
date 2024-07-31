@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
-using System.Reflection;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using UnityEngine.VFX;
 
@@ -96,7 +93,7 @@ public class Animatronics : MonoBehaviour
         {
             id = 1004;
         }
-        animator = GetComponent<Animator>();
+        
         audioSource = GetComponent<AudioSource>();
         AnimatronicsInit(id);
     }
@@ -136,7 +133,7 @@ public class Animatronics : MonoBehaviour
         }
 
         SetJumpScareObject();
-
+        animator = GetComponentInChildren<Animator>();
 
     }
     public void SetVisible()
