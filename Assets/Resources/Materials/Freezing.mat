@@ -59,7 +59,7 @@ Material:
     - _Emission: 4.87
     - _FreezingPower: 0
     - _Fullscreen_DepthWrite: 0
-    - _Sides: 20
+    - _Sides: 3.5
     m_Colors:
     - _Emission: {r: 2.3962264, g: 3.7044024, b: 4, a: 0}
   m_BuildTextureStacks: []

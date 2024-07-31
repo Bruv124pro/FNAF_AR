@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UniqueFeintState : IState
@@ -15,14 +13,23 @@ public class UniqueFeintState : IState
 
     public void Enter()
     {
+        animatronics.SetUniqueFeintShader();
+        animatronics.OnUniqueFeintFinished += FinishUniqueFeint;
     }
 
     public void Update()
     {
+        animatronics.UpdateUniqueFeintShader();
     }
 
     public void Exit()
     {
+        animatronics.OnUniqueFeintFinished -= FinishUniqueFeint;
+    }
+
+    private void FinishUniqueFeint()
+    {
+        controller.StateMachine.TransitionTo(controller.StateMachine.repositionState);
     }
 
 }
