@@ -1,84 +1,122 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static Define;
 
 public class UI_InGamePopup : UI_Popup
 {
-    private ShockButton shock;
-    private FlashLightButton flash;
-    private Slider batterySlider;
-
-    enum Texts
+    private enum Texts
     {
-        BatteryAmountText
+        BatteryAmount
     }
 
-    enum Images
+    private enum Buttons
     {
-        ShockImage,
-        ShockCoolDownImage,
-        FlashOnImage,
-        FlashOffImage
+        ShockButton,
+        FlashLightButton
     }
 
-    enum Buttons
+    private enum Sliders
     {
-        ShockAttackButton,
-        FlashLightButton,
-        CancleButton
-    }
-
-    enum Sliders
-    {
+        ShockCooltime,
         BatterySlider
     }
 
-    Action _onClickFlashButton;
-    Action _onClickShockButton;
+    bool isFlashButtonCilcked;
 
+    private enum Images
+    {
+        onButton,
+        offButton,
+        ShockImage,
+        shockBackgroundImage,
+    }
     public override bool Init()
     {
-        if(base.Init() == false)
+        if (base.Init() == false)
         {
             return false;
         }
 
-        shock = GetComponent<ShockButton>();
-        flash = GetComponent<FlashLightButton>();
-
         BindButton(typeof(Buttons));
         BindSlider(typeof(Sliders));
+        BindText(typeof(Texts));
+        BindImage(typeof(Images));
 
-        GetButton((int)Buttons.ShockAttackButton).gameObject.BindEvent(OnClickShockButton);
+        GetButton((int)Buttons.ShockButton).gameObject.BindEvent(OnClickShockButton);
         GetButton((int)Buttons.FlashLightButton).gameObject.BindEvent(OnClickFlashButton);
 
-        batterySlider = GetSlider((int)Sliders.BatterySlider);
-        if(batterySlider != null)
-        {
-            batterySlider.interactable = false;
-        }
+        GetSlider((int)Sliders.BatterySlider).value = 100;
+        GetSlider((int)Sliders.ShockCooltime).value = 100;
+
+        GetSlider((int)Sliders.BatterySlider).interactable = false;
+        GetSlider((int)Sliders.ShockCooltime).interactable = false;
 
         return true;
     }
 
+    void Update()
+    {
+        GetSlider((int)Sliders.BatterySlider).value = Managers.GameManager.BatteryAmount;
+        GetText((int)Texts.BatteryAmount).text = $"{Managers.GameManager.BatteryAmount}";
+
+        if (Managers.GameManager.BatteryAmount <= 0)
+        {
+            Managers.GameManager.VignetteValueChange("off");
+        }
+
+        if (Managers.GameManager.ElapsedTime < 100)
+        {
+            GetImage((int)Images.ShockImage).gameObject.SetActive(false);
+            Managers.GameManager.ElapsedTime += 1;
+            GetSlider((int)Sliders.ShockCooltime).value = Managers.GameManager.ElapsedTime;
+        }
+
+        if (Managers.GameManager.ElapsedTime == 100)
+        {
+            GetImage((int)Images.ShockImage).gameObject.SetActive(true);
+        }
+
+        if (Managers.GameManager.IsFlashPressed && Managers.GameManager.BatteryAmount > 0)
+        {
+            Managers.GameManager.batteryTimer += Time.deltaTime;
+            Debug.Log(Managers.GameManager.batteryTimer);
+            if (Managers.GameManager.batteryTimer >= Managers.GameManager.batteryDrainInterval)
+            {
+                Managers.GameManager.BatteryAmount -= 1;
+                Managers.GameManager.batteryTimer = 0;
+            }
+        }
+    }
+
     void OnClickShockButton()
     {
-        shock.ButtonClick();
-        if(_onClickShockButton != null)
+        if (Managers.GameManager.BatteryAmount > 10 && Managers.GameManager.ElapsedTime == 100)
         {
-            _onClickShockButton.Invoke();
+            Managers.GameManager.IsShockPressed = true;
+            Managers.GameManager.ElapsedTime = 0;
+            GetSlider((int)Sliders.ShockCooltime).value = Managers.GameManager.ElapsedTime;
+            Managers.GameManager.ShockPressedCheck();
+        }
+        else if (Managers.GameManager.ElapsedTime < 100 && Managers.GameManager.IsShockPressed)
+        {
+            Managers.GameManager.IsShockPressed = !Managers.GameManager.IsShockPressed;
         }
     }
 
     void OnClickFlashButton()
     {
-        flash.ButtonClick();
-        if (_onClickFlashButton != null)
+        if (Managers.GameManager.BatteryAmount > 0 && !isFlashButtonCilcked)
         {
-            _onClickFlashButton.Invoke();
+            Managers.GameManager.VignetteValueChange("on");
         }
+
+        else
+        {
+            Managers.GameManager.VignetteValueChange("off");
+        }
+
+        Managers.GameManager.FlashPressedCheck();
+        isFlashButtonCilcked = !isFlashButtonCilcked;
     }
+
 }

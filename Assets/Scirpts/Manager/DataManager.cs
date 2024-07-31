@@ -30,7 +30,7 @@ public class DataManager : MonoBehaviour
     }
 
 
-    private void Init()
+    public void Init()
     {
         var json = Resources.Load<TextAsset>(Path.Combine(DATA_PATH, ANIMATRONICS_JSON));
         GameData gameData = JsonUtility.FromJson<GameData>(json.text);

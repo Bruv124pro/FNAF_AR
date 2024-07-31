@@ -12,25 +12,14 @@ public class Managers : MonoBehaviour
     public static Managers s_instance = null;
     public static Managers Instance { get { return s_instance; } }
 
-    //private static GameManager s_gameManager = new GameManager();
     private static DataManager s_dataManager = new DataManager();
     private static UIManager s_uiManager = new UIManager();
     private static ResourceManager s_resourceManager = new ResourceManager();
-    private static SceneManagerEx s_sceneManager = new SceneManagerEx();
-
-    //public static GameManager Game { get { Init(); return s_gameManager; } }
+    private static GameManager gameManager = new GameManager();
     public static DataManager Data { get { Init(); return s_dataManager; } }
     public static UIManager UI { get { Init(); return s_uiManager; } }
     public static ResourceManager Resource { get { Init(); return s_resourceManager; } }
-    public static SceneManagerEx Scene { get { Init(); return s_sceneManager; } }
-
-    //public static string GetText(int id)
-    //{
-    //    if (Managers.Data.Texts.TryGetValue(id, out TextData value) == false)
-    //        return "";
-
-    //    return value.kor.Replace("{userName}", Managers.Game.Name);
-    //}
+    public static GameManager GameManager { get { Init(); return gameManager; } }
 
     private void Start()
     {
@@ -48,8 +37,8 @@ public class Managers : MonoBehaviour
             s_instance = Utils.GetOrAddComponent<Managers>(go);
             DontDestroyOnLoad(go);
 
-            s_resourceManager.Init();
-            s_sceneManager.Init();
+            s_dataManager.Init();
+            gameManager.Init();
 
             Application.targetFrameRate = 60;
         }
