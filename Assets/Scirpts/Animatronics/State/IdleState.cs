@@ -31,7 +31,7 @@ public class IdleState : IState
             state = animatronics.GoIdleToAnotherState();
             IState nextState = controller.StateMachine.GetState(state);
             //controller.StateMachine.TransitionTo(nextState);
-            controller.StateMachine.TransitionTo(controller.StateMachine.chargeState);
+            controller.StateMachine.TransitionTo(controller.StateMachine.uniqueFeintState);
         }
         else
         {

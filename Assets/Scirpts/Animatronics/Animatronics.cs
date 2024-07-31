@@ -57,6 +57,7 @@ public class Animatronics : MonoBehaviour
     public event Action OnVisibleFinished;
     public event Action ShockButtonPressed;
     public event Action ChargeToJumpScare;
+    public event Action OnUniqueFeintFinished;
 
     public string[] visibleAnimationNames = { "Glimpse1", "Glimpse2", "Glimpse3" };
 
@@ -77,7 +78,15 @@ public class Animatronics : MonoBehaviour
 
     public Canvas gameResultCanvas;
     public Text gameResultText;
-    
+
+    [SerializeField]private Material uniqueFeintMaterial;
+    private float uniqueShaderValue;
+    private bool isUniqueShader;
+
+    private Gyroscope _gyro;
+    private Vector3 lastRotationRate;
+    private float sidesValue;
+
     private void Awake()
     {
         if (id == null)
@@ -116,6 +125,13 @@ public class Animatronics : MonoBehaviour
         HitParticleOff();
         ElecEffectOff(true);
         ElecEffectOff(false);
+
+        if (SystemInfo.supportsGyroscope)
+        {
+            _gyro = Input.gyro;
+            _gyro.enabled = true;
+        }
+        
     }
     public void SetVisible()
     {
@@ -382,7 +398,6 @@ public class Animatronics : MonoBehaviour
     {
         if (IsFindVisibleAnimatronics())
         {
-            Debug.Log($"±Û¸®Ä¡ {useGlitch}");
             if (useGlitch)
             {
                 glitchMaterial.SetFloat("_Force", 3);
@@ -538,5 +553,63 @@ public class Animatronics : MonoBehaviour
         gameResultCanvas.gameObject.SetActive(true);
         gameResultText.text = "YOU WIN";
         gameResultText.color = Color.white;
+    }
+
+    public void SetUniqueFeintShader()
+    {
+        SetUniqueValue(true);
+        StartCoroutine(stopUniqueFeint());
+    }
+
+    IEnumerator stopUniqueFeint()
+    {
+        yield return new WaitForSeconds(cloackedTime);
+        SetUniqueValue(false);
+    }
+
+    public void SetUniqueValue(bool _isFreez)
+    {
+        sidesValue = 3.5f;
+        Debug.Log($"{sidesValue}");
+        if (_isFreez)
+        {
+            uniqueFeintMaterial.SetInt("_FreezingPower", 1);
+        }
+        else
+        {
+            uniqueFeintMaterial.SetInt("_FreezingPower", 0);
+            OnUniqueFeintFinished?.Invoke();
+        }
+        uniqueFeintMaterial.SetFloat("_Sides", sidesValue);
+    }
+
+    public void UpdateUniqueFeintShader()
+    {
+        if (GyroCheck())
+        {
+            sidesValue += 1f;
+            uniqueFeintMaterial.SetFloat("_Sides", sidesValue);
+        }
+        if(sidesValue >= 20f)
+        {
+            SetUniqueValue(false);
+        }
+    }
+    public bool GyroCheck()
+    {
+        Vector3 currentRotationRate = Input.gyro.rotationRate;
+        Debug.Log($"{currentRotationRate}");
+        if(lastRotationRate == null)
+        {
+            lastRotationRate = currentRotationRate;
+        }
+        float rotationChange = (currentRotationRate - lastRotationRate).magnitude;
+        lastRotationRate = currentRotationRate;
+
+        if (rotationChange > 2f)
+        {
+            return true;
+        }
+        return false;
     }
 }

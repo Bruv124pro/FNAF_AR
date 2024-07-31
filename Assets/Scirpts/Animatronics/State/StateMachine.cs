@@ -49,6 +49,7 @@ public class StateMachine
         this.soundFeintState = new SoundFeintState(controller);
         this.invisibleFeintState = new InvisibleFeintState(controller);
         this.repositionState = new RepositionState(controller);
+        this.uniqueFeintState = new UniqueFeintState(controller);
     }
 
     public void Initialize(IState startingState)
@@ -90,7 +91,8 @@ public class StateMachine
             "feintState" => feintState,
             "soundFeintState" => soundFeintState,
             "invisibleFeintState" => invisibleFeintState,
-            "repositionState" => repositionState
+            "repositionState" => repositionState,
+            "uniqueFeintState" => uniqueFeintState
         };
     }
 }

@@ -545,6 +545,7 @@ MonoBehaviour:
   shockButton: {fileID: 1123366992}
   gameResultCanvas: {fileID: 1802555701}
   gameResultText: {fileID: 170274292}
+  uniqueFeintMaterial: {fileID: 2100000, guid: 23649ec5adcaae643bb67deef38575d0, type: 2}
 --- !u!114 &151853166 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2512387470528047737, guid: 48cb3fb68c91eb94999fd99957eb0cae,
@@ -3987,6 +3988,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Freddy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7998146489314940619, guid: 1b9584e4e049b8541807410f5153deaa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8178010418348523728, guid: 1b9584e4e049b8541807410f5153deaa,
         type: 3}
