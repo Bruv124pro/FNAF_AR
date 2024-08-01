@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class UI_InGamePopup : UI_Popup
 {
+    Animatronics animatronics;
     private enum Texts
     {
         BatteryAmount
@@ -26,7 +27,6 @@ public class UI_InGamePopup : UI_Popup
     private enum Images
     {
         onButton,
-        offButton,
         ShockImage,
         shockBackgroundImage,
     }
@@ -37,6 +37,9 @@ public class UI_InGamePopup : UI_Popup
             return false;
         }
 
+        animatronics.ElecEffectOff(true);
+        animatronics.ElecEffectOff(false);
+
         BindButton(typeof(Buttons));
         BindSlider(typeof(Sliders));
         BindText(typeof(Texts));
@@ -44,6 +47,7 @@ public class UI_InGamePopup : UI_Popup
 
         GetButton((int)Buttons.ShockButton).gameObject.BindEvent(OnClickShockButton);
         GetButton((int)Buttons.FlashLightButton).gameObject.BindEvent(OnClickFlashButton);
+        GetImage((int)Images.onButton).gameObject.SetActive(false);
 
         GetSlider((int)Sliders.BatterySlider).value = 100;
         GetSlider((int)Sliders.ShockCooltime).value = 100;
@@ -108,15 +112,22 @@ public class UI_InGamePopup : UI_Popup
         if (Managers.GameManager.BatteryAmount > 0 && !isFlashButtonCilcked)
         {
             Managers.GameManager.VignetteValueChange("on");
+            GetImage((int)Images.onButton).gameObject.SetActive(true);
         }
 
         else
         {
             Managers.GameManager.VignetteValueChange("off");
+            GetImage((int)Images.onButton).gameObject.SetActive(false);
         }
 
         Managers.GameManager.FlashPressedCheck();
         isFlashButtonCilcked = !isFlashButtonCilcked;
     }
 
+    void OnClickCancleButton()
+    {
+        Managers.UI.ClosePopupUI(this);
+        Managers.UI.ShowPopupUI<UI_SelectAnimatronics>();
+    }
 }

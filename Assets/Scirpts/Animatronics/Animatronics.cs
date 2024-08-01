@@ -463,7 +463,7 @@ public class Animatronics : MonoBehaviour
         return (float)maxshockTime / 10;
     }
 
-    private void ElecEffectOn(bool isSuccAtack)
+    public void ElecEffectOn(bool isSuccAtack)
     {
         if (isSuccAtack)
         {
@@ -482,7 +482,7 @@ public class Animatronics : MonoBehaviour
 
     }
 
-    private void ElecEffectOff(bool isSuccAtack)
+    public void ElecEffectOff(bool isSuccAtack)
     {
         if (isSuccAtack)
         {

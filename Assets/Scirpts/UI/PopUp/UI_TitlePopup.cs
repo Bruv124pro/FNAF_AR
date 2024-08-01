@@ -53,6 +53,6 @@ public class UI_TitlePopup : UI_Popup
         material.SetFloat("_Force", 0);
         yield return new WaitForSeconds(2f);
         Managers.UI.ClosePopupUI(this);
-        Managers.UI.ShowPopupUI<UI_InGamePopup>();
+        Managers.UI.ShowPopupUI<UI_SelectAnimatronics>();
     }
 }

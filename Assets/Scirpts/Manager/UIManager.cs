@@ -25,22 +25,22 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void SetCanvas(GameObject go, bool sort = true)
-    {
-        Canvas canvas = Utils.GetOrAddComponent<Canvas>(go);
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.overrideSorting = true;
+    //public void SetCanvas(GameObject go, bool sort = true)
+    //{
+    //    Canvas canvas = Utils.GetOrAddComponent<Canvas>(go);
+    //    canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+    //    canvas.overrideSorting = true;
 
-        if(sort)
-        {
-            canvas.sortingOrder = _order;
-            _order++;
-        }
-        else
-        {
-            canvas.sortingOrder = 0;
-        }
-    }
+    //    if(sort)
+    //    {
+    //        canvas.sortingOrder = _order;
+    //        _order++;
+    //    }
+    //    else
+    //    {
+    //        canvas.sortingOrder = 0;
+    //    }
+    //}
 
     public T MakeSubItem<T>(Transform parent = null, string name = null) where T : UI_Base
     {
