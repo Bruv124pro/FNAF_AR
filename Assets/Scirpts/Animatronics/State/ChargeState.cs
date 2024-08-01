@@ -38,7 +38,6 @@ public class ChargeState : IState
         {
             controller.StateMachine.TransitionTo(controller.StateMachine.jumpScareState);
         }
-
         else
         {
             controller.StateMachine.TransitionTo(controller.StateMachine.repositionState);

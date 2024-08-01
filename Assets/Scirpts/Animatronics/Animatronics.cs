@@ -38,8 +38,10 @@ public class Animatronics : MonoBehaviour
     private bool isFinishCircleMove;
     private bool useGlitch;
     private bool alreadyinit;
-    public AudioClip[] audioClips;
+    
+    [SerializeField]private AudioClip[] audioClips;
     public AudioSource audioSource;
+    private string audioClipsPath = "Sound/";
 
     private VisualEffect[] hitParticles;
 
@@ -135,6 +137,10 @@ public class Animatronics : MonoBehaviour
 
         SetJumpScareObject();
         animator = GetComponentInChildren<Animator>();
+
+        audioClips = Resources.LoadAll<AudioClip>(audioClipsPath + charName);
+
+
     }
     public void SetVisible()
     {
