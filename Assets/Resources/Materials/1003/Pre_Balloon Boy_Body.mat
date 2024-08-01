@@ -54,7 +54,7 @@ Material:
     - _DissolveScale: 40
     - _DissolveWidth: 0.02
     - _Normal: 1
-    - _Occlusion: 0.5
+    - _Occlusion: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 3.5
