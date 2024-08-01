@@ -497,12 +497,7 @@ MonoBehaviour:
   deCloackedTime: 0
   minRepositionAngleDegrees: 0
   maxRepositionAngleDegrees: 0
-  audioClips:
-  - {fileID: 8300000, guid: 0c47246fc13a2f3438b314c4941ac372, type: 3}
-  - {fileID: 8300000, guid: 7732e2ae00d7b2243a5fe7bcc5747f68, type: 3}
-  - {fileID: 8300000, guid: 4d5b8cf38584d834d91f86b9d3798af7, type: 3}
-  - {fileID: 8300000, guid: f80512a9d8b71724c8954802f5c9f1ba, type: 3}
-  - {fileID: 8300000, guid: 692c953ea96cecf47a46532a0c699a76, type: 3}
+  audioClips: []
   audioSource: {fileID: 0}
   missParticle:
   - {fileID: 1125342979}
@@ -782,7 +777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 094cccce0427e524891ce1aedf859087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1003
+  id: 1006
 --- !u!114 &252200455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1826,7 +1821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 094cccce0427e524891ce1aedf859087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1003
+  id: 1006
 --- !u!114 &462059459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6427,7 +6422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 094cccce0427e524891ce1aedf859087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1002
+  id: 1005
 --- !u!114 &1249089241
 MonoBehaviour:
   m_ObjectHideFlags: 0
