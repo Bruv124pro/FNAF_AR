@@ -16,6 +16,7 @@ public class AttackFailState : IState
         animatronics.PlayAnimation("Shocked");
         animatronics.HpDecrease();
         animatronics.HitAnimatronicsBodyParticle();
+        animatronics.PlaySound(animatronics.shockAudioClip);
         if (animatronics.HpCheck())
         {
             animatronics.ChangeGlitchBoolValue(true);

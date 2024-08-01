@@ -17,6 +17,7 @@ public class ErrorAttackFeintState : IState
         elapsedTime = 0;
         animatronics.PlayAnimation("Haywire");
         animatronics.SetVisible();
+        animatronics.PlaySound(animatronics.hayWireAudioClip);
         animatronics.OnVisibleFinished += OnErrorAttackFinished;
     }
 
