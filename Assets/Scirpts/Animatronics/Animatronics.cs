@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.VFX;
@@ -64,8 +63,10 @@ public class Animatronics : MonoBehaviour
 
     public StateMachine StateMachine { get; private set; }
 
-    [SerializeField] private Material bodyShader;
-    [SerializeField] private Material eyeShader;
+    private SkinnedMeshRenderer skinnedMeshRenderer;
+    private Material[] skinnedMaterials;
+    private Material bodyShader;
+    private Material eyeShader;
     private float bodyAlpha;
     private float eyeAlpha;
 
@@ -100,8 +101,11 @@ public class Animatronics : MonoBehaviour
 
     void Start()
     {
-        ShaderAlpahValueInitalize();
+        skinnedMaterials = transform.GetChild(1).GetComponentInChildren<SkinnedMeshRenderer>().materials;
+        bodyShader = skinnedMaterials[0];
+        eyeShader = skinnedMaterials[1];
 
+        ShaderAlpahValueInitalize();    
         isFinishCircleMove = false;
         alreadyinit = false;
         isJumpState = false;
@@ -134,7 +138,6 @@ public class Animatronics : MonoBehaviour
 
         SetJumpScareObject();
         animator = GetComponentInChildren<Animator>();
-
     }
     public void SetVisible()
     {
@@ -606,7 +609,6 @@ public class Animatronics : MonoBehaviour
     public bool GyroCheck()
     {
         Vector3 currentRotationRate = Input.gyro.rotationRate;
-        Debug.Log($"{currentRotationRate}");
         if(lastRotationRate == null)
         {
             lastRotationRate = currentRotationRate;
@@ -637,5 +639,4 @@ public class Animatronics : MonoBehaviour
             }
         }
     }
-
 }

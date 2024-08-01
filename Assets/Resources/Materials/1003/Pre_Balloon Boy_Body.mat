@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: B.B._Preview_Body
+  m_Name: Pre_Balloon Boy_Body
   m_Shader: {fileID: -6465566751694194690, guid: a53094367bfa8ed4093adf379f805a6e,
     type: 3}
   m_Parent: {fileID: 0}
