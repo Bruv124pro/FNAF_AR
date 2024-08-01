@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.VFX;
@@ -42,7 +41,7 @@ public class Animatronics : MonoBehaviour
     public AudioClip[] audioClips;
     public AudioSource audioSource;
 
-    [SerializeField] public VisualEffect[] hitParticles;
+    private VisualEffect[] hitParticles;
 
     [SerializeField] public VisualEffect[] missParticle;
     [SerializeField] public VisualEffect[] succParticle;
@@ -64,8 +63,10 @@ public class Animatronics : MonoBehaviour
 
     public StateMachine StateMachine { get; private set; }
 
-    [SerializeField] private Material bodyShader;
-    [SerializeField] private Material eyeShader;
+    private SkinnedMeshRenderer skinnedMeshRenderer;
+    private Material[] skinnedMaterials;
+    private Material bodyShader;
+    private Material eyeShader;
     private float bodyAlpha;
     private float eyeAlpha;
 
@@ -100,18 +101,18 @@ public class Animatronics : MonoBehaviour
 
     void Start()
     {
-        ShaderAlpahValueInitalize();
+        skinnedMaterials = transform.GetChild(0).GetComponentInChildren<SkinnedMeshRenderer>().materials;
+        bodyShader = skinnedMaterials[0];
+        eyeShader = skinnedMaterials[1];
+        Debug.Log($"{transform.GetChild(0).name}");
+        hitParticles = transform.GetChild(0).GetComponentsInChildren<VisualEffect>();
 
+        ShaderAlpahValueInitalize();    
         isFinishCircleMove = false;
         alreadyinit = false;
         isJumpState = false;
         isHitElectronic = false;
         useGlitch = true;
-
-        foreach (var effect in hitParticles)
-        {
-            effect.transform.GetComponent<VisualEffect>();
-        }
 
         foreach (var effect in missParticle)
         {
@@ -134,7 +135,6 @@ public class Animatronics : MonoBehaviour
 
         SetJumpScareObject();
         animator = GetComponentInChildren<Animator>();
-
     }
     public void SetVisible()
     {
@@ -290,11 +290,11 @@ public class Animatronics : MonoBehaviour
         {
             state = "uniqueFeintState";
         }
-        else if (ran > chanceToUniqueFeint && ran <= 60)
+        else if (ran > chanceToUniqueFeint && ran <= (100 - chanceToUniqueFeint)/ 2 + chanceToUniqueFeint)
         {
             state = "soundFeintState";
         }
-        else if (ran > 60)
+        else if (ran > (100 - chanceToUniqueFeint) / 2 + chanceToUniqueFeint)
         {
             state = "invisibleFeintState";
         }
@@ -606,7 +606,6 @@ public class Animatronics : MonoBehaviour
     public bool GyroCheck()
     {
         Vector3 currentRotationRate = Input.gyro.rotationRate;
-        Debug.Log($"{currentRotationRate}");
         if(lastRotationRate == null)
         {
             lastRotationRate = currentRotationRate;
@@ -637,5 +636,4 @@ public class Animatronics : MonoBehaviour
             }
         }
     }
-
 }

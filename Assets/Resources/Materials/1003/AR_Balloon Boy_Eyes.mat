@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ballon Boy Eyes
+  m_Name: AR_Balloon Boy_Eyes
   m_Shader: {fileID: -6465566751694194690, guid: 4f91fec5eeb6f8649a51147ae64336fa,
     type: 3}
   m_Parent: {fileID: 0}
@@ -60,19 +60,11 @@ Material:
         m_Texture: {fileID: 2800000, guid: abcb16e7f1c0fb545ac8ee5fcd2f1ef2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MRAC:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Normal_Map:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -122,10 +114,8 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _IsVisible: 1
+    - _IsVisible: 0
     - _Metallic: 1
-    - _Normal: 1
-    - _Occlusion: 0.5
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
@@ -142,13 +132,11 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 0.023529412, b: 0, a: 1}
-    - _DissolveColor: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 23.968628, g: 0, b: 0.19976981, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &3919041327230600752
+--- !u!114 &428272736718850815
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

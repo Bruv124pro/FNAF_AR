@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Freddy_Preview_Eyes
-  m_Shader: {fileID: -6465566751694194690, guid: 556e96aa24061934ea3e2106598347f6,
+  m_Name: AR_FreddyFazbear_Eyes
+  m_Shader: {fileID: -6465566751694194690, guid: 4f91fec5eeb6f8649a51147ae64336fa,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -29,11 +29,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AlphaMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: d04fddee319193349896b1be9786be96, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emission_Map:
-        m_Texture: {fileID: 2800000, guid: abcb16e7f1c0fb545ac8ee5fcd2f1ef2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 85bf583b395409e45aa73d5f4f4c465f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MRAC:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal_Map:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -51,17 +59,21 @@ Material:
     m_Ints: []
     m_Floats:
     - _Alpha: 0
-    - _DissolveScale: 40
-    - _DissolveWidth: 0.02
-    - _IsVisible: 0
+    - _DissolveScale: 30
+    - _DissolveWidth: 0.04
+    - _IsVisible: 1
     - _Metallic: 1
+    - _Normal: 1
+    - _Occlusion: 0.5
+    - _On_Off: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 1
     m_Colors:
-    - _Emission: {r: 2.670157, g: 2.670157, b: 2.670157, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Emission: {r: 5.672134, g: 19.60415, b: 77.384155, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &1964028389703863269
+--- !u!114 &4187747123439442151
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

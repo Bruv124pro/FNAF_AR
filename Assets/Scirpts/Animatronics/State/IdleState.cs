@@ -32,7 +32,6 @@ public class IdleState : IState
             Debug.Log($"state´Â {state}");
             IState nextState = controller.StateMachine.GetState(state);
             controller.StateMachine.TransitionTo(nextState);
-            //controller.StateMachine.TransitionTo(controller.StateMachine.uniqueFeintState);
         }
         else
         {
