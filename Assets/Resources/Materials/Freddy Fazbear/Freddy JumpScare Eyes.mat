@@ -58,7 +58,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0
+    - _Alpha: -0.01999956
     - _DissolveScale: 30
     - _DissolveWidth: 0.04
     - _IsVisible: 1
