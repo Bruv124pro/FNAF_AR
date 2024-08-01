@@ -41,7 +41,7 @@ public class Animatronics : MonoBehaviour
     public AudioClip[] audioClips;
     public AudioSource audioSource;
 
-    [SerializeField] public VisualEffect[] hitParticles;
+    private VisualEffect[] hitParticles;
 
     [SerializeField] public VisualEffect[] missParticle;
     [SerializeField] public VisualEffect[] succParticle;
@@ -101,9 +101,11 @@ public class Animatronics : MonoBehaviour
 
     void Start()
     {
-        skinnedMaterials = transform.GetChild(1).GetComponentInChildren<SkinnedMeshRenderer>().materials;
+        skinnedMaterials = transform.GetChild(0).GetComponentInChildren<SkinnedMeshRenderer>().materials;
         bodyShader = skinnedMaterials[0];
         eyeShader = skinnedMaterials[1];
+        Debug.Log($"{transform.GetChild(0).name}");
+        hitParticles = transform.GetChild(0).GetComponentsInChildren<VisualEffect>();
 
         ShaderAlpahValueInitalize();    
         isFinishCircleMove = false;
@@ -111,11 +113,6 @@ public class Animatronics : MonoBehaviour
         isJumpState = false;
         isHitElectronic = false;
         useGlitch = true;
-
-        foreach (var effect in hitParticles)
-        {
-            effect.transform.GetComponent<VisualEffect>();
-        }
 
         foreach (var effect in missParticle)
         {
@@ -293,11 +290,11 @@ public class Animatronics : MonoBehaviour
         {
             state = "uniqueFeintState";
         }
-        else if (ran > chanceToUniqueFeint && ran <= 60)
+        else if (ran > chanceToUniqueFeint && ran <= (100 - chanceToUniqueFeint)/ 2 + chanceToUniqueFeint)
         {
             state = "soundFeintState";
         }
-        else if (ran > 60)
+        else if (ran > (100 - chanceToUniqueFeint) / 2 + chanceToUniqueFeint)
         {
             state = "invisibleFeintState";
         }
