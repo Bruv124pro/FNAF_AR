@@ -13,7 +13,8 @@ public class UI_InGamePopup : UI_Popup
     private enum Buttons
     {
         ShockButton,
-        FlashLightButton
+        FlashLightButton,
+        CancelButton
     }
 
     private enum Sliders
@@ -28,7 +29,7 @@ public class UI_InGamePopup : UI_Popup
     {
         onButton,
         ShockImage,
-        shockBackgroundImage,
+        ShockBackGroundImage,
     }
     public override bool Init()
     {
@@ -37,8 +38,8 @@ public class UI_InGamePopup : UI_Popup
             return false;
         }
 
-        animatronics.ElecEffectOff(true);
-        animatronics.ElecEffectOff(false);
+        //animatronics.ElecEffectOff(true);
+        //animatronics.ElecEffectOff(false);
 
         BindButton(typeof(Buttons));
         BindSlider(typeof(Sliders));
@@ -47,6 +48,7 @@ public class UI_InGamePopup : UI_Popup
 
         GetButton((int)Buttons.ShockButton).gameObject.BindEvent(OnClickShockButton);
         GetButton((int)Buttons.FlashLightButton).gameObject.BindEvent(OnClickFlashButton);
+        GetButton((int)Buttons.CancelButton).gameObject.BindEvent(OnClickCancleButton);
         GetImage((int)Images.onButton).gameObject.SetActive(false);
 
         GetSlider((int)Sliders.BatterySlider).value = 100;

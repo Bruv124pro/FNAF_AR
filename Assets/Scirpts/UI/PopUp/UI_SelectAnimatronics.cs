@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
 
 public class UI_SelectAnimatronics : UI_Popup
@@ -10,6 +11,7 @@ public class UI_SelectAnimatronics : UI_Popup
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject animatronics;
     [SerializeField] private GameObject InGameAnimatronics;
+    [SerializeField] private ButtonID[] buttonID;
     private Camera camera;
     private Camera mapCamera;
     private TextMeshProUGUI idText;
@@ -20,8 +22,6 @@ public class UI_SelectAnimatronics : UI_Popup
     public Transform parentTransform;
     private GameObject preViewAnimatronics;
     private GameObject ARAnimatronics;
-    ButtonID buttonID;
-    AnimatronicsModel animatronicsTable;
 
     bool isDialog = false;
 
@@ -34,7 +34,7 @@ public class UI_SelectAnimatronics : UI_Popup
 
     private enum GameObjects
     {
-        ButtonCanvas,
+        SelectCanvas,
         FreddyFazbear,
         FreddyFrostbear,
         BalloonBoy
@@ -48,7 +48,6 @@ public class UI_SelectAnimatronics : UI_Popup
         }
 
         idText = panel.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        buttonID = GetComponent<ButtonID>();
 
         camera = Camera.main;
         camera.gameObject.SetActive(false);
@@ -58,35 +57,37 @@ public class UI_SelectAnimatronics : UI_Popup
         BindButton(typeof(Buttons));
         BindObject(typeof(GameObjects));
 
-        GetButton((int)Buttons.FreddyFazbearButton).gameObject.BindEvent(SelectAnimatronics);
-        GetButton((int)Buttons.FreddyFrostbearButton).gameObject.BindEvent(SelectAnimatronics);
-        GetButton((int)Buttons.BalloonBoyButton).gameObject.BindEvent(SelectAnimatronics);
-
-        //GetObject((int)GameObjects.ButtonCanvas)
+        GetButton((int)Buttons.FreddyFazbearButton).gameObject.BindEvent(() => SelectAnimatronics(1001));
+        GetButton((int)Buttons.FreddyFrostbearButton).gameObject.BindEvent(() => SelectAnimatronics(1002));
+        GetButton((int)Buttons.BalloonBoyButton).gameObject.BindEvent(() => SelectAnimatronics(1003));
+        GetObject((int)GameObjects.SelectCanvas).gameObject.SetActive(false);
 
         return true;
     }
 
-    public void SelectAnimatronics()
+    public void SelectAnimatronics(int buttonID)
     {
-        switch(buttonID.id)
-        {
-            case 1001:
-                id = 1001;
-                break;
-            case 1002:
-                id = 1002;
-                break;
-            case 1003:
-                id = 1003;
-                break;
-        }
+        panel.SetActive(true);
 
-        animatronicsTable = DataManager.Instance.AnimatronicsTable[id];
-        if (id != null)
+        ButtonID selectedButtonID = null;
+        foreach (var button in this.buttonID)
         {
+            if (button.id == buttonID)
+            {
+                selectedButtonID = button;
+                Debug.Log($"button : {button}");
+                break;
+            }
+        }
+        Debug.Log($"selectedButtonID : {selectedButtonID.id}");
+        if (selectedButtonID != null)
+        {
+            var animatronicsTable = DataManager.Instance.AnimatronicsTable[selectedButtonID.id];
             idText.text = animatronicsTable.charName;
-            GameObject prefab = Resources.Load<GameObject>(prefabPath + id);
+            GameObject prefab = Resources.Load<GameObject>(prefabPath + selectedButtonID.id);
+            id = selectedButtonID.id;
+
+            Debug.Log($"{prefabPath + id}");
 
             if (prefab != null)
             {
@@ -95,12 +96,13 @@ public class UI_SelectAnimatronics : UI_Popup
                 if (parentTransform != null)
                 {
                     preViewAnimatronics.transform.SetParent(parentTransform, false);
+                    isDialog = true;
                 }
-            }
 
-            if (isDialog)
-            {
-                Managers.UI.ShowPopupUI<UI_Dialog>().SetDialog(() => { UIChange(); }, $"{animatronicsTable.charName}", "EnCounter");
+                if (isDialog)
+                {
+                    Managers.UI.ShowPopupUI<UI_Dialog>().SetDialog(() => { UIChange(); }, $"{idText}", "EnCounter");
+                }
             }
         }
     }
@@ -123,6 +125,8 @@ public class UI_SelectAnimatronics : UI_Popup
 
     private void UIChange()
     {
+        camera.gameObject.SetActive(true);
+
         Managers.UI.ClosePopupUI(this);
         Managers.UI.ShowPopupUI<UI_InGamePopup>();
     }

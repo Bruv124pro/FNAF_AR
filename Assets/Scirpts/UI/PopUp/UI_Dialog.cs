@@ -7,7 +7,7 @@ public class UI_Dialog : UI_Popup
 {
     enum Texts
     {
-        TitleText,
+        Name,
     }
 
     enum Images
@@ -17,11 +17,11 @@ public class UI_Dialog : UI_Popup
 
     enum Buttons
     {
-        Confirm
+        EnCounter
     }
 
-    string _title;
-    string _confirm;
+    string _name;
+    string _encounter;
 
 
     public override bool Init()
@@ -32,18 +32,18 @@ public class UI_Dialog : UI_Popup
         BindText(typeof(Texts));
         BindButton(typeof(Buttons));
 
-        GetButton((int)Buttons.Confirm).gameObject.BindEvent(OnClickYesButton);
+        GetButton((int)Buttons.EnCounter).gameObject.BindEvent(OnClickYesButton);
         GetImage((int)Images.RawImage);
-        GetText((int)Texts.TitleText).text = _title;
+        GetText((int)Texts.Name).text = _name;
 
         return true;
     }
 
-    public void SetDialog(Action onClickYesButton, string title, string confirm)
+    public void SetDialog(Action onClickYesButton, string name, string encounter)
     {
         _onClickYesButton = onClickYesButton;
-        _title = title;
-        _confirm = confirm;
+        _name = name;
+        _encounter = encounter;
     }
 
     Action _onClickYesButton;
