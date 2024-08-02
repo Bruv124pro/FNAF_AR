@@ -503,6 +503,8 @@ MonoBehaviour:
   hayWireAudioClip: {fileID: 0}
   jumpScareAudioClip: {fileID: 0}
   shockAudioClip: {fileID: 0}
+  ChargeAudioClip: {fileID: 0}
+  CircleMoveAudioClip: {fileID: 0}
   missParticle:
   - {fileID: 1125342979}
   - {fileID: 1125342978}
@@ -1403,6 +1405,7 @@ MonoBehaviour:
   InGameAnimatronics: {fileID: 898073917}
   currentDepth: 0
   parentTransform: {fileID: 789427105}
+  glitchMaterial: {fileID: 2100000, guid: c874813fed7bc3241af4695ed63e2568, type: 2}
 --- !u!4 &386302768
 Transform:
   m_ObjectHideFlags: 0
@@ -2450,6 +2453,24 @@ MonoBehaviour:
   elapsedTime: 0
   battery: {fileID: 721012526}
   animatronics: {fileID: 115534682}
+  missParticle:
+  - {fileID: 1125342979}
+  - {fileID: 1125342978}
+  - {fileID: 1125342977}
+  - {fileID: 1125342976}
+  - {fileID: 1125342975}
+  - {fileID: 1125342974}
+  - {fileID: 1125342973}
+  - {fileID: 1125342972}
+  succParticle:
+  - {fileID: 1990114607}
+  - {fileID: 1990114606}
+  - {fileID: 1990114605}
+  - {fileID: 1990114604}
+  - {fileID: 1990114603}
+  - {fileID: 1990114602}
+  - {fileID: 1990114601}
+  - {fileID: 1990114600}
   isShockPressed: 0
 --- !u!4 &721012529
 Transform:
