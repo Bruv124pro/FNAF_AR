@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.VFX;
@@ -42,6 +43,12 @@ public class Animatronics : MonoBehaviour
     [SerializeField]private AudioClip[] audioClips;
     public AudioSource audioSource;
     private string audioClipsPath = "Sound/";
+
+    [SerializeField] private AudioClip[] audioEffectSoundClips;
+    public AudioClip hayWireAudioClip;
+    public AudioClip jumpScareAudioClip;
+    public AudioClip shockAudioClip;
+
 
     private VisualEffect[] hitParticles;
 
@@ -140,6 +147,8 @@ public class Animatronics : MonoBehaviour
 
         audioClips = Resources.LoadAll<AudioClip>(audioClipsPath + charName);
 
+        audioEffectSoundClips = Resources.LoadAll<AudioClip>(audioClipsPath + "EffectSound");
+        SetAudioClip(audioEffectSoundClips);
 
     }
     public void SetVisible()
@@ -373,6 +382,11 @@ public class Animatronics : MonoBehaviour
         int ran = UnityEngine.Random.Range(0, audioClips.Length);
         AudioClip clip = audioClips[ran];
         StartCoroutine(CheckSoundPlayFinished(clip.length));
+        GetComponent<AudioSource>().PlayOneShot(clip);
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
         GetComponent<AudioSource>().PlayOneShot(clip);
     }
 
@@ -641,5 +655,12 @@ public class Animatronics : MonoBehaviour
                 jumpscareObject.SetActive(false);
             }
         }
+    }
+
+    private void SetAudioClip(AudioClip[] audioClips)
+    {
+        hayWireAudioClip = audioClips[0];
+        jumpScareAudioClip = audioClips[1];
+        shockAudioClip = audioClips[2];
     }
 }
