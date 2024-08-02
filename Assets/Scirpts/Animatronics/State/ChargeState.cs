@@ -18,6 +18,8 @@ public class ChargeState : IState
         
         animatronics.ChargeToJumpScare += ChangeChargeState;
 
+        animatronics.PlaySound(animatronics.ChargeAudioClip);
+
         animatronics.ChangeChargeToJumpScare();
     }
 

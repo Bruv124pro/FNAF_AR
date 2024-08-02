@@ -48,7 +48,8 @@ public class Animatronics : MonoBehaviour
     public AudioClip hayWireAudioClip;
     public AudioClip jumpScareAudioClip;
     public AudioClip shockAudioClip;
-
+    public AudioClip ChargeAudioClip;
+    public AudioClip CircleMoveAudioClip;
 
     private VisualEffect[] hitParticles;
 
@@ -99,21 +100,21 @@ public class Animatronics : MonoBehaviour
 
     private void Awake()
     {
-        if (id == null)
-        {
-            id = 1004;
-        }
-        
-        audioSource = GetComponent<AudioSource>();
-        AnimatronicsInit(id);
     }
 
     void Start()
     {
+        if (id == null)
+        {
+            id = 1001;
+        }
+
+        audioSource = GetComponent<AudioSource>();
+        AnimatronicsInit(id);
+
         skinnedMaterials = transform.GetChild(0).GetComponentInChildren<SkinnedMeshRenderer>().materials;
         bodyShader = skinnedMaterials[0];
         eyeShader = skinnedMaterials[1];
-        Debug.Log($"{transform.GetChild(0).name}");
         hitParticles = transform.GetChild(0).GetComponentsInChildren<VisualEffect>();
 
         ShaderAlpahValueInitalize();    
@@ -146,7 +147,6 @@ public class Animatronics : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
 
         audioClips = Resources.LoadAll<AudioClip>(audioClipsPath + charName);
-
         audioEffectSoundClips = Resources.LoadAll<AudioClip>(audioClipsPath + "EffectSound");
         SetAudioClip(audioEffectSoundClips);
 
@@ -356,6 +356,7 @@ public class Animatronics : MonoBehaviour
     {
         if (isFinishCircleMove)
         {
+            GetComponent<AudioSource>().Stop();
             isFinishCircleMove = false;
             return true;
         }
@@ -643,7 +644,6 @@ public class Animatronics : MonoBehaviour
     private void SetJumpScareObject()
     {
         GameObject prefab = Resources.Load<GameObject>(jumpScarePrefabPath + id);
-        Debug.Log($"점프스케어 프리팹 세팅 {prefab.name}");
 
         if( prefab != null)
         {
@@ -659,8 +659,11 @@ public class Animatronics : MonoBehaviour
 
     private void SetAudioClip(AudioClip[] audioClips)
     {
-        hayWireAudioClip = audioClips[0];
-        jumpScareAudioClip = audioClips[1];
-        shockAudioClip = audioClips[2];
+        ChargeAudioClip = audioClips[0];
+        CircleMoveAudioClip = audioClips[1];
+        hayWireAudioClip = audioClips[2];
+        jumpScareAudioClip = audioClips[3];
+        shockAudioClip = audioClips[4];
+        
     }
 }
