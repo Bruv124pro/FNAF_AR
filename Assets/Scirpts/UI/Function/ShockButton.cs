@@ -58,20 +58,20 @@ public class ShockButton : MonoBehaviour
         }
     }
 
-    public void ButtonClick()
+    public void ShockButtonClick()
     {
         if (battery.batteryAmount > 10 && elapsedTime == 100)
         {
             isShockPressed = true;
             if (animatronics.isJumpState && animatronics.IsVisibleInMonitor())
             {
-                animatronics.HitElecParticle(true);
+                HitElecParticle(true);
                 animatronics.isHitElectronic = true;
                 
             }
             else
             {
-                animatronics.HitElecParticle(false);
+                HitElecParticle(false);
             }
             elapsedTime = 0;
             coolTime.value = elapsedTime;
@@ -118,5 +118,18 @@ public class ShockButton : MonoBehaviour
                 p.Stop();
             }
         }
+    }
+
+    public void HitElecParticle(bool isSuccAtack)
+    {
+        ElecEffectOn(isSuccAtack);
+        StartCoroutine(HitElecParticleFinish(isSuccAtack));
+    }
+
+    IEnumerator HitElecParticleFinish(bool isSuccAtack)
+    {
+        yield return new WaitForSeconds(1f);
+        ElecEffectOff(isSuccAtack);
+        animatronics.isJumpState = false;
     }
 }

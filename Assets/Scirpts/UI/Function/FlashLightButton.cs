@@ -22,13 +22,6 @@ public class FlashLightButton : MonoBehaviour
     private void Awake()
     {
         VignetteValueChange("off");
-
-        //isFlashPressed = false;
-        //if (volume.profile.TryGet<Vignette>(out vignette) && volume.profile.TryGet<ShadowsMidtonesHighlights>(out shadow))
-        //{
-        //    vignette.intensity.value = 0.65f;
-        //    shadow.shadows.SetValue(new Vector4Parameter(new Vector4(0, 0, 0, -0.3f)));
-        //}
     }
 
     private void Update()
@@ -36,45 +29,19 @@ public class FlashLightButton : MonoBehaviour
         if (battery.batteryAmount <= 0)
         {
             VignetteValueChange("off");
-
-            //isFlashPressed = false;
-            //flashButton.sprite = offButton;
-
-            //if (volume.profile.TryGet<Vignette>(out vignette) && volume.profile.TryGet<ShadowsMidtonesHighlights>(out shadow))
-            //{
-            //    vignette.intensity.value = 0.65f;
-            //    shadow.shadows.SetValue(new Vector4Parameter(new Vector4(0, 0, 0, -0.3f)));
-            //}
         }
     }
 
-    public void ButtonClick()
+    public void FlashButtonClick()
     {
         if (battery.batteryAmount > 0 && flashButton.sprite == offButton)
         {
             VignetteValueChange("on");
-
-            //isFlashPressed = true;
-            //flashButton.sprite = onButton;
-
-            //if (volume.profile.TryGet<Vignette>(out vignette) && volume.profile.TryGet<ShadowsMidtonesHighlights>(out shadow))
-            //{
-            //    vignette.intensity.value = 0.5f;
-            //    shadow.shadows.SetValue(new Vector4Parameter(new Vector4(0, 0, 0, 0.25f)));
-            //}
         }
+
         else
         {
             VignetteValueChange("off");
-
-            //isFlashPressed = false;
-            //flashButton.sprite = offButton;
-
-            //if (volume.profile.TryGet<Vignette>(out vignette) && volume.profile.TryGet<ShadowsMidtonesHighlights>(out shadow))
-            //{
-            //    vignette.intensity.value = 0.65f;
-            //    shadow.shadows.SetValue(new Vector4Parameter(new Vector4(0, 0, 0, -0.3f)));
-            //}
         }
     }
 

@@ -505,24 +505,6 @@ MonoBehaviour:
   shockAudioClip: {fileID: 0}
   ChargeAudioClip: {fileID: 0}
   CircleMoveAudioClip: {fileID: 0}
-  missParticle:
-  - {fileID: 1125342979}
-  - {fileID: 1125342978}
-  - {fileID: 1125342977}
-  - {fileID: 1125342976}
-  - {fileID: 1125342975}
-  - {fileID: 1125342974}
-  - {fileID: 1125342973}
-  - {fileID: 1125342972}
-  succParticle:
-  - {fileID: 1990114607}
-  - {fileID: 1990114606}
-  - {fileID: 1990114605}
-  - {fileID: 1990114604}
-  - {fileID: 1990114603}
-  - {fileID: 1990114602}
-  - {fileID: 1990114601}
-  - {fileID: 1990114600}
   camera: {fileID: 331264287}
   glitchMaterial: {fileID: 2100000, guid: c874813fed7bc3241af4695ed63e2568, type: 2}
   visibleAnimationNames:
@@ -5151,7 +5133,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 721012528}
         m_TargetAssemblyTypeName: ShockButton, Assembly-CSharp
-        m_MethodName: ButtonClick
+        m_MethodName: ShockButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7293,7 +7275,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 721012527}
         m_TargetAssemblyTypeName: FlashLightButton, Assembly-CSharp
-        m_MethodName: ButtonClick
+        m_MethodName: FlashButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
