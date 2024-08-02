@@ -57,6 +57,7 @@ public class Animatronics : MonoBehaviour
     public Camera camera;
 
     public Material glitchMaterial;
+    public Material tagGlitchMaterial;
 
     public event Action OnSoundPlayFinished;
     public event Action OnVisibleFinished;
@@ -89,8 +90,6 @@ public class Animatronics : MonoBehaviour
     public Text gameResultText;
 
     [SerializeField]private Material uniqueFeintMaterial;
-    private float uniqueShaderValue;
-    private bool isUniqueShader;
 
     private Gyroscope _gyro;
     private Vector3 lastRotationRate;
@@ -260,7 +259,7 @@ public class Animatronics : MonoBehaviour
 
     public string GoIdleToAnotherState()
     {
-        int ran = UnityEngine.Random.Range(0, 100);
+        int ran = UnityEngine.Random.Range(1, 101);
         string state = "";
 
         if (ran < chanceToCharge)
@@ -284,9 +283,11 @@ public class Animatronics : MonoBehaviour
 
     public string GoFeintToAnotherState()
     {
-        int ran = UnityEngine.Random.Range(0, 100);
+        int ran = UnityEngine.Random.Range(1, 101);
         string state = "";
 
+        Debug.Log($"{chanceToUniqueFeint}");
+        Debug.Log($"{(100 - chanceToUniqueFeint) / 2 + chanceToUniqueFeint}");
 
         if (ran <= chanceToUniqueFeint)
         {
@@ -601,6 +602,30 @@ public class Animatronics : MonoBehaviour
         hayWireAudioClip = audioClips[2];
         jumpScareAudioClip = audioClips[3];
         shockAudioClip = audioClips[4];
-        
+    }
+
+    public void SetGameOverGlitch(bool _isGameOver)
+    {
+        StartCoroutine(SetGameOverGlitchOnOff(_isGameOver));
+    }
+
+    IEnumerator SetGameOverGlitchOnOff(bool _isGameOver)
+    {
+        if (_isGameOver)
+        {
+            yield return new WaitForSeconds(2f);
+            tagGlitchMaterial.SetInt("_On_Off", 1);
+            glitchMaterial.SetFloat("_ScanLineStrength", 0);
+            glitchMaterial.SetFloat("_Force", 30);
+            StartCoroutine(SetGameOverGlitchOnOff(false));
+        }
+        else
+        {
+            yield return new WaitForSeconds(5f);
+            Debug.Log($"tagglitch {tagGlitchMaterial}");
+            tagGlitchMaterial.SetInt("_On_Off", 0);
+            glitchMaterial.SetFloat("_ScanLineStrength", 1);
+            glitchMaterial.SetFloat("_Force", 0);
+        }
     }
 }

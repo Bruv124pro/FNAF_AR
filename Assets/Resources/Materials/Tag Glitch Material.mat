@@ -39,8 +39,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _Bright: 0.3
-    - _On_Off: 0
-    - _XPower: 0.01
-    - _YPower: 0.01
+    - _On_Off: 1
+    - _XPower: 0.02
+    - _YPower: 0.02
     m_Colors: []
   m_BuildTextureStacks: []
