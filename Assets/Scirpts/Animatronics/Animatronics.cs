@@ -49,6 +49,7 @@ public class Animatronics : MonoBehaviour
     public AudioClip jumpScareAudioClip;
     public AudioClip shockAudioClip;
     public AudioClip ChargeAudioClip;
+    public AudioClip CircleMoveAudioClip;
 
     private VisualEffect[] hitParticles;
 
@@ -356,6 +357,7 @@ public class Animatronics : MonoBehaviour
     {
         if (isFinishCircleMove)
         {
+            GetComponent<AudioSource>().Stop();
             isFinishCircleMove = false;
             return true;
         }
@@ -660,8 +662,10 @@ public class Animatronics : MonoBehaviour
     private void SetAudioClip(AudioClip[] audioClips)
     {
         ChargeAudioClip = audioClips[0];
-        hayWireAudioClip = audioClips[1];
-        jumpScareAudioClip = audioClips[2];
-        shockAudioClip = audioClips[3];
+        CircleMoveAudioClip = audioClips[1];
+        hayWireAudioClip = audioClips[2];
+        jumpScareAudioClip = audioClips[3];
+        shockAudioClip = audioClips[4];
+        
     }
 }

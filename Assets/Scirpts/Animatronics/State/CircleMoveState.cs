@@ -14,7 +14,7 @@ public class CircleMoveState : IState
     public void Enter()
     {
         Debug.Log("CircleMoveState");
-
+        animatronics.PlaySound(animatronics.CircleMoveAudioClip);
         controller.animatronics.MoveCircle();
     }
 
