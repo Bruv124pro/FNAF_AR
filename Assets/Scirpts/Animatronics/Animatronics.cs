@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using Unity.VisualScripting;
+using Unity.XR.CoreUtils;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.VFX;
 
@@ -537,7 +539,6 @@ public class Animatronics : MonoBehaviour
     public void SetUniqueValue(bool _isFreez)
     {
         sidesValue = 3.5f;
-        Debug.Log($"{sidesValue}");
         if (_isFreez)
         {
             uniqueFeintMaterial.SetInt("_FreezingPower", 1);
@@ -626,6 +627,21 @@ public class Animatronics : MonoBehaviour
             tagGlitchMaterial.SetInt("_On_Off", 0);
             glitchMaterial.SetFloat("_ScanLineStrength", 1);
             glitchMaterial.SetFloat("_Force", 0);
+            Destroy(transform.GetChild(0).gameObject);
+
+            Camera[] allCameras = GameObject.FindObjectsOfType<Camera>(true);
+            
+            foreach(Camera cam in allCameras)
+            {
+                Debug.Log($"{cam.gameObject.name}");
+                
+                if (!cam.gameObject.activeInHierarchy)
+                {
+                    cam.gameObject.SetActive(true);
+                    gameResultCanvas.gameObject.SetActive(false);
+                }
+            }
+
         }
     }
 }
