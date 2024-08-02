@@ -40,7 +40,6 @@ public class SelectUIManager : MonoBehaviour
     public void SelectAnimatronics(Button button)
     {
         panel.SetActive(true);
-        //animatronics.SetActive(true);
         ButtonID buttonID = button.GetComponent<ButtonID>();
         
         if (buttonID != null)

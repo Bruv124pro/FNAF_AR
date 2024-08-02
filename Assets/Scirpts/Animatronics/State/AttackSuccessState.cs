@@ -19,6 +19,7 @@ public class AttackSuccessState : IState
         animatronics.shockButton.interactable = false;
         animatronics.GameOverOverlay();
         animatronics.transform.GetChild(0).gameObject.SetActive(false);
+        animatronics.SetGameOverGlitch(true);
     }
 
     public void Update()
