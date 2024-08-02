@@ -25,9 +25,11 @@ public class SelectUIManager : MonoBehaviour
     private GameObject preViewAnimatronics;
     private GameObject ARAnimatronics;
 
+    [SerializeField] Material glitchMaterial;
 
     private void Start()
     {
+        glitchMaterial.SetFloat("_Force", 0);
         panel.SetActive(false);
         ui = GameObject.Find("UI");
         uiChild = ui.transform.GetChild(0).gameObject;

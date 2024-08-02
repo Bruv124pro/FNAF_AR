@@ -53,8 +53,6 @@ public class Animatronics : MonoBehaviour
 
     private VisualEffect[] hitParticles;
 
-    [SerializeField] public VisualEffect[] missParticle;
-    [SerializeField] public VisualEffect[] succParticle;
 
     public Camera camera;
 
@@ -123,18 +121,7 @@ public class Animatronics : MonoBehaviour
         isHitElectronic = false;
         useGlitch = true;
 
-        foreach (var effect in missParticle)
-        {
-            effect.transform.GetComponent<VisualEffect>();
-        }
-        foreach (var effect in succParticle)
-        {
-            effect.transform.GetComponent<VisualEffect>();
-        }
-
         HitParticleOff();
-        ElecEffectOff(true);
-        ElecEffectOff(false);
 
         if (SystemInfo.supportsGyroscope)
         {
@@ -461,59 +448,9 @@ public class Animatronics : MonoBehaviour
         eyeShader.SetInt("_IsVisible", 0);
     }
 
-    public void HitElecParticle(bool isSuccAtack)
-    {
-        ElecEffectOn(isSuccAtack);
-        StartCoroutine(HitElecParticleFinish(isSuccAtack));
-    }
-
-    IEnumerator HitElecParticleFinish(bool isSuccAtack)
-    {
-        yield return new WaitForSeconds(1f);
-        ElecEffectOff(isSuccAtack);
-        isJumpState = false;
-    }
-
     public float InitmaxShockTime()
     {
         return (float)maxshockTime / 10;
-    }
-
-    public void ElecEffectOn(bool isSuccAtack)
-    {
-        if (isSuccAtack)
-        {
-            foreach (VisualEffect p in succParticle)
-            {
-                p.Play();
-            }
-        }
-        else
-        {
-            foreach (VisualEffect p in missParticle)
-            {
-                p.Play();
-            }
-        }
-
-    }
-
-    public void ElecEffectOff(bool isSuccAtack)
-    {
-        if (isSuccAtack)
-        {
-            foreach (VisualEffect p in succParticle)
-            {
-                p.Stop();
-            }
-        }
-        else
-        {
-            foreach (VisualEffect p in missParticle)
-            {
-                p.Stop();
-            }
-        }
     }
     
     private void HitParticleOn()
