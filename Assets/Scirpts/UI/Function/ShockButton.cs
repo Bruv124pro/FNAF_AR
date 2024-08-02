@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.VFX;
 
 public class ShockButton : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class ShockButton : MonoBehaviour
     [SerializeField] private BatteryUse battery;
     [SerializeField] private Animatronics animatronics;
 
+    [SerializeField] public VisualEffect[] missParticle;
+    [SerializeField] public VisualEffect[] succParticle;
+
     public bool isShockPressed;
 
     void Awake()
@@ -25,6 +29,18 @@ public class ShockButton : MonoBehaviour
         isShockPressed = false;
         shock.sprite = shockImage;
         elapsedTime = 100;
+
+        foreach (var effect in missParticle)
+        {
+            effect.transform.GetComponent<VisualEffect>();
+        }
+        foreach (var effect in succParticle)
+        {
+            effect.transform.GetComponent<VisualEffect>();
+        }
+
+        ElecEffectOff(true);
+        ElecEffectOff(false);
     }
 
     void Update()
@@ -64,6 +80,43 @@ public class ShockButton : MonoBehaviour
         else if (elapsedTime < 100 && isShockPressed)
         {
             isShockPressed = !isShockPressed;
+        }
+    }
+
+    public void ElecEffectOn(bool isSuccAtack)
+    {
+        if (isSuccAtack)
+        {
+            foreach (VisualEffect p in succParticle)
+            {
+                p.Play();
+            }
+        }
+        else
+        {
+            foreach (VisualEffect p in missParticle)
+            {
+                p.Play();
+            }
+        }
+
+    }
+
+    public void ElecEffectOff(bool isSuccAtack)
+    {
+        if (isSuccAtack)
+        {
+            foreach (VisualEffect p in succParticle)
+            {
+                p.Stop();
+            }
+        }
+        else
+        {
+            foreach (VisualEffect p in missParticle)
+            {
+                p.Stop();
+            }
         }
     }
 }

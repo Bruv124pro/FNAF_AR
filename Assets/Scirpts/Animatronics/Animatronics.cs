@@ -134,8 +134,6 @@ public class Animatronics : MonoBehaviour
         }
 
         HitParticleOff();
-        ElecEffectOff(true);
-        ElecEffectOff(false);
 
         if (SystemInfo.supportsGyroscope)
         {
