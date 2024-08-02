@@ -98,7 +98,6 @@ public class UI_SelectAnimatronics : UI_Popup
                     preViewAnimatronics.transform.SetParent(parentTransform, false);
                     isDialog = true;
                 }
-
                 if (isDialog)
                 {
                     Managers.UI.ShowPopupUI<UI_Dialog>().SetDialog(() => { UIChange(); }, $"{idText}", "EnCounter");

@@ -15,8 +15,7 @@ public class ChargeState : IState
     {
         Debug.Log("ChargeState");
         animatronics.PlayAnimation("Charge");
-        animatronics.transform.position -= new Vector3(Camera.main.transform.position.x, animatronics.transform.position.y, Camera.main.transform.position.z);
-
+        
         animatronics.ChargeToJumpScare += ChangeChargeState;
 
         animatronics.ChangeChargeToJumpScare();

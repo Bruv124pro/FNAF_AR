@@ -315,7 +315,7 @@ public class Animatronics : MonoBehaviour
         eyeShader.SetInt("_IsVisible", 1);
         if (bodyAlpha > 0 || eyeAlpha > 0)
         {
-            bodyAlpha -= 0.03f;
+            bodyAlpha -= 0.02f;
             eyeAlpha -= 0.03f;
             bodyShader.SetFloat("_Alpha", bodyAlpha);
             eyeShader.SetFloat("_Alpha", eyeAlpha);
