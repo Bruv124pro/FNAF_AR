@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 416030b5e8a2cde4da8e10edfcb6de2b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 416030b5e8a2cde4da8e10edfcb6de2b,
         type: 3}
@@ -61,7 +61,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 416030b5e8a2cde4da8e10edfcb6de2b,
         type: 3}
       propertyPath: m_Name
-      value: JumpScare_1003
+      value: JumpScare_1006
       objectReference: {fileID: 0}
     - target: {fileID: 3996247122482753033, guid: 416030b5e8a2cde4da8e10edfcb6de2b,
         type: 3}
