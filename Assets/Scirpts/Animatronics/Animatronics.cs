@@ -48,7 +48,7 @@ public class Animatronics : MonoBehaviour
     public AudioClip hayWireAudioClip;
     public AudioClip jumpScareAudioClip;
     public AudioClip shockAudioClip;
-
+    public AudioClip ChargeAudioClip;
 
     private VisualEffect[] hitParticles;
 
@@ -659,8 +659,9 @@ public class Animatronics : MonoBehaviour
 
     private void SetAudioClip(AudioClip[] audioClips)
     {
-        hayWireAudioClip = audioClips[0];
-        jumpScareAudioClip = audioClips[1];
-        shockAudioClip = audioClips[2];
+        ChargeAudioClip = audioClips[0];
+        hayWireAudioClip = audioClips[1];
+        jumpScareAudioClip = audioClips[2];
+        shockAudioClip = audioClips[3];
     }
 }
