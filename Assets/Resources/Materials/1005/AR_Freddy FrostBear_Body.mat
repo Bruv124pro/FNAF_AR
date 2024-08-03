@@ -169,7 +169,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 1
-    - _Normal: 2
+    - _Normal: 0.3
     - _Occlusion: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.005
