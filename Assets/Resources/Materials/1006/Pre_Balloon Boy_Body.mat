@@ -53,7 +53,7 @@ Material:
     - _Alpha: 0
     - _DissolveScale: 40
     - _DissolveWidth: 0.02
-    - _Normal: 1
+    - _Normal: 0.3
     - _Occlusion: 1
     - _QueueControl: 0
     - _QueueOffset: 0
