@@ -97,11 +97,20 @@ public class Animatronics : MonoBehaviour
     private Vector3 lastRotationRate;
     private float sidesValue;
 
-    private void Awake()
+    void Start()
     {
+        Initialize();
     }
 
-    void Start()
+    public void ReStart()
+    {
+        Debug.Log($"onenable {id}");
+        Initialize();
+        flashButton.interactable = true;
+        shockButton.interactable = true;
+    }
+
+    private void Initialize()
     {
         if (id == null)
         {
@@ -116,7 +125,7 @@ public class Animatronics : MonoBehaviour
         eyeShader = skinnedMaterials[1];
         hitParticles = transform.GetChild(0).GetComponentsInChildren<VisualEffect>();
 
-        ShaderAlpahValueInitalize();    
+        ShaderAlpahValueInitalize();
         isFinishCircleMove = false;
         alreadyinit = false;
         isJumpState = false;
@@ -137,8 +146,8 @@ public class Animatronics : MonoBehaviour
         audioClips = Resources.LoadAll<AudioClip>(audioClipsPath + charName);
         audioEffectSoundClips = Resources.LoadAll<AudioClip>(audioClipsPath + "EffectSound");
         SetAudioClip(audioEffectSoundClips);
-
     }
+
     public void SetVisible()
     {
         bodyShader.SetFloat("_Alpha", 0);
@@ -638,7 +647,10 @@ public class Animatronics : MonoBehaviour
                 if (!cam.gameObject.activeInHierarchy)
                 {
                     cam.gameObject.SetActive(true);
+                    Destroy(jumpscareObject);
                     gameResultCanvas.gameObject.SetActive(false);
+                    GameObject.Find("UI").transform.GetChild(0).gameObject.SetActive(false);
+                    gameObject.SetActive(false);
                 }
             }
 

@@ -41,6 +41,7 @@ public class SelectUIManager : MonoBehaviour
     }
     public void SelectAnimatronics(Button button)
     {
+        panel.transform.parent.gameObject.SetActive(true);
         panel.SetActive(true);
         ButtonID buttonID = button.GetComponent<ButtonID>();
         
@@ -63,7 +64,6 @@ public class SelectUIManager : MonoBehaviour
                 }
             }
         }
-        
     }
 
     public void EnCounterARView()
@@ -88,8 +88,7 @@ public class SelectUIManager : MonoBehaviour
                 ARAnimatronics.transform.SetParent(InGameAnimatronics.transform, false);
             }
         }
-
-
         InGameAnimatronics.GetComponent<Animatronics>().GetId(id);
+        InGameAnimatronics.GetComponent<Animatronics>().ReStart();
     }
 }
