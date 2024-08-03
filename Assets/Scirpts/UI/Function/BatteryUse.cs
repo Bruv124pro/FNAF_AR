@@ -23,6 +23,12 @@ public class BatteryUse : MonoBehaviour
         enumerator = BatteryAmountDown();
     }
 
+    private void OnEnable()
+    {
+        batteryAmount = 100;
+        enumerator = BatteryAmountDown();
+    }
+
     void Update()
     {
         if (batteryAmount > 0)
