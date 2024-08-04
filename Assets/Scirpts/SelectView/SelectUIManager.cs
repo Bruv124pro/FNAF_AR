@@ -24,7 +24,6 @@ public class SelectUIManager : MonoBehaviour
     public Transform parentTransform;
     private GameObject preViewAnimatronics;
     private GameObject ARAnimatronics;
-
     [SerializeField] Material glitchMaterial;
 
     private void Start()
@@ -38,6 +37,7 @@ public class SelectUIManager : MonoBehaviour
         mapCamera = Camera.allCameras[1];
         cameraData = camera.GetComponent<UniversalAdditionalCameraData>();
         mapCamera.GetComponent<UniversalAdditionalCameraData>();
+        isMapView = true;
     }
     public void SelectAnimatronics(Button button)
     {
@@ -57,6 +57,7 @@ public class SelectUIManager : MonoBehaviour
             if (prefab != null)
             {
                 preViewAnimatronics = Instantiate(prefab);
+                isMapView = false;
 
                 if (parentTransform != null)
                 {
