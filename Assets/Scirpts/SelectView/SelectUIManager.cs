@@ -101,7 +101,7 @@ public class SelectUIManager : MonoBehaviour
     public void EnCounterARView()
     {
         var animatronicsTable = DataManager.Instance.AnimatronicsTable[id];
-
+        audioSource.Stop();
         panel.SetActive(false);
         panel.transform.parent.gameObject.SetActive(false);
         Destroy(preViewAnimatronics);
