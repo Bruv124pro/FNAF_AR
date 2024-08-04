@@ -291,7 +291,7 @@ MonoBehaviour:
   shockAudioClip: {fileID: 0}
   ChargeAudioClip: {fileID: 0}
   CircleMoveAudioClip: {fileID: 0}
-  batteryUse: {fileID: 0}
+  batteryUse: {fileID: 721012526}
   camera: {fileID: 331264287}
   glitchMaterial: {fileID: 2100000, guid: c874813fed7bc3241af4695ed63e2568, type: 2}
   tagGlitchMaterial: {fileID: 2100000, guid: c4f9db045d6155149944b7d07f06e683, type: 2}
@@ -6581,9 +6581,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6b658fc70c598f4a9dd6fee9c886c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonPrefab: {fileID: 7243669690631156953, guid: 008dee63f8a4fc14ab210ea84efbf633,
-    type: 3}
-  poolSize: 5
 --- !u!4 &1796859820
 Transform:
   m_ObjectHideFlags: 0
