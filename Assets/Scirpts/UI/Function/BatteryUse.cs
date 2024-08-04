@@ -84,4 +84,9 @@ public class BatteryUse : MonoBehaviour
         isBatteryCoroutineRunning = false;
         elapsedTime = 0;
     }
+
+    public void GetBatteryAmount(int num)
+    {
+        batteryAmount = num;
+    }
 }

@@ -59,9 +59,13 @@ public class SelectUIManager : MonoBehaviour
         PlayBackGroundSound(backgroundAudioClip);
     }
 
-    private void PlayBackGroundSound(AudioClip audioClip)
+    public void PlayBackGroundSound(AudioClip audioClip = null)
     {
         audioSource.Stop();
+        if(audioClip == null)
+        {
+            audioClip = backgroundAudioClip;
+        }
         audioSource.clip = audioClip;
         audioSource.loop = true;
         audioSource.Play();
@@ -120,6 +124,7 @@ public class SelectUIManager : MonoBehaviour
                 ARAnimatronics.transform.SetParent(InGameAnimatronics.transform, false);
             }
         }
+
         InGameAnimatronics.GetComponent<Animatronics>().GetId(id);
         InGameAnimatronics.GetComponent<Animatronics>().ReStart();
     }
