@@ -73,7 +73,8 @@ public class SelectUIManager : MonoBehaviour
 
         panel.SetActive(false);
         panel.transform.parent.gameObject.SetActive(false);
-        preViewAnimatronics.SetActive(false);
+        Destroy(preViewAnimatronics);
+        //preViewAnimatronics.SetActive(false);
         uiChild.SetActive(true);
         mapCamera.gameObject.SetActive(false);
         InGameAnimatronics.SetActive(true);
@@ -91,5 +92,12 @@ public class SelectUIManager : MonoBehaviour
         }
         InGameAnimatronics.GetComponent<Animatronics>().GetId(id);
         InGameAnimatronics.GetComponent<Animatronics>().ReStart();
+    }
+
+    public void OnJammerButtonCliecked()
+    {
+        panel.SetActive(false);
+
+        Destroy(preViewAnimatronics);
     }
 }
