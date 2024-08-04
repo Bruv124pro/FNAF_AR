@@ -1389,6 +1389,8 @@ MonoBehaviour:
   currentDepth: 0
   parentTransform: {fileID: 789427105}
   glitchMaterial: {fileID: 2100000, guid: c874813fed7bc3241af4695ed63e2568, type: 2}
+  tagGlitchMaterial: {fileID: 2100000, guid: c4f9db045d6155149944b7d07f06e683, type: 2}
+  volume: {fileID: 1107232100}
 --- !u!4 &386302768
 Transform:
   m_ObjectHideFlags: 0

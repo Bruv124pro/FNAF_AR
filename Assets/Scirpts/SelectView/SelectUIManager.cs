@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
@@ -26,10 +27,15 @@ public class SelectUIManager : MonoBehaviour
     private GameObject ARAnimatronics;
 
     [SerializeField] Material glitchMaterial;
+    [SerializeField] Material tagGlitchMaterial;
+
+    [SerializeField] private Volume volume;
+    private Vignette vignette;
 
     private void Start()
     {
         glitchMaterial.SetFloat("_Force", 0);
+        tagGlitchMaterial.SetInt("_On_Off", 0);
         panel.SetActive(false);
         ui = GameObject.Find("UI");
         uiChild = ui.transform.GetChild(0).gameObject;
