@@ -8,7 +8,6 @@ public class TraceMapObject : MonoBehaviour
     Rigidbody rb;
     [SerializeField] private GameObject traceButton;
     RectTransform rectTransform;
-    private Vector3 localPosOffset = Vector3.zero;
 
     void Start()
     {

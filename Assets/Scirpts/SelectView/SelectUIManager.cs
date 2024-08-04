@@ -25,6 +25,7 @@ public class SelectUIManager : MonoBehaviour
     private GameObject preViewAnimatronics;
     private GameObject ARAnimatronics;
     [SerializeField] Material glitchMaterial;
+    private bool isMapView;
 
     private void Start()
     {
