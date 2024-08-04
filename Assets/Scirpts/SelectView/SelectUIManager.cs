@@ -12,6 +12,9 @@ public class SelectUIManager : MonoBehaviour
     [SerializeField] private GameObject animatronics;
     [SerializeField] private GameObject InGameAnimatronics;
     [SerializeField] private GameObject ButtonSpawner;
+    [SerializeField] private AudioClip[] soundClips;
+    private AudioClip backgroundAudioClip;
+    private AudioClip SelectAudioClip;
     private Camera camera;
     private Camera mapCamera;
     private GameObject ui;
@@ -20,6 +23,8 @@ public class SelectUIManager : MonoBehaviour
     private int id;
     public float currentDepth;
     private UniversalAdditionalCameraData cameraData;
+
+    private AudioSource audioSource;
 
     private string ARAnimatronicsPrefabPath = "Prefabs/ARAnimatronics/AR_";
     private string prefabPath = "Prefabs/PreViewAnimatronics/pre_";
@@ -47,9 +52,24 @@ public class SelectUIManager : MonoBehaviour
         cameraData = camera.GetComponent<UniversalAdditionalCameraData>();
         mapCamera.GetComponent<UniversalAdditionalCameraData>();
         isMapView = true;
+
+        soundClips = Resources.LoadAll<AudioClip>("Sound/background music");
+        SetAudioClip(soundClips);
+        audioSource = GetComponent<AudioSource>();
+        PlayBackGroundSound(backgroundAudioClip);
     }
+
+    private void PlayBackGroundSound(AudioClip audioClip)
+    {
+        audioSource.Stop();
+        audioSource.clip = audioClip;
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+
     public void SelectAnimatronics(Button button)
     {
+        PlayBackGroundSound(SelectAudioClip);
         panel.transform.parent.gameObject.SetActive(true);
         panel.SetActive(true);
         ButtonID buttonID = button.GetComponent<ButtonID>();
@@ -73,7 +93,6 @@ public class SelectUIManager : MonoBehaviour
                     preViewAnimatronics.transform.SetParent(parentTransform, false);
                 }
             }
-
             Destroy(button.gameObject);
             ButtonSpawner.GetComponent<ButtonSpawner>().AddSpawnButton();
         }
@@ -108,8 +127,12 @@ public class SelectUIManager : MonoBehaviour
     public void OnJammerButtonCliecked()
     {
         panel.SetActive(false);
-
-
+        PlayBackGroundSound(backgroundAudioClip);
         Destroy(preViewAnimatronics);
+    }
+    private void SetAudioClip(AudioClip[] audioClips)
+    {
+        SelectAudioClip = audioClips[0];
+        backgroundAudioClip = audioClips[1];
     }
 }
