@@ -55,6 +55,7 @@ public class Animatronics : MonoBehaviour
 
     private VisualEffect[] hitParticles;
 
+    [SerializeField] private BatteryUse batteryUse;
 
     public Camera camera;
 
@@ -108,6 +109,7 @@ public class Animatronics : MonoBehaviour
         Initialize();
         flashButton.interactable = true;
         shockButton.interactable = true;
+        batteryUse.GetBatteryAmount(100);
     }
 
     private void Initialize()
@@ -638,6 +640,9 @@ public class Animatronics : MonoBehaviour
             glitchMaterial.SetFloat("_Force", 0);
             Destroy(transform.GetChild(0).gameObject);
 
+            GameObject selectUIManager = GameObject.Find("SelectUIManager");
+            selectUIManager.GetComponent<SelectUIManager>().PlayBackGroundSound();
+            
             Camera[] allCameras = GameObject.FindObjectsOfType<Camera>(true);
             
             foreach(Camera cam in allCameras)
@@ -653,7 +658,6 @@ public class Animatronics : MonoBehaviour
                     gameObject.SetActive(false);
                 }
             }
-
         }
     }
 }
