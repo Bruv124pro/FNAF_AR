@@ -26,7 +26,7 @@ public class AttackFailState : IState
         {
             controller.StateMachine.TransitionTo(controller.StateMachine.stopWorkState);
         }
-
+        animatronics.SetGameOverGlitch(false);
         animatronics.GameClearOverlay();
     }
 

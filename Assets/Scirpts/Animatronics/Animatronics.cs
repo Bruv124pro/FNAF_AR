@@ -634,29 +634,33 @@ public class Animatronics : MonoBehaviour
         else
         {
             yield return new WaitForSeconds(5f);
-            Debug.Log($"tagglitch {tagGlitchMaterial}");
-            tagGlitchMaterial.SetInt("_On_Off", 0);
-            glitchMaterial.SetFloat("_ScanLineStrength", 1);
-            glitchMaterial.SetFloat("_Force", 0);
-            Destroy(transform.GetChild(0).gameObject);
+            ReturnMapView();
+        }
+    }
 
-            GameObject selectUIManager = GameObject.Find("SelectUIManager");
-            selectUIManager.GetComponent<SelectUIManager>().PlayBackGroundSound();
-            
-            Camera[] allCameras = GameObject.FindObjectsOfType<Camera>(true);
-            
-            foreach(Camera cam in allCameras)
+    private void ReturnMapView()
+    {
+        tagGlitchMaterial.SetInt("_On_Off", 0);
+        glitchMaterial.SetFloat("_ScanLineStrength", 1);
+        glitchMaterial.SetFloat("_Force", 0);
+        Destroy(transform.GetChild(0).gameObject);
+
+        GameObject selectUIManager = GameObject.Find("SelectUIManager");
+        selectUIManager.GetComponent<SelectUIManager>().PlayBackGroundSound();
+
+        Camera[] allCameras = FindObjectsOfType<Camera>(true);
+
+        foreach (Camera cam in allCameras)
+        {
+            Debug.Log($"{cam.gameObject.name}");
+
+            if (!cam.gameObject.activeInHierarchy)
             {
-                Debug.Log($"{cam.gameObject.name}");
-                
-                if (!cam.gameObject.activeInHierarchy)
-                {
-                    cam.gameObject.SetActive(true);
-                    Destroy(jumpscareObject);
-                    gameResultCanvas.gameObject.SetActive(false);
-                    GameObject.Find("UI").transform.GetChild(0).gameObject.SetActive(false);
-                    gameObject.SetActive(false);
-                }
+                cam.gameObject.SetActive(true);
+                Destroy(jumpscareObject);
+                gameResultCanvas.gameObject.SetActive(false);
+                GameObject.Find("UI").transform.GetChild(0).gameObject.SetActive(false);
+                gameObject.SetActive(false);
             }
         }
     }
