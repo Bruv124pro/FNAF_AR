@@ -5,9 +5,8 @@ using UnityEngine.UI;
 
 public class TraceMapObject : MonoBehaviour
 {
-    Rigidbody rb;
-    [SerializeField] private GameObject traceButton;
-    RectTransform rectTransform;
+    [SerializeField] public GameObject traceButton;
+    private RectTransform rectTransform;
 
     void Start()
     {
@@ -17,7 +16,16 @@ public class TraceMapObject : MonoBehaviour
 
     void Update()
     {
-        rectTransform.position = transform.position + Vector3.back;
+        if (traceButton != null)
+        {
+            rectTransform.position = transform.position + Vector3.back;
+            
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+        
     }
 
     IEnumerator MoveAnimatronicsButton()

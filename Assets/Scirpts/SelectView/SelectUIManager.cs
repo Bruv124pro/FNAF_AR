@@ -11,6 +11,7 @@ public class SelectUIManager : MonoBehaviour
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject animatronics;
     [SerializeField] private GameObject InGameAnimatronics;
+    [SerializeField] private GameObject ButtonSpawner;
     private Camera camera;
     private Camera mapCamera;
     private GameObject ui;
@@ -72,6 +73,9 @@ public class SelectUIManager : MonoBehaviour
                     preViewAnimatronics.transform.SetParent(parentTransform, false);
                 }
             }
+
+            Destroy(button.gameObject);
+            ButtonSpawner.GetComponent<ButtonSpawner>().AddSpawnButton();
         }
     }
 
@@ -82,7 +86,6 @@ public class SelectUIManager : MonoBehaviour
         panel.SetActive(false);
         panel.transform.parent.gameObject.SetActive(false);
         Destroy(preViewAnimatronics);
-        //preViewAnimatronics.SetActive(false);
         uiChild.SetActive(true);
         mapCamera.gameObject.SetActive(false);
         InGameAnimatronics.SetActive(true);
@@ -105,6 +108,7 @@ public class SelectUIManager : MonoBehaviour
     public void OnJammerButtonCliecked()
     {
         panel.SetActive(false);
+
 
         Destroy(preViewAnimatronics);
     }
